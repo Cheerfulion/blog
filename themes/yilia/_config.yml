@@ -1,27 +1,34 @@
 # Header
 
+# menu:
+#   主页: /
+#   随笔: /tags/随笔/
+
 menu:
   主页: /
-  随笔: /tags/随笔/
+  分类: /categories
+  归档: /archives
 
 # SubNav
 subnav:
-  github: "#"
-  weibo: "#"
-  rss: "#"
-  zhihu: "#"
-  #qq: "#"
-  #weixin: "#"
-  #jianshu: "#"
-  #douban: "#"
-  #segmentfault: "#"
-  #bilibili: "#"
-  #acfun: "#"
-  #mail: "mailto:litten225@qq.com"
-  #facebook: "#"
-  #google: "#"
-  #twitter: "#"
-  #linkedin: "#"
+  github: "https://gitee.com/cheerfulion"
+  rss: "/atom.xml"
+  weibo: "https://blog.csdn.net/ion_L"
+  # weibo: "#"
+  # rss: "#"
+  # zhihu: "#"
+  qq: "tencent://message/?uin=2437403125&Site=qq&Menu=yes"
+  # weixin: "#"
+  # jianshu: "#"
+  # douban: "#"
+  # segmentfault: "#"
+  # bilibili: "#"
+  # acfun: "#"
+  # mail: "mailto:litten225@qq.com"
+  # facebook: "#"
+  # google: "#"
+  # twitter: "#"
+  # linkedin: "#"
 
 rss: /atom.xml
 
@@ -43,7 +50,7 @@ open_in_new: false
 
 # 打赏
 # 打赏type设定：0-关闭打赏； 1-文章对应的md文件里有reward:true属性，才有打赏； 2-所有文章均有打赏
-reward_type: 2
+reward_type: 0
 # 打赏wording
 reward_wording: '谢谢你请我吃糖果'
 # 支付宝二维码图片地址，跟你设置头像的方式一样。比如：/assets/img/alipay.jpg
@@ -65,10 +72,10 @@ top: true
 # Miscellaneous
 baidu_analytics: ''
 google_analytics: ''
-favicon: /favicon.png
+favicon: /blog/assets/img/favicon.png
 
 #你的头像url
-avatar:
+avatar: '/blog/assets/img/avatar.jpg'
 
 #是否开启分享
 share_jia: true
@@ -97,6 +104,15 @@ gitment_oauth:
   client_id: ''           #client ID
   client_secret: ''       #client secret
 
+gitalk: 
+  enable: true    #用来做启用判断可以不用
+  clientID: '7433477a1a82130981e9'    #Github上生成的
+  clientSecret: '67888aa85d7153c2e8996911fa3fdd9890c61c46'   #同上
+  repo: blog-talk    #评论所在的github project
+  owner: Cheerfulion    #github用户名
+  admin: Cheerfulion    #可以初始化评论issue的github账户名称
+  distractionFreeMode: true
+
 # 样式定制 - 一般不需要修改，除非有很强的定制欲望…
 style:
   # 头像上面的背景颜色
@@ -116,7 +132,7 @@ slider:
 #  friends: false
 smart_menu:
   innerArchive: '所有文章'
-  friends: '友链'
+  friends: false
   aboutme: '关于我'
 
 friends:
@@ -127,4 +143,24 @@ friends:
   友情链接5: http://localhost:4000/
   友情链接6: http://localhost:4000/
 
-aboutme: 很惭愧<br><br>只做了一点微小的工作<br>谢谢大家
+aboutme: 我是ionluo，谢谢大家 ( ^_^ ) 
+
+# 是否开启字数统计
+#不需要使用，直接设置值为false，或注释掉
+word_count: false
+
+#版权基础设定：0-关闭声明； 1-文章对应的md文件里有declare: true属性，才有版权声明； 2-所有文章均有版权声明
+#当前应用的版权协议地址。
+#版权协议的名称
+#版权协议的Logo
+declare_type: 2
+licensee_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+licensee_name: '知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议'
+licensee_img: https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png
+
+
+# Automatically Excerpt. Not recommend.
+# Please use <!-- more --> in the post to control excerpt accurately.
+auto_excerpt:
+  enable: true
+  length: 150
