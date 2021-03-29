@@ -1,12 +1,12 @@
 ---
 title: select兼容
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web前端
   - 兼容问题
 abbrlink: d7d51091
-date: 2021-02-12 13:31:15
+date: 2021-03-29 22:03:33
 ---
 
 
@@ -15,7 +15,7 @@ date: 2021-02-12 13:31:15
 
 一直认为IE11应该和现代浏览器比较接近了，今天打开网站一看，搜索的select默认样式好丑，于是想办法修改他的默认样式。
 
-![1612250611152](assets/select兼容/1612250611152.png)
+![1612250611152](http://blog.cdn.ionluo.cn/blog/1612250611152.png)
 
 
 

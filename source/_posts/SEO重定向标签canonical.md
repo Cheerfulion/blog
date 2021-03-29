@@ -1,12 +1,12 @@
 ---
 title: SEO重定向标签canonical
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web前端
   - SEO
 abbrlink: 35ff579f
-date: 2021-01-20 00:15:24
+date: 2021-03-29 22:11:29
 ---
 
 

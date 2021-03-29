@@ -1,12 +1,12 @@
 ---
-title: 积累
-description: 暂无描述！
+title: Less的积累
+description: '-'
 tags:
   - WEB开发
   - Web前端
   - Css预处理
   - Less
-abbrlink: 7e1d3ac
+abbrlink: c8618756
 date: 2021-01-20 00:15:24
 ---
 

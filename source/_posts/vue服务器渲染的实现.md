@@ -1,6 +1,6 @@
 ---
 title: vue服务器渲染的实现
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web前端

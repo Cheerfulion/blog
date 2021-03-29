@@ -1,6 +1,6 @@
 ---
 title: 【转载】 解决jenkins点击立即构建没有反应
-description: 暂无描述！
+description: '-'
 tags:
   - Jenkins
 abbrlink: 227dc26b

@@ -1,12 +1,12 @@
 ---
 title: express学习
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web后端
   - NodeJs
 abbrlink: 30df1e17
-date: 2021-03-17 21:02:33
+date: 2021-03-29 22:29:03
 ---
 
 
@@ -17,49 +17,47 @@ date: 2021-03-17 21:02:33
 
 
 
-![1595677903075](assets/express学习/1595677903075.png)
+![1595677903075](http://blog.cdn.ionluo.cn/blog/1595677903075.png)
 
-![1595678357322](assets/express学习/1595678357322.png)
+![1595678357322](http://blog.cdn.ionluo.cn/blog/1595678357322.png)
 
-![1595678374027](assets/express学习/1595678374027.png)
+![1595678374027](http://blog.cdn.ionluo.cn/blog/1595678374027.png)
 
 
 
-![1595678389646](assets/express学习/1595678389646.png)
+![1595678389646](http://blog.cdn.ionluo.cn/blog/1595678389646.png)
 
 
 
 ## 中间件
 
-![1595679133946](assets/express学习/1595679133946.png)
+![1595679133946](http://blog.cdn.ionluo.cn/blog/1595679133946.png)
 
 
 
 
 
-![1595679209599](assets/express学习/1595679209599.png)
+![1595679209599](http://blog.cdn.ionluo.cn/blog/1595679209599.png)
 
 
 
-![1595679290736](assets/express学习/1595679290736.png)
+![1595679290736](http://blog.cdn.ionluo.cn/blog/1595679290736.png)
 
 
 
-
-
-![1595679474809](assets/express学习/1595679474809.png)
-
-
-
-
-
-![1595679807103](assets/express学习/1595679807103.png)
+![1595679474809](http://blog.cdn.ionluo.cn/blog/1595679474809.png)
 
 
 
 
 
-![1595681069012](assets/express学习/1595681069012.png)
+![1595679807103](http://blog.cdn.ionluo.cn/blog/1595679807103.png)
+
+
+
+
+
+![1595681069012](http://blog.cdn.ionluo.cn/blog/1595681069012.png)
 
 
 
@@ -67,17 +65,17 @@ date: 2021-03-17 21:02:33
 
 中间键是有顺序的，从上到下
 
-![1595748553068](assets/express学习/1595748553068.png)
+![1595748553068](http://blog.cdn.ionluo.cn/blog/1595748553068.png)
 
 
 
 ## 构建模块化路由
 
-![1595753364409](assets/express学习/1595753364409.png)
+![1595753364409](http://blog.cdn.ionluo.cn/blog/1595753364409.png)
 
 
 
-![1595767197577](assets/express学习/1595767197577.png)
+![1595767197577](http://blog.cdn.ionluo.cn/blog/1595767197577.png)
 
 
 
@@ -85,9 +83,9 @@ date: 2021-03-17 21:02:33
 
 
 
-![1595767616613](assets/express学习/1595767616613.png)
+![1595767616613](http://blog.cdn.ionluo.cn/blog/1595767616613.png)
 
-![1595767674511](assets/express学习/1595767674511.png)
+![1595767674511](http://blog.cdn.ionluo.cn/blog/1595767674511.png)
 
 *// 这里通过express的第三方模块body-parser对post请求的参数进行解析。*
 
@@ -99,7 +97,7 @@ app.**use**(bodyParser.**urlencoded**({extended: false}));
 
 
 
-![1595768336055](assets/express学习/1595768336055.png)
+![1595768336055](http://blog.cdn.ionluo.cn/blog/1595768336055.png)
 
 
 
@@ -109,9 +107,9 @@ app.**use**(bodyParser.**urlencoded**({extended: false}));
 
 
 
-![1595768543489](assets/express学习/1595768543489.png)
+![1595768543489](http://blog.cdn.ionluo.cn/blog/1595768543489.png)
 
-![1595768732454](assets/express学习/1595768732454.png)
+![1595768732454](http://blog.cdn.ionluo.cn/blog/1595768732454.png)
 
 > app.**use**('/static', express.**static**(path.**join**(__dirname, 'public')));
 
@@ -125,7 +123,7 @@ http://localhost:3000/static/logo.png
 
 
 
-![1595768220015](assets/express学习/1595768220015.png)
+![1595768220015](http://blog.cdn.ionluo.cn/blog/1595768220015.png)
 
 
 
@@ -133,7 +131,7 @@ http://localhost:3000/static/logo.png
 
 
 
-![1595775447334](assets/express学习/1595775447334.png)
+![1595775447334](http://blog.cdn.ionluo.cn/blog/1595775447334.png)
 
 > res.render('模板名称', '模板数据')  
 
@@ -141,7 +139,7 @@ http://localhost:3000/static/logo.png
 
 
 
-![1595775613661](assets/express学习/1595775613661.png)
+![1595775613661](http://blog.cdn.ionluo.cn/blog/1595775613661.png)
 
 
 
@@ -153,7 +151,7 @@ http://localhost:3000/static/logo.png
 
 
 
-![1595775788572](assets/express学习/1595775788572.png)
+![1595775788572](http://blog.cdn.ionluo.cn/blog/1595775788572.png)
 
 
 
@@ -163,7 +161,7 @@ http://localhost:3000/static/logo.png
 
 
 
-![1596252240622](assets/express学习/1596252240622.png)
+![1596252240622](http://blog.cdn.ionluo.cn/blog/1596252240622.png)
 
 
 
@@ -177,7 +175,7 @@ npm install --global --production windows-build-tools
 
 
 
-![1596110235504](assets/express学习/1596110235504.png)
+![1596110235504](http://blog.cdn.ionluo.cn/blog/1596110235504.png)
 
 
 
@@ -185,9 +183,9 @@ npm install --global --production windows-build-tools
 
 
 
-![1596260815827](assets/express学习/1596260815827.png)
+![1596260815827](http://blog.cdn.ionluo.cn/blog/1596260815827.png)
 
-![1596260952370](assets/express学习/1596260952370.png)
+![1596260952370](http://blog.cdn.ionluo.cn/blog/1596260952370.png)
 
 
 
@@ -201,7 +199,7 @@ npm install joi
 
 
 
-![1596272355704](assets/express学习/1596272355704.png)
+![1596272355704](http://blog.cdn.ionluo.cn/blog/1596272355704.png)
 
 > 默认的参数都是可选的，需要加上required()。另外如果参数对象有规则里面没有定义的key会验证失败。
 
@@ -219,7 +217,7 @@ npm install joi
 
 >  chrome://flags/#extensions-on-chrome-urls
 
-![1596279432255](assets/express学习/1596279432255.png)
+![1596279432255](http://blog.cdn.ionluo.cn/blog/1596279432255.png)
 
 重启后，鼠标拖动第三方的`.crx`文件到扩展程序页面就可以显示“拖放以安装”
 
@@ -233,7 +231,7 @@ npm install joi
 
 
 
-![1596279855179](assets/express学习/1596279855179.png)
+![1596279855179](http://blog.cdn.ionluo.cn/blog/1596279855179.png)
 
 
 
@@ -243,15 +241,15 @@ npm install joi
 
 ### formidable解析表单 - 文件上传
 
-![1596873065845](assets/express学习/1596873065845.png)
+![1596873065845](http://blog.cdn.ionluo.cn/blog/1596873065845.png)
 
 ### 文件读取FileReader
 
-![1596875098423](assets/express学习/1596875098423.png)
+![1596875098423](http://blog.cdn.ionluo.cn/blog/1596875098423.png)
 
 ## 分页模块
 
-![1597246414368](assets/express学习/1597246414368.png)
+![1597246414368](http://blog.cdn.ionluo.cn/blog/1597246414368.png)
 
 page: 第几页
 
@@ -261,7 +259,7 @@ display： 显示的页码数（比如如果有1000页，那并不需要显示10
 
 
 
-![1597246573181](assets/express学习/1597246573181.png)
+![1597246573181](http://blog.cdn.ionluo.cn/blog/1597246573181.png)
 
 
 
@@ -271,9 +269,9 @@ display： 显示的页码数（比如如果有1000页，那并不需要显示10
 
 需要建立超级管理员账号，再创建普通账号。超级管理员账号对应admin数据库，拥有全部的权限。普通账号对应与具体的数据库。
 
-![1597247862502](assets/express学习/1597247862502.png)
+![1597247862502](http://blog.cdn.ionluo.cn/blog/1597247862502.png)
 
-![1597249557919](assets/express学习/1597249557919.png)
+![1597249557919](http://blog.cdn.ionluo.cn/blog/1597249557919.png)
 
 
 
@@ -281,7 +279,7 @@ display： 显示的页码数（比如如果有1000页，那并不需要显示10
 
 创建超级管理员账号：
 
-![1597248229847](assets/express学习/1597248229847.png)
+![1597248229847](http://blog.cdn.ionluo.cn/blog/1597248229847.png)
 
 ```shell
 db.createUser({user: '用户名', pwd: "用户密码", roles: [‘用户角色(用户组，系统有内置的值，如root即超级管理员)’]})
@@ -295,7 +293,7 @@ db.createUser({user: '用户名', pwd: "用户密码", roles: [‘用户角色(�
 
 给blog数据库创建普通用户账号：
 
-![1597248480530](assets/express学习/1597248480530.png)
+![1597248480530](http://blog.cdn.ionluo.cn/blog/1597248480530.png)
 
 ```shell
 db.createUser({user: 'itcast', pwd: 'itcast', roles: ['readWrite']})
@@ -307,13 +305,13 @@ db.createUser({user: 'itcast', pwd: 'itcast', roles: ['readWrite']})
 
 卸载mongodb服务：
 
-![1597248725448](assets/express学习/1597248725448.png)
+![1597248725448](http://blog.cdn.ionluo.cn/blog/1597248725448.png)
 
 
 
 创建并启动mongodb服务：
 
-![1597249181883](assets/express学习/1597249181883.png)
+![1597249181883](http://blog.cdn.ionluo.cn/blog/1597249181883.png)
 
 ```shell
 mongod --logpath="[日志输出位置]C:\Program Files\MongoDB\Server\4.2\log\mongod.log" --dbpath="[数据库存储目录]C:\Program Files\MongoDB\Server\4.2\data" --install --auth
@@ -327,7 +325,7 @@ mongod --logpath="[日志输出位置]C:\Program Files\MongoDB\Server\4.2\log\mo
 
 验证数据库操作需要权限：
 
-![1597249430737](assets/express学习/1597249430737.png)
+![1597249430737](http://blog.cdn.ionluo.cn/blog/1597249430737.png)
 
 上面运行了mongoose操作数据库的程序，程序中连接数据库没有加上账号密码，显示是数据库连接成功，但是进行数据库操作的时候就报错了。
 
@@ -349,7 +347,7 @@ mongoose.connect('mongodb://itcast:itcast@localhost:27017/blog', { useNewUrlPars
 
 ## 如何区分开发环境和生产环境
 
-![1597462531287](assets/express学习/1597462531287.png)
+![1597462531287](http://blog.cdn.ionluo.cn/blog/1597462531287.png)
 
 注意设置环境变量后需要重启cmd才可以获取到新加入的系统环境变量
 

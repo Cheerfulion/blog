@@ -1,6 +1,6 @@
 ---
 title: sessionStorage在firfox不能新开页面共享
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web前端

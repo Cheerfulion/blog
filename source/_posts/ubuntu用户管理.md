@@ -1,6 +1,6 @@
 ---
 title: ubuntu用户管理
-description: 暂无描述！
+description: '-'
 tags:
   - 运维
   - Linux

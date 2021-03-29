@@ -1,6 +1,6 @@
 ---
 title: Redis 密码查看，设置，取消
-description: 暂无描述！
+description: '-'
 tags:
   - Redis
 abbrlink: 962fb26b

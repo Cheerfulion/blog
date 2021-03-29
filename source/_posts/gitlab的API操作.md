@@ -1,6 +1,6 @@
 ---
 title: gitlab的API操作
-description: 暂无描述！
+description: '-'
 tags:
   - Git
 abbrlink: eafa4ec2

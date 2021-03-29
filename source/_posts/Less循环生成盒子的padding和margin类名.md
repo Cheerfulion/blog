@@ -1,12 +1,12 @@
 ---
-title: 循环生成盒子的padding和margin类名
-description: 暂无描述！
+title: Less循环生成盒子的padding和margin类名
+description: '-'
 tags:
   - WEB开发
   - Web前端
   - Css预处理
   - Less
-abbrlink: 7a4a55e3
+abbrlink: 6b6409b
 date: 2021-01-20 00:15:24
 ---
 

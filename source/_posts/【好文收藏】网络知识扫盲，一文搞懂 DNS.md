@@ -1,6 +1,6 @@
 ---
 title: 【好文收藏】网络知识扫盲，一文搞懂 DNS
-description: 暂无描述！
+description: '-'
 tags:
   - 运维
   - Linux

@@ -1,10 +1,10 @@
 ---
 title: 我的hexo博客搭建记录
-description: 暂无描述！
+description: '-'
 tags:
   - hexo
 abbrlink: fb846fae
-date: 2021-03-28 23:44:27
+date: 2021-03-29 21:43:35
 ---
 
 
@@ -75,32 +75,29 @@ https://blog.csdn.net/weixin_30399797/article/details/99023570
 编辑`themes\yilia\layout\_partial\article.ejs`文件，
 
 ```ejs
-	  <% if (post.excerpt && index){ %>
+<div class="article-entry" itemprop="articleBody">
+      <!-- 首页不展示文章所有内容开始 -->
+      <% if (post.description && index) { %>
+        <%- post.description %>
+      <% } else if (post.excerpt && index) { %>
         <%- post.excerpt %>
         <% if (theme.excerpt_link) { %>
           <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
         <% } %>
-      <% } else { %>
-        <!-- 首页不展示文章所有内容开始 -->
-        <% if (theme.auto_excerpt && theme.auto_excerpt.enable && index) { %>
-          <%- post.content.substring(0, theme.auto_excerpt.length) %>...
-          <% if (theme.excerpt_link) { %>
-            <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-          <% } %>
-        <% } else { %>
-          <%- post.content %>
+      <% } else if(theme.auto_excerpt.enable && index){ %>
+        <%= post.content.substring(0, theme.auto_excerpt.length) %>...
+        <% if (theme.excerpt_link) { %>
+          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
         <% } %>
-        <!-- 首页不展示文章所有内容结束 -->
+      <% } else {%>
+        <%- post.content %>
       <% } %>
+      <!-- 首页不展示文章所有内容结束 -->
 ```
 
+上面配置使得文章有指定`description`的时候，用`description`来作为描述。没有的话，用文章内容中的`<!-- more -->`作为截断。如果也没有`<!-- more -->`的话，提取html原文截断指定字符来显示（缺点：会显示html标签）。最后才用全文来填充。
 
-
-理论上来说更推荐增加`<!-- more -->`的形式，或者文章头部指定`description`. 因为这里直接截取有可能带上markdown的格式而不仅仅是纯文字，会导致页面混乱。
-
-
-
-
+> 我这里使用的是description的方式，通过nodejs的包先解析HTML，分析提取摘要。 
 
 ## 置顶文章
 

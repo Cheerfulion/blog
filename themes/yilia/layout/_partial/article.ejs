@@ -25,24 +25,23 @@
       </header>
     <% } %>
     <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index) { %>
+      <!-- 首页不展示文章所有内容开始 -->
+      <% if (post.description && index) { %>
+        <%- post.description %>
+      <% } else if (post.excerpt && index) { %>
         <%- post.excerpt %>
         <% if (theme.excerpt_link) { %>
           <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
         <% } %>
-      <% } else { %>
-        <!-- 首页不展示文章所有内容开始 -->
-        <% if (theme.auto_excerpt && theme.auto_excerpt.enable && index) { %>
-          <%= post.content.substring(0, theme.auto_excerpt.length) %>
-          ...
-          <% if (theme.excerpt_link) { %>
-            <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-          <% } %>
-        <% } else { %>
-          <%- post.content %>
+      <% } else if(theme.auto_excerpt.enable && index){ %>
+        <%= post.content.substring(0, theme.auto_excerpt.length) %>...
+        <% if (theme.excerpt_link) { %>
+          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
         <% } %>
-        <!-- 首页不展示文章所有内容结束 -->
+      <% } else {%>
+        <%- post.content %>
       <% } %>
+      <!-- 首页不展示文章所有内容结束 -->
 
       <!-- 增加版权声明 -->
       <%

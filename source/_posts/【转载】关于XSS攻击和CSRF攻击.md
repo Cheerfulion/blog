@@ -1,6 +1,6 @@
 ---
 title: 【转载】关于XSS攻击和CSRF攻击
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web安全

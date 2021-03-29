@@ -1,6 +1,6 @@
 ---
 title: Jenkins
-description: 暂无描述！
+description: '-'
 tags:
   - Jenkins
 abbrlink: 9a7f448e

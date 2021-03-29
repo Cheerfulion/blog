@@ -1,6 +1,6 @@
 ---
 title: 移动端不支持dbclick事件解决
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web前端

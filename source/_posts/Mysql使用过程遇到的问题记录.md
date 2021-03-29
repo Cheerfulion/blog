@@ -1,6 +1,6 @@
 ---
 title: Mysql使用过程遇到的问题记录
-description: 暂无描述！
+description: '-'
 tags:
   - 数据库
   - mysql

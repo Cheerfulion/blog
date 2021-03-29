@@ -1,6 +1,6 @@
 ---
 title: JSHint遇到的一些问题
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web前端

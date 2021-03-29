@@ -1,6 +1,6 @@
 ---
 title: 【好文收藏】硬核Redis总结，看这篇就够了！
-description: 暂无描述！
+description: '-'
 tags:
   - Redis
 abbrlink: b4886406

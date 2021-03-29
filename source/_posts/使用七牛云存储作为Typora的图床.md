@@ -1,6 +1,6 @@
 ---
 title: 使用七牛云存储作为Typora的图床
-description: 暂无描述！
+description: '-'
 tags:
   - 七牛云
 abbrlink: b20a6fa3

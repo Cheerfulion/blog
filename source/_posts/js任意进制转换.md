@@ -1,6 +1,6 @@
 ---
 title: js任意进制转换
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web前端

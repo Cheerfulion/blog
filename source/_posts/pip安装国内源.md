@@ -1,6 +1,6 @@
 ---
 title: pip安装国内源
-description: 暂无描述！
+description: '-'
 tags:
   - python
 abbrlink: 7a2a044e

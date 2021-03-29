@@ -1,6 +1,6 @@
 ---
 title: Ubuntu 矫正系统时间
-description: 暂无描述！
+description: '-'
 tags:
   - 运维
   - Linux

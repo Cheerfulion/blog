@@ -1,6 +1,6 @@
 ---
 title: gitlab部署秘钥并添加到项目中，设置免密验证
-description: 暂无描述！
+description: '-'
 tags:
   - Git
 abbrlink: de167b2b

@@ -1,6 +1,6 @@
 ---
 title: 完整卸载vscode
-description: 暂无描述！
+description: '-'
 tags:
   - IDE
   - VSCode

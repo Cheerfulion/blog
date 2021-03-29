@@ -1,12 +1,12 @@
 ---
 title: object不兼容处理
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web前端
   - 兼容问题
 abbrlink: 8fee1a1e
-date: 2021-02-23 21:51:33
+date: 2021-03-29 22:03:17
 ---
 
 
@@ -19,9 +19,9 @@ date: 2021-02-23 21:51:33
 
 这里，我使用了object标签, chrome和firefox一看没有问题，上线！！！
 
-但是随后使用ie11看就出现问题了，PDF显示区域一片空白。说好的“IE浏览器对object标签有更好的兼容性，而非IE浏览器对embed标签则有更好的兼容性”呢![1612417142188](assets/object不兼容处理/1612417142188.png)
+但是随后使用ie11看就出现问题了，PDF显示区域一片空白。说好的“IE浏览器对object标签有更好的兼容性，而非IE浏览器对embed标签则有更好的兼容性”呢![1612417142188](http://blog.cdn.ionluo.cn/blog/1612417142188.png)
 
-![1612417042967](assets/object不兼容处理/1612417042967.png)
+![1612417042967](http://blog.cdn.ionluo.cn/blog/1612417042967.png)
 
 
 
@@ -41,7 +41,7 @@ date: 2021-02-23 21:51:33
 
 
 
-![1612417285315](assets/object不兼容处理/1612417285315.png)
+![1612417285315](http://blog.cdn.ionluo.cn/blog/1612417285315.png)
 
 
 

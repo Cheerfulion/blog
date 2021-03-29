@@ -1,12 +1,12 @@
 ---
 title: 兼容html5和css3
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web前端
   - 兼容问题
 abbrlink: 9690ea3b
-date: 2021-01-20 00:15:24
+date: 2021-03-29 22:06:58
 ---
 
 
@@ -52,7 +52,7 @@ date: 2021-01-20 00:15:24
 
 如果不需要支持IE9以下浏览器，可以引入下面的代码：
 
-[byebye-ie](assert/package/byebye-ie)
+[byebye-ie](http://blog.cdn.ionluo.cn/files/byebye-ie.zip)
 
 ```javascript
 <!DOCTYPE html>

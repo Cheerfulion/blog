@@ -1,6 +1,6 @@
 ---
 title: Ubuntu监控内存利用率并邮件告警
-description: 暂无描述！
+description: '-'
 tags:
   - 运维
   - Linux

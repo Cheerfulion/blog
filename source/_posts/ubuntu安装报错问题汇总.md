@@ -1,6 +1,6 @@
 ---
 title: ubuntu安装报错问题汇总
-description: 暂无描述！
+description: '-'
 tags:
   - 运维
   - Linux

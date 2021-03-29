@@ -1,10 +1,10 @@
 ---
 title: 我的hexo问题记录
-description: 暂无描述！
+description: '-'
 tags:
   - hexo
 abbrlink: 63cf15be
-date: 2021-03-28 23:49:11
+date: 2021-03-29 00:24:31
 ---
 
 
@@ -45,9 +45,71 @@ reason: 'can not read a block mapping entry; a multiline key may not be an impli
 
 ## 我的nodejs脚本
 
-把本地的一些之前的markdown写的文章复制到hexo博客中
+把本地的一些之前的markdown写的文章复制到hexo博客中。
+
+不要经常使用，防止abbrlink被重置。
 
 ```javascript
+var fs = require('fs');
+// 路径操作模块
+const path = require('path');
+var exec = require('child_process').exec;
+// 日期格式化模块
+const dateFormat = require('dateformat');
 
+// 需要复制出来的文件夹
+form_path = path.join(__dirname, 'origin')
+// 复制目标位置
+to_path = path.join(__dirname, '..', 'my_blog', 'source', '_posts')
+// to_path =  path.join(__dirname, 'copy')
+
+ 
+function copyToFolder (pathname, stat, filesList) {
+    if (path.extname(pathname) !== '.md') return;
+
+    const new_path = path.join(to_path, path.basename(pathname));
+
+    // 这里需要注意，window是两个反斜杆的路径，linux是一个正斜杆路径
+    let tags = pathname.split('\\')
+    tags = tags.slice(tags.indexOf('origin') + 1, -1)
+    let tags_str = ''
+    tags.forEach((item) => {
+        tags_str += '\n    - ' + item;
+    })
+
+    // 文件内容
+    let text = fs.readFileSync(pathname).toString();
+
+    // hexo yilia主题貌似不支持头部描述
+    text = `---
+title: ${path.basename(pathname, path.extname(pathname))}
+tags: ${ tags_str }
+date: ${ dateFormat(new Date(stat.mtime), "yyyy-mm-dd HH:MM:ss") }
+---\n\n\n\n` + text
+
+    fs.writeFileSync(new_path, text);
+
+    filesList.push(pathname)
+}
+
+function readFileList(dir, filesList = []) {
+    const files = fs.readdirSync(dir);
+    files.forEach((item, index) => {
+        if (item.includes('asset')) return;
+
+        var fullPath = path.join(dir, item);
+        const stat = fs.statSync(fullPath);
+        if (stat.isDirectory()) {      
+            readFileList(path.join(dir, item), filesList);  //递归读取文件
+        } else {  
+            copyToFolder(fullPath, stat, filesList);      
+        }        
+    });
+    return filesList;
+}
+ 
+var filesList = [];
+readFileList(form_path, filesList);
+// console.log(filesList);
 ```
 

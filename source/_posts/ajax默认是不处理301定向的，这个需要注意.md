@@ -1,6 +1,6 @@
 ---
 title: ajax默认是不处理301定向的，这个需要注意
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web前端

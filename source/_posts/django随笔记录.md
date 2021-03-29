@@ -1,12 +1,12 @@
 ---
 title: django随笔记录
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web后端
   - Django
 abbrlink: 25abee52
-date: 2021-02-23 21:51:33
+date: 2021-03-29 23:10:43
 ---
 
 
@@ -19,7 +19,7 @@ date: 2021-02-23 21:51:33
 
 1. `supervisord -c /etc/supervisor/supervisord.conf`报错
 
-   ![1604977533436](assets/django/1604977533436.png)
+   ![1604977533436](http://blog.cdn.ionluo.cn/blog/1604977533436.png)
 
    **解决：**
 
@@ -35,7 +35,7 @@ date: 2021-02-23 21:51:33
 
 2. 启动supervisor报错，`unix:///var/run/supervisor.sock no such file`
 
-   ![1604977607347](assets/django/1604977607347.png)
+   ![1604977607347](http://blog.cdn.ionluo.cn/blog/1604977607347.png)
 
    github上说到可以用这个方式（未验证）：
 
@@ -51,7 +51,7 @@ date: 2021-02-23 21:51:33
 
    **解决：**可以用 `supervisorctl tail program_name stderr` 或者 `supervisorctl tail program_name stdout`查看日志，就可以看到配置中对应的日志错误文件
 
-   ![1604978655792](assets/django/1604978655792.png)
+   ![1604978655792](http://blog.cdn.ionluo.cn/blog/1604978655792.png)
 
    > 这里提示是不存在日志文件，但是创建了还是报错，所以问题未解决
 

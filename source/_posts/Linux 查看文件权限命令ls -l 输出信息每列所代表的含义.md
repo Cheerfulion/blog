@@ -1,6 +1,6 @@
 ---
 title: Linux 查看文件权限命令ls -l 输出信息每列所代表的含义
-description: 暂无描述！
+description: '-'
 tags:
   - 运维
   - Linux

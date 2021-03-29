@@ -1,6 +1,6 @@
 ---
 title: nginx接口转发解决跨域问题
-description: 暂无描述！
+description: '-'
 tags:
   - Nginx
 abbrlink: 52ec706e

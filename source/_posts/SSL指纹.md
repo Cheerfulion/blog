@@ -1,6 +1,6 @@
 ---
 title: SSL指纹
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web安全

@@ -1,12 +1,12 @@
 ---
 title: 前端SSR
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web前端
   - SEO
 abbrlink: 50aae781
-date: 2021-01-20 00:15:24
+date: 2021-03-29 22:12:28
 ---
 
 
@@ -39,7 +39,7 @@ npm i -g create-nuxt-app@2.15.0
 >
 > v3.4.0的安装选项如下图（了解）：
 >
-> ![1607925118759](assets/前端SSR/1607925118759.png)
+> ![1607925118759](http://blog.cdn.ionluo.cn/blog/1607925118759.png)
 
 
 
@@ -49,11 +49,11 @@ npm i -g create-nuxt-app@2.15.0
 npx create-nuxt-app ssr_demo[项目名]
 ```
 
-![1607927184910](assets/前端SSR/1607927184910.png)
+![1607927184910](http://blog.cdn.ionluo.cn/blog/1607927184910.png)
 
 > 这里安装完成有报错，如下图：
 >
-> ![1607927253854](assets/前端SSR/1607927253854.png)
+> ![1607927253854](http://blog.cdn.ionluo.cn/blog/1607927253854.png)
 >
 > 实际上，这个不是报错，而是当 `eslint` 检查到错误或者警告时，会返回非0的代码，此时就会出现`npm ERR!`。 这里是由于`eslint`修正代码命令修正失败，因为 `--fix` 只能修改那些 fixable 的规则。
 >
@@ -69,13 +69,13 @@ npx create-nuxt-app ssr_demo[项目名]
 npm run dev
 ```
 
-![1607929089480](assets/前端SSR/1607929089480.png)
+![1607929089480](http://blog.cdn.ionluo.cn/blog/1607929089480.png)
 
 > 中间提示是否愿意发送匿名数据给nuxtJS官方，我选择了no
 >
 > 第一次运行会报错：
 >
-> ![1607929170683](assets/前端SSR/1607929170683.png)
+> ![1607929170683](http://blog.cdn.ionluo.cn/blog/1607929170683.png)
 >
 > 解决方法：项目中编辑 `.eslintrc.js`, 加上`'vue/comment-directive': 'off'`即可
 >

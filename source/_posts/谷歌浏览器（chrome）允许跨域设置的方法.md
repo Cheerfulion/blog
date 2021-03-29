@@ -1,6 +1,6 @@
 ---
 title: 谷歌浏览器（chrome）允许跨域设置的方法
-description: 暂无描述！
+description: '-'
 tags:
   - 黑科技
 abbrlink: b1f47f66

@@ -1,6 +1,6 @@
 ---
 title: 你用对 hasattr 了嘛？
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web后端

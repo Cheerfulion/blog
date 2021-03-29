@@ -1,12 +1,12 @@
 ---
 title: Django项目使用七牛云存储静态资源
-description: 暂无描述！
+description: '-'
 tags:
   - WEB开发
   - Web后端
   - Django
 abbrlink: 5e2a48c7
-date: 2021-03-12 23:00:31
+date: 2021-03-29 23:11:18
 ---
 
 

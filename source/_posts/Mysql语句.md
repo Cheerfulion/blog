@@ -1,6 +1,6 @@
 ---
 title: Mysql语句
-description: 暂无描述！
+description: '-'
 tags:
   - 数据库
   - mysql
