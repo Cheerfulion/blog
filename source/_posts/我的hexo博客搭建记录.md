@@ -4,7 +4,7 @@ description: '-'
 tags:
   - hexo
 abbrlink: fb846fae
-date: 2021-03-29 21:43:35
+date: 2021-04-02 21:13:57
 ---
 
 
@@ -32,10 +32,10 @@ date: 2021-03-29 21:43:35
 由于项目中`_config.yml`路径的根目录为`/blog/`（`root: /blog/`），因此，修改配置为：
 
 ```yml
-# /themes/yilia/source/assets/img/favicon.jpg
+# /source/assets/img/favicon.jpg
 favicon: /blog/assets/img/favicon.png
 
-# /themes/yilia/source/assets/img/avatar.jpg
+# /source/assets/img/avatar.jpg
 avatar: '/blog/assets/img/avatar.jpg'
 ```
 

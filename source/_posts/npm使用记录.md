@@ -6,7 +6,7 @@ tags:
   - Web后端
   - NodeJs
 abbrlink: acd31464
-date: 2021-03-17 21:02:33
+date: 2021-03-31 20:21:37
 ---
 
 
@@ -23,34 +23,7 @@ date: 2021-03-17 21:02:33
 
 
 
-## Ubuntu升级node和npm
-
-```bash
-# 安装nodejs和npm(如果有，直接跳过)
-sudo apt install -y nodejs nodejs-legacy npm
-
-# 设置淘宝镜像源
-sudo npm config set registry https://registry.npm.taobao.org
-
-# 安装工具n
-sudo npm install n -g
-
-# 安装最新稳定版nodejs
-sudo n stable
-
-# 更新npm
-sudo npm install npm@latest -g
-
-# 查看node和npm版本
-node -v
-npm -v
-
-# 这时候如果运行npm install或者其他命令依旧提示node或者npm版本过低，新开一个终端即可。因为新开终端才会重新读取环境。
-```
-
-
-
-## 安装出现错误
+## npm install出现错误
 
 1. 需要排除是否是版本问题，这个可以看报错信息。如果是版本过低，可以升级下node和npm。
 
@@ -58,7 +31,7 @@ npm -v
 
 3. 需要排查是否`npm源`的问题，原始源可能存在下载部分包错误，可以使用`nrm`来切换源继续第二步。
 
-4. 上面基本可以解决我遇到的大多数问题，如果问题依旧无法解决，使用淘宝的`cnpm`工具代替`npm`安装。
+4. 上面基本可以解决我遇到的大多数问题，如果问题依旧无法解决，使用淘宝的`cnpm`或者`yarn`工具代替`npm`安装。
 
    ```bash
    npm install cnpm -g

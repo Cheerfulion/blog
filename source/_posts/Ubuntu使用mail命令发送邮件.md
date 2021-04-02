@@ -5,7 +5,7 @@ tags:
   - 运维
   - Linux
 abbrlink: abdd27f8
-date: 2021-03-14 17:05:10
+date: 2021-03-31 20:15:42
 ---
 
 
@@ -18,11 +18,11 @@ date: 2021-03-14 17:05:10
    sudo apt install mailutils
    ```
 
-   ![1607566393707](assets/Ubuntu使用mail命令发送邮件/1607566393707.png)
+   ![1607566393707](http://blog.cdn.ionluo.cn/blog/1607566393707.png)
 
-   ![1607566559110](assets/Ubuntu使用mail命令发送邮件/1607566559110.png)
+   ![1607566559110](http://blog.cdn.ionluo.cn/blog/1607566559110.png)
 
-   ![1607566631213](assets/Ubuntu使用mail命令发送邮件/1607566631213.png)
+   ![1607566631213](http://blog.cdn.ionluo.cn/blog/1607566631213.png)
 
 2. 安装`heirloom-mailx`
 
@@ -44,7 +44,7 @@ date: 2021-03-14 17:05:10
 
    > 其中`USER@qq.com`是你的邮箱账号,PASSWORD是你邮箱的密码或者授权码.
    >
-   > ![1607568084978](assets/Ubuntu使用mail命令发送邮件/1607568084978.png)
+   > ![1607568084978](http://blog.cdn.ionluo.cn/blog/1607568084978.png)
    >
    > qq邮箱的授权码需要开启SMTP服务（安装mailutils就是选择的这个服务），至于IMAP和POP3的区别可以看官方说明。
 
@@ -97,8 +97,8 @@ date: 2021-03-14 17:05:10
    > ```bash
    > # 删除软件及其配置文件
    > apt-get --purge remove <package>
-   > # 删除没用的依赖包
-   > apt-get autoremove <package>
+   > # 删除没用的依赖包（危险操作：https://www.zhihu.com/question/392688534）
+   > # apt-get autoremove <package>
    > # 此时dpkg的列表中有“rc”状态的软件包，可以执行如下命令做最后清理：
    > dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P123456
    > ```

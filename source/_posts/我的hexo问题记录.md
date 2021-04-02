@@ -4,7 +4,7 @@ description: '-'
 tags:
   - hexo
 abbrlink: 63cf15be
-date: 2021-03-29 00:24:31
+date: 2021-03-29 23:51:50
 ---
 
 
@@ -53,9 +53,12 @@ reason: 'can not read a block mapping entry; a multiline key may not be an impli
 var fs = require('fs');
 // 路径操作模块
 const path = require('path');
-var exec = require('child_process').exec;
-// 日期格式化模块
+// markdown解析成html "marked": "^1.2.7",
+const marked = require('marked')
+// 日期格式化模块 "dateformat": "^3.0.3",
 const dateFormat = require('dateformat');
+// DOM操作 "cheerio": "^1.0.0-rc.5",
+const cheerio = require('cheerio');
 
 // 需要复制出来的文件夹
 form_path = path.join(__dirname, 'origin')
@@ -65,6 +68,7 @@ to_path = path.join(__dirname, '..', 'my_blog', 'source', '_posts')
 
  
 function copyToFolder (pathname, stat, filesList) {
+    if (pathname.indexOf('private-') > -1) return;
     if (path.extname(pathname) !== '.md') return;
 
     const new_path = path.join(to_path, path.basename(pathname));
@@ -79,10 +83,15 @@ function copyToFolder (pathname, stat, filesList) {
 
     // 文件内容
     let text = fs.readFileSync(pathname).toString();
+    // // markdown文件解析成html
+    // let html = marked(text);
+    // $ = cheerio.load(html);
+    // let description = $('p').text().substr(0, 300).replace(/>-/g, '').replace(/:/g, '').replace(/\n/g, '') || '';
 
-    // hexo yilia主题貌似不支持头部描述
+    // hexo头部描述(description暂时不太清楚其规则，先不管，空着)
     text = `---
 title: ${path.basename(pathname, path.extname(pathname))}
+description: '-'
 tags: ${ tags_str }
 date: ${ dateFormat(new Date(stat.mtime), "yyyy-mm-dd HH:MM:ss") }
 ---\n\n\n\n` + text

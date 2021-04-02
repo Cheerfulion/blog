@@ -6,7 +6,7 @@ tags:
   - Web后端
   - Django
 abbrlink: 9d50cee6
-date: 2021-03-29 23:11:49
+date: 2021-03-30 22:30:30
 ---
 
 
@@ -75,10 +75,46 @@ cyagen@QhBetaBio:/$ sudo /var/www/beta_bio_cyagen_net/bin/wkhtmltopdf/0.12.3/wkh
 
 https://github.com/wkhtmltopdf/wkhtmltopdf/issues/3579
 
-https://github.com/wkhtmltopdf/wkhtmltopdf/issues/3579
+https://github.com/wkhtmltopdf/wkhtmltopdf/pull/3692
 
 
 
 ## 封面参数需要移至全局参数之后
 
 https://github.com/jgm/pandoc/issues/6171
+
+
+
+
+
+## 图片无法加载
+
+1. 情况一：图片链接被置换成 `file///xxx`
+
+   截图如下：
+
+   ![image-20210330145559694](http://blog.cdn.ionluo.cn/blog/image-20210330145559694.png)
+
+   可以看到，原来的链接被替换多了 `file///xxx`, 具体原因不详，应该是django-wkhtmltopdf插件导致。
+
+   解决方法：修改图片位置，不要放到`static`的路径下，我这里放到了`media`目录下即可。
+
+2. 情况二：图片过大导致的无法显示。
+
+   这个情况其实我也不确定是否图片过大导致，只是一个猜测。
+
+   解决方法：设置一个延时(`javascript-delay`)，让图片有更多的加载时间。
+
+   ```python
+   WKHTMLTOPDF_CMD_OPTIONS = {
+       'page-size': 'Letter', 'margin-top': 16, 'margin-bottom': 10, 'javascript-delay': 1000,
+   }
+   ```
+
+3. 情况三：无法引用本地图片。
+
+   检查下是否有加`--disable-internal-links`配置。
+
+
+
+**有一个万精油的解决方案就是：把图片转base64嵌入html**

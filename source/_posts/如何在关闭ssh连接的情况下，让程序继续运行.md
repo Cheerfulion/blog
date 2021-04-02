@@ -5,7 +5,7 @@ tags:
   - 运维
   - Linux
 abbrlink: ef747403
-date: 2021-01-20 00:15:19
+date: 2021-03-31 20:15:42
 ---
 
 
@@ -44,13 +44,13 @@ screen -S test
 python -m SimpleHTTPServer
 ```
 
-![1610344448968](assets/如何在关闭ssh连接的情况下，让程序继续运行/1610344448968.png)
+![1610344448968](http://blog.cdn.ionluo.cn/blog/1610344448968.png)
 
 ### 关闭终端
 
 这时候服务还是在后台运行。
 
-![1610344534481](assets/如何在关闭ssh连接的情况下，让程序继续运行/1610344534481.png)
+![1610344534481](http://blog.cdn.ionluo.cn/blog/1610344534481.png)
 
 ### 查看screen会话
 
@@ -58,7 +58,7 @@ python -m SimpleHTTPServer
 screen -ls
 ```
 
-![1610344635039](assets/如何在关闭ssh连接的情况下，让程序继续运行/1610344635039.png)
+![1610344635039](http://blog.cdn.ionluo.cn/blog/1610344635039.png)
 
 ### 进入会话
 
@@ -68,7 +68,7 @@ screen -r 63017
 
 > 63017 是上面查看的会话id， 输入后就可以看到之前运行的命令了。
 
-![1610344708963](assets/如何在关闭ssh连接的情况下，让程序继续运行/1610344708963.png)
+![1610344708963](http://blog.cdn.ionluo.cn/blog/1610344708963.png)
 
 ### 退出会话
 
@@ -76,7 +76,7 @@ screen -r 63017
 exit
 ```
 
-![1610344770289](assets/如何在关闭ssh连接的情况下，让程序继续运行/1610344770289.png)
+![1610344770289](http://blog.cdn.ionluo.cn/blog/1610344770289.png)
 
 
 

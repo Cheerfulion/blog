@@ -4,7 +4,7 @@ description: '-'
 tags:
   - Jenkins
 abbrlink: 9a7f448e
-date: 2021-03-28 18:18:57
+date: 2021-03-30 22:30:30
 ---
 
 
@@ -202,6 +202,7 @@ java -version
    	python manage.py migrate --database=default --noinput
    fi
    
+   # 这里有一个问题，比较的是和上一次提交的差异，但是有的时候拉取的是很多个提交。可以先记录下git pull的输出文字，然后再grep。
    if [ $(git diff HEAD HEAD~1 --stat | grep -c "locale/") -ge 1 ]; then
    	python manage.py compilemessages
    fi
