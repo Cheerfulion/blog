@@ -1,7 +1,8 @@
 ---
 title: django转发请求
-date: 2021-04-07 16:19:15
 tags: web开发 后台 django
+abbrlink: 336387b5
+date: 2021-04-07 16:19:15
 ---
 
 
