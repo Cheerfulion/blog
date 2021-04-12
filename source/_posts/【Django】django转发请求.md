@@ -17,7 +17,7 @@ from views import my_proxy_view
 
 urlpatterns = patterns(
 	...
-	url('proxy/(?P<path>.*)', my_proxy_view),
+	url(r'^proxy$', my_proxy_view),
 	...
 )
 
@@ -26,11 +26,14 @@ from django.views.decorators.csrf import csrf_exempt
 from proxy.views import proxy_view
 
 @csrf_exempt
-def my_proxy_view(request, path):
+def my_proxy_view(request):
     extra_requests_args = {}
-    remoteurl = path
+    remoteurl = request.GET.get('path')
     response = proxy_view(request, remoteurl, extra_requests_args)
     response.__setitem__('Access-Control-Allow-Origin', '*')
     return response
 ```
 
+
+
+> 注意：path最好写到url的hash中去，如果使用nginx默认是无法在路由的路径中写上地址的。
