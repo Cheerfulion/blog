@@ -1,8 +1,9 @@
 ---
 title: 【前端】如何中断Promise的链式调用
+tags:
+  - 前端
+abbrlink: e0d4478a
 date: 2021-04-12 10:54:17
-tags:	
-	- 前端
 ---
 
 Promise的then用起来很方便，通过链式调用可以让代码看起来更清晰。

@@ -74,6 +74,14 @@ index_generator:
     top: -1
     date: -1
 
+# index2 generator是否包含官方的hexo-generator-index，默认true（包含）
+index2_include_index: true
+# 配置index2 generator，可以是数组或对象
+index2_generator:
+  exclude:
+    - tag 笔试面试
+    - tag hide
+
 # Category & Tag
 default_category: uncategorized
 category_map:

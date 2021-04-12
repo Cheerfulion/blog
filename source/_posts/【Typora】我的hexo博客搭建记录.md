@@ -297,6 +297,38 @@ https://blog.csdn.net/weixin_30399797/article/details/99023570
 
 
 
+## 首页隐藏文章
+
+1. **安装插件**
+
+   ```bash
+   $ npm install hexo-generator-index2 --save
+   $ npm uninstall hexo-generator-index --save
+   ```
+
+   > [hexo-generator-index2](https://github.com/Jamling/hexo-generator-index2)可以完全替代官方的[hexo-generator-index](https://github.com/hexojs/hexo-generator-index)，所以安装之后，先卸载官方的插件，不然会引起一些冲突。
+
+2. **配置项目`_config.yml`，`index_generator`下面添加**
+
+   ```yml
+   # index2 generator是否包含官方的hexo-generator-index，默认true（包含）
+   index2_include_index: true
+   # 配置index2 generator，可以是数组或对象
+   index2_generator:
+     exclude:
+       - tag hide # 隐藏标签是hide的文章
+   ```
+
+3. 然后在想隐藏的文章头部添加上标签hide，如:
+
+   ```markdown
+   ---
+   title: hello world
+   date: 2016-03-30 21:18:02   
+   tags:  
+   	- hide    
+   ---
+   ```
 
 ## 404 页面
 
