@@ -330,6 +330,12 @@ https://blog.csdn.net/weixin_30399797/article/details/99023570
    ---
    ```
 
+
+
+> 注意：这里只能达到在首页列表隐藏的功能，搜索或者其他地方还是可以找到的，如果需要更完美的方式可以参照https://vanchchen.github.io/p/7587.html试试！
+
+
+
 ## 404 页面
 
 这里配置的是腾讯公益404页面
