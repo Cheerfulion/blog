@@ -62,26 +62,26 @@ echo -e project_full_name: ${project_full_name}
 
 cd /var/www/$project_full_name/
 
-git pull
+result=$(git pull)
 git checkout master
 # git reset --hard origin/master
 
 source /var/www/env/$project_full_name/bin/activate
 
 # 费时操作根据判断是否执行
-if [ $(git diff HEAD HEAD~1 --stat | grep -c "requirements.txt") -ge 1 ]; then
+if [ $(echo $result | grep -c "requirements.txt") -ge 1 ]; then
     pip install -r ./requirements.txt
 fi
 
-if [ $(git diff HEAD HEAD~1 --stat | grep -c "app/migrations") -ge 1 ]; then
+if [ $(echo $result | grep -c "app/migrations") -ge 1 ]; then
     python manage.py migrate --database=default --noinput
 fi
 
-if [ $(git diff HEAD HEAD~1 --stat | grep -c "locale/") -ge 1 ]; then
+if [ $(echo $result | grep -c "locale/") -ge 1 ]; then
     python manage.py compilemessages
 fi
 
-if [ $(git diff HEAD HEAD~1 --stat | grep -c -E "\.js|\.css|\.less") -ge 1 ]; then
+if [ $(echo $result | grep -c -E "\.js|\.css|\.less") -ge 1 ]; then
     cd app/static/
     ls -dt ./build/*/ | tail -n +5 | xargs rm -rf
     grunt build

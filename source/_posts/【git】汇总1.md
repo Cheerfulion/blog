@@ -1,5 +1,5 @@
 ---
-title: 汇总1
+title: git使用问题汇总
 description: '-'
 tags:
   - Git
@@ -245,7 +245,7 @@ git checkout -t origin/production -b issue-0
 
 git stash pop
 
-# 提交和推送了
+## 提交和推送了
 
 git add .
 
@@ -253,7 +253,7 @@ git commit -m "提交信息"
 
 git push origin issue-0 
 
-# 但原来的分支production依旧是多了一次提交, 这时候需要切回去, 提交一次
+## 但原来的分支production依旧是多了一次提交, 这时候需要切回去, 提交一次
 
 git checkout production 
 
@@ -340,7 +340,7 @@ https://stackoverflow.com/questions/11706215/how-to-fix-git-error-object-file-is
 
 
 
-# window下配置.gitignore
+## window下配置.gitignore
 
 \1. 在仓库目录下打开GitBash，输入命令 **touch .gitignore**
 
@@ -480,19 +480,19 @@ git checkout -- .
 
 
 
-# [删除untracked files](https://www.cnblogs.com/smallyi/p/6727664.html)
+## [删除untracked files](https://www.cnblogs.com/smallyi/p/6727664.html)
 
 ```bash
-# 删除 untracked files
+## 删除 untracked files
 git clean -f
  
-# 连 untracked 的目录也一起删掉
+## 连 untracked 的目录也一起删掉
 git clean -fd
  
 # 连 gitignore 的untrack 文件/目录也一起删掉 （慎用，一般这个是用来删掉编译出来的 .o之类的文件用的）
 git clean -xfd
  
-# 在用上述 git clean 前，墙裂建议加上 -n 参数来先看看会删掉哪些文件，防止重要文件被误删
+## 在用上述 git clean 前，墙裂建议加上 -n 参数来先看看会删掉哪些文件，防止重要文件被误删
 git clean -nxfd
 git clean -nf
 git clean -nfd
@@ -502,7 +502,7 @@ git clean -nfd
 
 
 
-# 去除gitlab对分支的保护
+## 去除gitlab对分支的保护
 
 有时候对master分支进行强制push【git push -f】时会报错
 
@@ -521,7 +521,7 @@ git clean -nfd
 
 
 
-# git的默认编辑器是nano，关于如何使用请看
+## git的默认编辑器是nano，关于如何使用请看
 
 http://www.vpser.net/manage/nano.html
 
@@ -529,7 +529,7 @@ http://www.vpser.net/manage/nano.html
 
 
 
-# 解决 git pull/push 每次都要输入用户名密码的问题
+## 解决 git pull/push 每次都要输入用户名密码的问题
 
 原文链接：https://www.jianshu.com/p/5b81c9ce505c
 
@@ -579,7 +579,7 @@ http://www.vpser.net/manage/nano.html
 
 
 
-# [Git删除暂存区或版本库中的文件](https://www.cnblogs.com/cposture/p/git.html)
+## [Git删除暂存区或版本库中的文件](https://www.cnblogs.com/cposture/p/git.html)
 
 https://www.cnblogs.com/cposture/p/git.html
 
@@ -644,4 +644,37 @@ git config --global core.quotepath false
 `core.quotepath`设为`false`的话，就不会对`0x80`以上的字符进行编码。中文显示正常。
 
 ![1609771436187](http://blog.cdn.ionluo.cn/blog/1609771436187.png)
+
+
+
+
+
+## There are too many unreachable loose objects; run 'git prune' to remove them.
+
+```bash
+(web) ion@ubuntu:~/projects/web/app/static$ git pull
+Warning: the RSA host key for 'gitlab.xxx.net' differs from the key for the IP address '172.xx.xx.xx'
+Offending key for IP in /home/ion/.ssh/known_hosts:2
+Matching host key in /home/ion/.ssh/known_hosts:4
+Are you sure you want to continue connecting (yes/no)? yes
+自动在后台执行仓库打包以求最佳性能。
+手工维护参见 "git help gc"。
+error: 最后一次 gc 操作报告如下信息。请检查原因并删除 .git/gc.log。
+在该文件被删除之前，自动清理将不会执行。
+
+warning: There are too many unreachable loose objects; run 'git prune' to remove them.
+
+Already up-to-date.
+(web) ion@ubuntu:~/projects/web/app/static$ git count-objects
+193628 objects, 850024 kilobytes
+(web) ion@ubuntu:~/projects/web/app/static$ git gc --prune=now 
+对象计数中: 244216, 完成.
+Delta compression using up to 4 threads.
+压缩对象中: 100% (97590/97590), 完成.
+写入对象中: 100% (244216/244216), 完成.
+Total 244216 (delta 160722), reused 219325 (delta 142055)
+正在删除重复对象: 100% (256/256), 完成.
+(web) ion@ubuntu:~/projects/web/app/static$ git count-objects
+0 objects, 0 kilobytes
+```
 

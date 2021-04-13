@@ -187,28 +187,30 @@ java -version
    # echo "Local version: $(git rev-parse FETCH_HEAD)"
    # echo "Remote origin url: $(git ls-remote --get-url)"
    
-   git pull
+   result=$(git pull)
    git checkout master
    # git reset --hard origin/master  # 强制保持和远程master分支代码相同
    
    source /var/www/env/web/bin/activate
    
    # 费时操作根据判断是否执行
-   if [ $(git diff HEAD HEAD~1 --stat | grep -c "requirements.txt") -ge 1 ]; then
+   if [ $(echo $result | grep -c "requirements.txt") -ge 1 ]; then
    	pip install -r ./requirements.txt
    fi
    
-   if [ $(git diff HEAD HEAD~1 --stat | grep -c "app/migrations") -ge 1 ]; then
+   if [ $(echo $result | grep -c "app/migrations") -ge 1 ]; then
    	python manage.py migrate --database=default --noinput
    fi
    
-   # 这里有一个问题，比较的是和上一次提交的差异，但是有的时候拉取的是很多个提交。可以先记录下git pull的输出文字，然后再grep。
-   if [ $(git diff HEAD HEAD~1 --stat | grep -c "locale/") -ge 1 ]; then
+   if [ $(echo $result | grep -c "locale/") -ge 1 ]; then
    	python manage.py compilemessages
    fi
    
    # 这个前端代码打包操作不适合放到服务器进行
-   if [ $(git diff HEAD HEAD~1 --stat | grep -c -E "\.js|\.css|\.less") -ge 1 ]; then
+   # 2021/4/13 
+   # 不要使用git diff HEAD HEAD~1 --stat"，这只比较了最后一次提交，但是我们拉取有可能拉取到多次提交。
+   # 放弃pack参数 if [ $(git diff HEAD HEAD~1 --stat | grep -c -E "js|css|less") -ge 1 ] || [ $pack == 'yes' ]; then
+   if [ $(echo $result | grep -c -E "\.js|\.css|\.less") -ge 1 ]; then
        cd app/static/
        # 显示当前文件夹下的文件(-d), 并按时间排序(-t)
        # 从第5个位置开始输出
