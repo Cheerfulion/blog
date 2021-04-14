@@ -39,13 +39,15 @@ sudo dpkg -i wps-office_11.1.0.10161_amd64.deb
 
 ## 字体安装
 
+测试系统：Ubuntu16.04
+
 1. **下载字体** ：[wps_symbol_fonts.zip](https://blog.cdn.ionluo.cn/files/wps_symbol_fonts.zip)
 
 2. **解压安装字体**
 
    ```bash
    sudo unzip -d ./wps_symbol_fonts/ wps_symbol_fonts.zip
-   sudo cp wps_symbol_fonts/* /usr/share/fonts
+   sudo cp wps_symbol_fonts/* /usr/share/fonts/wps_fonts
    ```
 
 3. **大功告成**

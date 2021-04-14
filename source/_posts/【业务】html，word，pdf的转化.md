@@ -489,9 +489,31 @@ for top, dirs, files in os.walk('/my/pdf/folder'):
 
 **总结：**
 
-效果是比较好的，但是转docx还是会出现格式混乱的问题。同时在wps中页面有一定的偏移，在桌面版Ubuntu中打开会卡死，原因未知。
+效果是比较好的，但是转docx还是会出现格式混乱的问题。同时在wps中页面有一定的偏移，在桌面版Ubuntu的LibreOffice Writer中打开会卡死，原因未知。
 
 ![image-20210402102706439](http://blog.cdn.ionluo.cn/blog/image-20210402102706439.png)
+
+
+
+
+
+> **wps中页面偏移解决办法：**
+>
+> 页面偏移主要是WPS默认页边距不为0导致的，而且由于转化的word中有分页符，所以需要在页面布局→页面设置→页边距→填入页边距值，选择应用于“整篇文档”即可。
+>
+> ![image-20210414092014241](http://blog.cdn.ionluo.cn/blog/image-20210414092014241.png)
+>
+> 参考：https://jingyan.baidu.com/article/2c8c281dea9bea4109252a54.html
+>
+> 
+>
+> **LibreOffice Writer打开卡死解决办法：**
+>
+> 暂无
+>
+> 尝试了下面的方法，但是还是卡
+>
+> https://linux.zone/2997
 
 
 
