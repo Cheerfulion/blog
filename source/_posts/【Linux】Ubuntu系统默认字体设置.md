@@ -1,8 +1,9 @@
 ---
 title: 【Linux】Ubuntu系统默认字体设置
-date: 2021-04-14 09:45:55
 tags:
-	- Linux
+  - Linux
+abbrlink: ddd17c2c
+date: 2021-04-14 09:45:55
 ---
 
 

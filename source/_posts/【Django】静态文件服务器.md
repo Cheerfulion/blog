@@ -60,4 +60,4 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_PATH, 'app/static')
 ```
 
-> 该方法不好自定义一些功能，如我就发现图片不存在的时候请求时间很长，卡页面。另外就是无法设置跨域请求头Access-Control-Origin: *;
+> 该方法不好自定义一些功能，如我就发现图片不存在的时候请求时间很长，卡页面。另外就是无法设置跨域请求头Access-Control-Origin: *; 所以建议自己重写一个视图函数，不要直接使用django.views.static.serve
