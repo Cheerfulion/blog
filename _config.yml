@@ -81,7 +81,7 @@ index2_generator:
   exclude:
     - tag 笔试面试
     - tag hide
-    - tag 公基
+    - tag 公考
 
 # Category & Tag
 default_category: uncategorized
