@@ -5,6 +5,7 @@ tags:
   - hexo
 abbrlink: 63cf15be
 date: 2021-03-29 23:51:50
+disableNunjucks: true
 ---
 
 
@@ -40,6 +41,38 @@ reason: 'can not read a block mapping entry; a multiline key may not be an impli
 原因：标题中带有markdown的格式符号，理论上来说，无论title, tags, date什么头部的内容都不要带上markdown符号，会解析成html。
 
 解决：把`[]`改成`【】`即可。
+
+
+
+## 其他报错
+
+1. `Error [Nunjucks Error]: _posts/xx.md [Line xx, Column xx] expected variable end`
+
+   ![image-20210418095046951](http://blog.cdn.ionluo.cn/blog/image-20210418095046951.png)
+
+   官网有提供说明和解决方法：
+
+   [![image-20210418095436416](http://blog.cdn.ionluo.cn/blog/image-20210418095436416.png)](https://hexo.io/docs/troubleshooting.html)
+
+   **方法一：**给`{{}}`和`{% %}`用一个反引号(`code`)或者三个反引号(`pre`)括起来，或者加上`{% raw %}{% endraw %}`包裹。
+
+   **方法二：**[Front-matter](https://hexo.io/docs/front-matter)加上`disableNunjucks: true`，如下：
+
+   ```markdown
+   ---
+   title: 【python】django学习
+   tags:
+     - python
+     - django
+   abbrlink: 79fab809
+   date: 2021-04-15 18:02:23
+   disableNunjucks: true
+   ---
+   ```
+
+   **方法三：**通过Extensions [Disable Nunjucks tags](https://hexo.io/api/renderer#Disable-Nunjucks-tags)
+
+   > 这个方法需要找到我安装的hexo-cli包修改，感觉不能写到项目中，不好做版本控制就放弃了。
 
 
 

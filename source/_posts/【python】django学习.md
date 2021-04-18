@@ -1,9 +1,11 @@
 ---
 title: 【python】django学习
-date: 2021-04-15 18:02:23
 tags:
-	- python
-	- django
+  - python
+  - django
+abbrlink: 79fab809
+date: 2021-04-15 18:02:23
+disableNunjucks: true
 ---
 
 
@@ -463,7 +465,9 @@ homepage.html
 {% endwith %}
 ```
 如上，变量在with
+
 ## 内置过滤器大全
+
 1、`add `：将value的值增加2。使用形式为：{{ value | add: "2"}}。
 
 2、`addslashes`：在value中的引号前增加反斜线。使用形式为：{{ value | addslashes }}。
@@ -1291,3 +1295,5 @@ tmp_file = os.path.join(settings.MEDIA_ROOT,path)
 # 参考
 [django2.2基础教程](https://code.ziqiangxuetang.com/django/django-tutorial.html)
 [django在开发中取消外键约束的实现](https://www.jb51.net/article/186943.htm)
+
+
