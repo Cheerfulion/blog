@@ -340,52 +340,85 @@ https://stackoverflow.com/questions/11706215/how-to-fix-git-error-object-file-is
 
 
 
-## window下配置.gitignore
-
-\1. 在仓库目录下打开GitBash，输入命令 **touch .gitignore**
-
-\2. 常用的.gitignore配置
+## 仓库创建后该怎么做？
 
 ```bash
-.mvn
-.iml
-mvnw
-mvnw.cmd
-target/
-help.md
-.cache
-.project
-.settings
-.classpath
+# Git global setup
+git config --global user.name "【你的账号】"
+git config --global user.email "【你的邮箱】"
 
-*.log
-logs/
- 
-.idea
-.idea/
+# Create a new repository
+git clone git@gitlab.xxx.com:projects/xxx.git
+cd xxx
+touch README.md
+git add README.md
+git commit -m "add README"
+git push -u origin master
 
-# dependencies
-node_modules/
+# Existing folder
+cd existing_folder
+git init
+git remote add origin git@gitlab.xxx.com:projects/xxx.git
+git add .
+git commit -m "Initial commit"
+git push -u origin master
 
-# production
-build/
-dist/
-
-# misc
-.idea/
-.happypack
-.DS_Store
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-application.properties
+# Existing Git repository
+cd existing_repo
+git remote rename origin old-origin
+git remote add origin git@gitlab.xxx.com:projects/xxx.git
+git push -u origin --all
+git push -u origin --tags
 ```
 
-![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
 
-## 配置无效几种情况
+
+
+
+## window下配置.gitignore
+
+1. **在仓库目录下打开GitBash，输入命令 `touch .gitignore`**
+
+2. **常用的.gitignore配置**
+
+   ```bash
+   .mvn
+   .iml
+   mvnw
+   mvnw.cmd
+   target/
+   help.md
+   .cache
+   .project
+   .settings
+   .classpath
+   
+   *.log
+   logs/
+    
+   .idea
+   .idea/
+   
+   # dependencies
+   node_modules/
+   
+   # production
+   build/
+   dist/
+   
+   # misc
+   .idea/
+   .happypack
+   .DS_Store
+   
+   npm-debug.log*
+   yarn-debug.log*
+   yarn-error.log*
+   
+   application.properties
+   ```
+
+**配置无效几种情况**
 
 - 命令格式错误
 - 在配置语句的前后面添加空格、Tab、注释等，会导致当前行的配置语句失效
@@ -399,7 +432,6 @@ application.properties
 ```bash
 git rm -r --cached .
 git add .
-
 git commit -m 'update .gitignore'
 ```
 
@@ -409,49 +441,63 @@ git commit -m 'update .gitignore'
 
 ## 如何快速关联/修改Git远程仓库地址
 
-参考: https://www.cnblogs.com/youcong/p/10809085.html
+1. **方法一（最推荐）: 把修改旧Git地址，添加新的Git远程仓库地址**
 
-删除本地仓库当前关联的无效远程地址，再为本地仓库添加新的远程仓库地址
+   ```bash
+   git remote rename origin old-origin
+   git remote add origin git@gitlab.xxx.cn:xxx/xxx.git 
+   git push -u origin --all
+   git push -u origin --tags
+   # 查看结果
+   git remote -v
+   ```
 
-```html
-git remote -v //查看git对应的远程仓库地址
-git remote rm origin //删除关联对应的远程仓库地址
-git remote -v //查看是否删除成功，如果没有任何返回结果，表示OK
-//重新关联git远程仓库地址
-//这里需要注意，关联https的话部署秘钥是无效的，还是要通过账号密码去拉取代码。
-//如果一定要关联https的路径的话，可以百度下缓存账号密码的方式
-git remote add origin git@gitlab.xxx.cn:integrated-projects/korea.git 
-// 测试是否可以连接到远程仓库，如果没有welcome，需要配置秘钥（参考上面的ssh key生成）
-ssh -T git@gitlab.xxx.cn
-git branch --set-upstream-to=origin/master master // 设置关联，这里是关联本地master分支和远程master分支
-```
+   
 
-![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+2. **方法二：删除本地仓库当前关联的无效远程地址，再为本地仓库添加新的远程仓库地址**
 
-其实不仅仅上述这一种方式，还有如下几种方式:
+   ```bash
+   # 查看git对应的远程仓库地址
+   git remote -v
+   # 删除关联对应的远程仓库地址
+   git remote rm origin
+   # 查看是否删除成功，如果没有任何返回结果，表示OK
+   git remote -v
+   # 重新关联git远程仓库地址
+   # 这里需要注意，关联https的话部署秘钥是无效的，还是要通过账号密码去拉取代码。
+   # 如果一定要关联https的路径的话，可以百度下缓存账号密码的方式
+   git remote add origin git@gitlab.xxx.cn:xxx/xxx.git 
+   # 测试是否可以连接到远程仓库，如果没有welcome，需要配置秘钥（参考上面的ssh key生成）
+   ssh -T git@gitlab.xxx.cn
+   # 设置关联，这里是关联本地master分支和远程master分支
+   git branch --set-upstream-to=origin/master master
+   ```
 
-直接修改本地仓库所关联的远程仓库的地址
+   
 
-```html
-git remote  //查看远程仓库名称：origin 
-git remote get-url origin //查看远程仓库地址
-git remote set-url origin https://github.com/developers-youcong/Metronic_Template.git  ( 如果未设置ssh-key，此处仓库地址为 http://... 开头)
-```
+3. **方法三：直接修改本地仓库所关联的远程仓库的地址**
 
-![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+   ```bash
+   # 查看远程仓库名称：origin 
+   git remote
+   # 查看远程仓库地址
+   git remote get-url origin
+   #  如果未设置ssh-key，此处仓库地址为 http://... 开头
+   git remote set-url origin https://github.com/developers-youcong/Metronic_Template.git
+   ```
 
-修改 .git 配置文件
+   
 
-```html
-cd .git  //进入.git目录
-vim config  //修改config配置文件，快速找到remote "origin"下面的url并替换即可实现快速关联和修改
-```
+4. **方法四：修改 .git 配置文件**
 
-![点击并拖拽以移动](data:image/gif;base64,R0lGODlhAQABAPABAP///wAAACH5BAEKAAAALAAAAAABAAEAAAICRAEAOw==)
+   ```bash
+   # 进入.git目录
+   cd .git
+   # 修改config配置文件，快速找到remote "origin"下面的url并替换即可实现快速关联和修改
+   vim config
+   ```
 
-
-
-
+   
 
 ## git常见后悔药
 
