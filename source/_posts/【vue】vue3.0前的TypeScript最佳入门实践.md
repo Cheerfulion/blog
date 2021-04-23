@@ -1,9 +1,10 @@
 ---
 title: vue3.0前的TypeScript最佳入门实践
-date: 2021-04-22 20:29:26
 tags:
-	- vue
-	- typescript
+  - vue
+  - typescript
+abbrlink: cf8cd500
+date: 2021-04-22 20:29:26
 ---
 
 
