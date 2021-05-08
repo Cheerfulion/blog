@@ -994,8 +994,9 @@ class ModelStudy(View):
 
 
 # Django 配置
-## os
+**os**
 运行 `django-admin.py startproject [project-name] ` 命令会生成一系列文件，在Django 2.2.7版本的 settings.py 文件中有以下语句：
+
 ```python
 import os
 
@@ -1015,13 +1016,17 @@ import os
 print(os.path.abspath("."))   #当前目录的绝对路径
 print(os.path.abspath(r".."))  #上级目录的绝对路径
 print(os.path.abspath(r"D:\demo\mysite\learn\views.py"))
-```
-输出：
-E:\project\django\mysite
-E:\project\django
-D:\demo\mysite\learn\views.py
 
-## DEBUG＝True
+# 输出：
+# E:\project\django\mysite
+# E:\project\django
+# D:\demo\mysite\learn\views.py
+```
+
+
+
+
+**DEBUG＝True**
 开启debug模式（调试模式），如果出现 bug 便于我们看见问题所在，但是部署时最好不要让用户看见bug的详情，可能一些不怀好心的人攻击网站，造成不必要的麻烦。
 
 `ALLOWED_HOSTS = ['*.besttome.com','www.ziqiangxuetang.com']`
@@ -1030,8 +1035,14 @@ ALLOWED_HOSTS 允许你设置哪些域名可以访问，即使在 Apache 或 Ngi
 
 当 DEBUG=False 时，这个为必填项，如果不想输入，可以用 ALLOW_HOSTS = ['*'] 来允许所有的。
 
-## 设置静态文件位置
+
+
+
+
+**设置静态文件位置**
+
 ==设置静态文件目录==
+
 ```python
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
@@ -1048,6 +1059,7 @@ STATICFILES_DIRS = (
 这样我们就可以把静态文件放在 common_static 和 /var/www/static/中了，Django也能找到它们。
 
 ==设置用户上传的文件目录==
+
 ```python
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
@@ -1080,9 +1092,17 @@ TEMPLATES = [
 这样 就可以把模板文件放在 templates 和 templates2 文件夹中了。
 
 
-## 部署基础
+
+
+
+# 部署基础
+
 本文主要讲在 ==Linux== 平台下，使用 ==Nginx + uWSGI== 的方式来部署来 Django，这是目前比较主流的方式。当然你也可以使用 Gunicorn 代替 uWSGI，不过原理都是类似的。
-### 基础知识储备
+
+
+
+**基础知识储备**
+
 当我们发现用浏览器不能访问的时候，我们需要一步步排查问题。
 整个部署的链路是 Nginx -> uWSGI -> Python Web程序，通常还会提到supervisord工具。
 uWSGI是一个软件，部署服务的工具，了解整个过程，我们先了解一下WSGI规范，uwsgi协议等内容。
@@ -1101,7 +1121,12 @@ uWSGI通过WSGI规范和我们编写的服务进程通讯，然后通过自带�
 
 ==supervisor== 是一个进程管理工具。任何人都不能保证程序不异常退出，不别被人误杀，所以一个典型的工程做法就是使用supervisor看守着你的进程，一旦异常退出它会立马进程重新启动起来。如果服务部署后出现异常，不能访问。我们需要分析每一步有没有问题，这时候就不得不用到Linux中一些命令。
 
-### uwsgi.py设置
+
+
+
+
+**uwsgi.py设置**
+
 ```python
 [uwsgi]
 #socket = /tmp/xxx_com.sock
@@ -1143,32 +1168,47 @@ socket-timeout = 600
 buffer-size = 32768
 ```
 
-### 进程分析
+
+
+
+
+**进程分析**
+
 进程是计算机分配资源的最小单位，我们的程序至少是运行在一个进程中。
-##### 查看进程信息 
-`ps aux | grep python`( 查看系统中运行的 python 进程)
-我们可以通过查看 /proc/PID/ 目录的文件信息来得到这个进程的一些信息（Linux中一切皆文件，进程信息也在文件中），比如它是在哪个目录启动的，启动命令是什么等信息。执行命令如下：
-```bash
-tu@linux /proc/4491 $ sudo ls -ahl
-```
+1. 查看进程信息 
 
-##### 向进程发送信号
-`kill PID` 杀死一个进程
-`kill -9 PID` 强制杀死一个进程
-我们可以通过 `kill -l` 命令查看到所有的信号
-HUP INT QUIT ILL TRAP ABRT BUS FPE KILL USR1 SEGV USR2 PIPE ALRM TERM STKFLT CHLD CONT STOP TSTP TTIN TTOU URG XCPU XFSZ VTALRM PROF WINCH POLL PWR SYS
+   `ps aux | grep python`( 查看系统中运行的 python 进程)
+   我们可以通过查看 /proc/PID/ 目录的文件信息来得到这个进程的一些信息（Linux中一切皆文件，进程信息也在文件中），比如它是在哪个目录启动的，启动命令是什么等信息。执行命令如下：
+
+   ```bash
+   tu@linux /proc/4491 $ sudo ls -ahl
+   ```
+
+2. 向进程发送信号
+
+   `kill PID` 杀死一个进程
+   `kill -9 PID` 强制杀死一个进程
+   我们可以通过 `kill -l` 命令查看到所有的信号
+   HUP INT QUIT ILL TRAP ABRT BUS FPE KILL USR1 SEGV USR2 PIPE ALRM TERM STKFLT CHLD CONT STOP TSTP TTIN TTOU URG XCPU XFSZ VTALRM PROF WINCH POLL PWR SYS
+
+3. 查看进程打开了哪些文件 `sudo lsof -p PID`
+
+4. 查看文件被哪个进程使用 ` sudo lsof /path/to/file`
+
+5. 查看进程当前状态
+
+   当我们发现一个进程启动了，端口也是正常的，但好像这个进程就是不“干活”。比如我们执行的是数据更新进程，这个进程不更新数据了，但还是在跑着。可能数据源有问题，可能我们写的程序有BUG，也可能是更新时要写入到的数据库出问题了（数据库连接不上了，写数据死锁了）。我们这里主要说下第二种，我们自己的程序如果有BUG，导致工作不正常，我们怎么知道它当前正在干什么呢，这时候就要用到Linux中的调试分析诊断strace，可以使用 `sudo strace -p PID`这个命令。
+
+   通过执行后输出的一些信息，推测分析看是哪些出了问题。
+
+### 
 
 
-##### 查看进程打开了哪些文件 `sudo lsof -p PID`
-##### 查看文件被哪个进程使用 ` sudo lsof /path/to/file`
-##### 查看进程当前状态
-当我们发现一个进程启动了，端口也是正常的，但好像这个进程就是不“干活”。比如我们执行的是数据更新进程，这个进程不更新数据了，但还是在跑着。可能数据源有问题，可能我们写的程序有BUG，也可能是更新时要写入到的数据库出问题了（数据库连接不上了，写数据死锁了）。我们这里主要说下第二种，我们自己的程序如果有BUG，导致工作不正常，我们怎么知道它当前正在干什么呢，这时候就要用到Linux中的调试分析诊断strace，可以使用 `sudo strace -p PID`这个命令。
 
-通过执行后输出的一些信息，推测分析看是哪些出了问题。
+**端口分析**
 
+查看全部端口占用情况 `netstat -nltp`
 
-### 端口分析
-##### 查看全部端口占用情况 `netstat -nltp`
 Linux中我们可以使用 netstat 工具来进程网络分析，netstat 命令有非常多选项，这里只列出了常用的一部分
 ```bash
 -a或--all 显示所有连接中的Socket，默认不显示 LISTEN 相关的。
@@ -1179,7 +1219,7 @@ Linux中我们可以使用 netstat 工具来进程网络分析，netstat 命令�
 -t或--tcp 显示TCP传输协议的连接。
 -u或--udp 显示UDP传输协议的连接。
 ```
-##### 查看具体端口占用情况 `sudo lsof -i :80`
+查看具体端口占用情况 `sudo lsof -i :80`
 
 
 
