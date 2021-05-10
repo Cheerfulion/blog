@@ -15,22 +15,22 @@ disableNunjucks: true
 [别人收集的django入门教程](https://www.jianshu.com/p/b9fdc977bb96)
 [django1.8 中文文档　国人翻译](https://django-intro-zh.readthedocs.io/zh_CN/latest/)
 
-==python版本：3.6.3== 
+**python版本：3.6.3** 
 官方文档：[https://docs.python.org/3.6/library/index.html](https://docs.python.org/3.6/library/index.htm)
 中文文档：[http://www.pythondoc.com/pythontutorial3/index.html](http://www.pythondoc.com/pythontutorial3/index.html)
-==django版本：2.2.7== 
+**django版本：2.2.7** 
  官方文档：[https://docs.djangoproject.com/en/2.2/](https://docs.djangoproject.com/en/2.2/)
 中文文档：[django2.2基础教程](https://code.ziqiangxuetang.com/django/django-tutorial.html)
 
 
 # 问题汇总（此部分和正文无关，略过）
-> ==requests模块使用==
+> **requests模块使用**
 > https://www.cnblogs.com/lanyinhao/p/9634742.html
-> ==数据库的增删改查==
+> **数据库的增删改查**
 > https://www.cnblogs.com/py-web/archive/2019/05/22/10907206.html
 
 # 环境搭建
-1. 安装：`pip install Django==2.2.7` (需要先安装python)
+1. 安装：`pip install Django**2.2.7` (需要先安装python)
 2. 检查django是否安装成功:
 	```python
 	>>> import django
@@ -79,7 +79,7 @@ bash: /usr/local/bin/virtualenvwrapper.sh: 没有那个文件或目录
 尝试下面命令前可以用虚拟环境去执行。
 ```bash
 > workon virtualenv_name
-> pip install Django==2.2.7
+> pip install Django**2.2.7
 ```
 ## 新建一个 django project
 `django-admin.py startproject project_name`
@@ -286,7 +286,7 @@ def add2(request, a, b):
 好了，接下来进入正题。url(r'^add/$', calc_views.add, name='add'), 这里的 **name='add'** 是用来干什么的呢？
 简单说，name 可以用于在 `templates, models, views ……`中得到对应的网址，相当于“`给网址取了个名字`”，只要这个名字不变，网址变了也能通过名字获取到。
 
-==templates中根据url别名获取对应网址：==
+**templates中根据url别名获取对应网址：**
 ```html
 <!--
 不带参数的：
@@ -296,7 +296,7 @@ def add2(request, a, b):
 -->
 <a href="{% url 'add2' 4 5 %}">计算 4+5</a>
 ```
-==models, views中根据url别名获取对应网址：==
+**models, views中根据url别名获取对应网址：**
 ```python
 # reverse() 接收 url 中的 name 作为第一个参数
 from django.urls import reverse
@@ -433,7 +433,7 @@ homepage.html
 ```
 
 ## 实例四，逻辑操作
-` ==, !=, >=, <=, >, < 这些比较都可以在模板中使用`
+` **, !=, >=, <=, >, < 这些比较都可以在模板中使用`
 `and, or, not, in, not in 也可以在模板中使用`
 ```html
 {% if num <= 100 and num >= 0 %}
@@ -553,7 +553,7 @@ homepage.html
 另外，django中默认安装的数据库是`sqlite3`, 在 setting.py 文件可以看到：
 ![在这里插入图片描述](http://blog.cdn.ionluo.cn/blog/20191228171927164.png)
 下面就让我们来建立一个用户信息表吧！
-==1.  打开 learn/models.py 文件，修改其中的代码如下：==
+**1.  打开 learn/models.py 文件，修改其中的代码如下：**
 ```python
 from django.db import models
 
@@ -569,7 +569,7 @@ class User(models.Model):
         return self.name  # <Person: Person object> 显示成 <Person: Ion>
 ```
 **注意**： 这里就使用到了五种**Field**，其他可以参考：[https://docs.djangoproject.com/en/2.2/topics/db/models/](https://docs.djangoproject.com/en/2.2/topics/db/models/)
-==2. 创建数据表==
+**2. 创建数据表**
 `我们使用默认的数据库 SQLite3，无需配置`
 **第一步，生成迁移文件**
 先 cd 进入 manage.py 所在的那个文件夹下，输入下面的命令: `python manage.py makemigrations`
@@ -579,7 +579,7 @@ class User(models.Model):
 
 效果如下图，这里只有一个 migrate 记录是因为我之前执行过了，如果没有的话还有很多 django 内置的应用的表，他们是用户及用户认证等相关的。
 ![在这里插入图片描述](http://blog.cdn.ionluo.cn/blog/20191228172802536.png)
-==3. 添加和查询数据==
+**3. 添加和查询数据**
 ```python
 from learn.models import User
 User.objects.create(name="ion", age=23) # 添加数据 {"name":"ion","age":23}
@@ -620,7 +620,7 @@ filter是找出满足条件的，当然也有排除符合某条件的
 
 
 # Django QuerySet API
-==从数据库中查询出来的结果一般是一个集合，这个集合叫做 QuerySet。==
+**从数据库中查询出来的结果一般是一个集合，这个集合叫做 QuerySet。**
 
 **1.QuerySet 创建对象的方法**
 ```python
@@ -801,7 +801,7 @@ class CompressedTextField(models.TextField):
 
 # Django 数据表更改
 我们设计数据库的时候，早期设计完后，后期会发现不完善，要对数据表进行更改，这时候就要用到本节的知识。
-==Django 1.7.x 和后来的版本：==
+**Django 1.7.x 和后来的版本：**
 Django 1.7.x 及以后的版本集成了 South 的功能，在修改models.py了后运行：
 `python manage.py makemigrations`
 `python manage.py migrate`
@@ -882,7 +882,7 @@ from django.http import HttpResponse
 from .forms import AddForm
  
 def index(request):
-    if request.method == 'POST':# 当提交表单时
+    if request.method ** 'POST':# 当提交表单时
      
         form = AddForm(request.POST) # form 包含提交的数据
          
@@ -1041,7 +1041,7 @@ ALLOWED_HOSTS 允许你设置哪些域名可以访问，即使在 Apache 或 Ngi
 
 **设置静态文件位置**
 
-==设置静态文件目录==
+**设置静态文件目录**
 
 ```python
 STATIC_URL = '/static/'
@@ -1058,7 +1058,7 @@ STATICFILES_DIRS = (
 ```
 这样我们就可以把静态文件放在 common_static 和 /var/www/static/中了，Django也能找到它们。
 
-==设置用户上传的文件目录==
+**设置用户上传的文件目录**
 
 ```python
 MEDIA_URL = '/media/'
@@ -1066,7 +1066,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 ```
 media文件夹用来存放用户上传的文件.
 
-==设置模板文件目录==
+**设置模板文件目录**
 有时候有一些模板不是属于app的，比如 baidutongji.html, share.html等，
 
 Django 1.5 - Django 1.7
@@ -1097,7 +1097,7 @@ TEMPLATES = [
 
 # 部署基础
 
-本文主要讲在 ==Linux== 平台下，使用 ==Nginx + uWSGI== 的方式来部署来 Django，这是目前比较主流的方式。当然你也可以使用 Gunicorn 代替 uWSGI，不过原理都是类似的。
+本文主要讲在 **Linux** 平台下，使用 **Nginx + uWSGI** 的方式来部署来 Django，这是目前比较主流的方式。当然你也可以使用 Gunicorn 代替 uWSGI，不过原理都是类似的。
 
 
 
@@ -1107,21 +1107,19 @@ TEMPLATES = [
 整个部署的链路是 Nginx -> uWSGI -> Python Web程序，通常还会提到supervisord工具。
 uWSGI是一个软件，部署服务的工具，了解整个过程，我们先了解一下WSGI规范，uwsgi协议等内容。
 
-==WSGI（Web Server Gateway Interface)规范==，WSGI规定了Python Web应用和Python Web服务器之间的通讯方式。目前主流的Python Web框架，比如Django，Flask，Tornado等都是基于这个规范实现的。
+**WSGI（Web Server Gateway Interface)规范**，WSGI规定了Python Web应用和Python Web服务器之间的通讯方式。目前主流的Python Web框架，比如Django，Flask，Tornado等都是基于这个规范实现的。
 
-==uwsgi协议==是uWSGI工具独有的协议，简洁高效的uwsgi协议是选择uWSGI作为部署工具的重要理由之一，详细的 uwsgi协议 可以参考uWSGI的文档。
+**uwsgi协议**是uWSGI工具独有的协议，简洁高效的uwsgi协议是选择uWSGI作为部署工具的重要理由之一，详细的 uwsgi协议 可以参考uWSGI的文档。
 `uWSGI是 实现了uwsgi协议，WSGI规范和HTTP协议的 一个C语言实现的软件。`
 
-==Nginx==是一个Web服务器，是一个反向代理工具，我们通常用它来部署静态文件。主流的Python Web开发框架都遵循WSGI规范。
+**Nginx**是一个Web服务器，是一个反向代理工具，我们通常用它来部署静态文件。主流的Python Web开发框架都遵循WSGI规范。
 uWSGI通过WSGI规范和我们编写的服务进程通讯，然后通过自带的高效的 uwsgi 协议和 Nginx进行通讯，最终Nginx通过HTTP协议将服务对外透出。
 
 当一个访问进来的时候，首先到 Nginx，Nginx会把请求（HTTP协议）转换uwsgi协议传递给uWSGI，uWSGI通过WSGI和web server进行通讯取到响应结果，再通过uwsgi协议发给Nginx，最终Nginx以HTTP协议发现响应给用户。
 有些同学可能会说，uWSGI不是支持HTTP协议么，也支持静态文件部署，我不用Nginx行不行？
 当然可以，这么做没问题，但目前主流的做法是用Nginx，毕竟它久经考验，更稳定，当然也更值得我们信赖。
 
-==supervisor== 是一个进程管理工具。任何人都不能保证程序不异常退出，不别被人误杀，所以一个典型的工程做法就是使用supervisor看守着你的进程，一旦异常退出它会立马进程重新启动起来。如果服务部署后出现异常，不能访问。我们需要分析每一步有没有问题，这时候就不得不用到Linux中一些命令。
-
-
+**supervisor** 是一个进程管理工具。任何人都不能保证程序不异常退出，不别被人误杀，所以一个典型的工程做法就是使用supervisor看守着你的进程，一旦异常退出它会立马进程重新启动起来。如果服务部署后出现异常，不能访问。我们需要分析每一步有没有问题，这时候就不得不用到Linux中一些命令。
 
 
 
@@ -1200,8 +1198,6 @@ buffer-size = 32768
    当我们发现一个进程启动了，端口也是正常的，但好像这个进程就是不“干活”。比如我们执行的是数据更新进程，这个进程不更新数据了，但还是在跑着。可能数据源有问题，可能我们写的程序有BUG，也可能是更新时要写入到的数据库出问题了（数据库连接不上了，写数据死锁了）。我们这里主要说下第二种，我们自己的程序如果有BUG，导致工作不正常，我们怎么知道它当前正在干什么呢，这时候就要用到Linux中的调试分析诊断strace，可以使用 `sudo strace -p PID`这个命令。
 
    通过执行后输出的一些信息，推测分析看是哪些出了问题。
-
-### 
 
 
 
