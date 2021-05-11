@@ -9,7 +9,9 @@ date: 2021-05-10 20:21:26
 
 
 
-# Ubuntu18.04下安装MySQL
+## 前言
+
+Ubuntu18.04下安装MySQL
 
 
 
@@ -163,3 +165,103 @@ All done!
 > 如果使用上面的方法破解不成功，可以删除Navicat的注册表再重试一次。[彻底删除Navicat](https://blog.csdn.net/kevin1993best/article/details/105642367)
 >
 > ![image-20210510155838734](http://blog.cdn.ionluo.cn/blog/image-20210510155838734.png)
+
+
+
+## 搭建phpMyAdmin实现生产环境的数据库访问
+
+PhpMyAdmin 是一个用 PHP 编写的软件工具，可以通过 web方式控制和操作 MySQL 数据库。通过 phpMyAdmin 可以完全对数据库进行操作，例如建立、复制和删除数据等等，这样 MySQL数据库的管理就会变得相当简单
+
+
+
+1. **安装**
+
+   ```bash
+   sudo apt install phpmyadmin
+   ```
+
+   ```bash
+    # 这里用apache2提供web服务(apache2)
+    ┌────────────────────────────────┤ Configuring phpmyadmin ├────────────────────────────────┐   
+    │ Please choose the web server that should be automatically configured to run phpMyAdmin.  │   
+    │                                                                                          │   
+    │ Web server to reconfigure automatically:                                                 │   
+    │                                                                                          │   
+    │    [*] apache2                                                                           │   
+    │    [ ] lighttpd                                                                          │   
+    │                                                                                          │                      
+    └──────────────────────────────────────────────────────────────────────────────────────────┘
+    
+    # 需要配置数据库以使用phpmyadmin (yes)
+    ┌─────────────────────────────────┤ Configuring phpmyadmin ├──────────────────────────────────┐  
+    │                                                                                             │  
+    │ The phpmyadmin package must have a database installed and configured before it can be       │  
+    │ used.  This can be optionally handled with dbconfig-common.                                 │  
+    │                                                                                             │  
+    │ If you are an advanced database administrator and know that you want to perform this        │  
+    │ configuration manually, or if your database has already been installed and configured, you  │  
+    │ should refuse this option.  Details on what needs to be done should most likely be          │  
+    │ provided in /usr/share/doc/phpmyadmin.                                                      │  
+    │                                                                                             │  
+    │ Otherwise, you should probably choose this option.                                          │  
+    │                                                                                             │  
+    │ Configure database for phpmyadmin with dbconfig-common?                                     │  
+    │                                                                                             │  
+    │                          <Yes>                             <No>                             │  
+    │                                                                                             │  
+    └─────────────────────────────────────────────────────────────────────────────────────────────┘
+    
+    # 设置phpmyadmin的密码
+    ┌────────────────────────────────┤ Configuring phpmyadmin ├────────────────────────────────┐
+    │ Please provide a password for phpmyadmin to register with the database server. If left   │
+    │ blank, a random password will be generated.                                              │
+    │                                                                                          │
+    │ MySQL application password for phpmyadmin:                                               │
+    │                                                                                          │
+    │ ________________________________________________________________________________________ │
+    │                                                                                          │
+    │                         <Ok>                             <Cancel>                        │
+    │                                                                                          │
+    └──────────────────────────────────────────────────────────────────────────────────────────┘
+   ```
+
+   > 查看安装的文件：`dpkg -L phpmyadmin`
+   >
+   > 配置文件：`/etc/phpmyadmin`
+   >
+   > 项目目录：`/usr/share/phpmyadmin`
+
+   
+
+2. **为 phpMyAdmin 创建 nginx 的虚拟主机**
+
+   ```bash
+   vim /etc/nginx/site-enabled/phpmyadmin
+   
+   # 加入一下内容
+   server {
+           listen   80;
+           server_name  apac.mysql.cyagen.net;
+           root   /var/www/phpmyadmin;
+           index  index.php index.html index.htm index.nginx-debian.html;
+   
+           location / {
+                   try_files $uri $uri/ =404;
+           }
+           # access_log /var/log/nginx/phpmyadmin_access.log;
+           # error_log /var/log/nginx/phpmyadmin_error.log;
+   
+           location ~ \.php$ {
+                   include snippets/fastcgi-php.conf;
+                   fastcgi_pass   unix:/run/php/php7.0-fpm.sock;
+           }
+   
+            location ~ /\.ht {
+                   deny all;
+           }
+   
+   }
+   ```
+
+   
+
