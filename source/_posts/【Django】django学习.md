@@ -13,14 +13,23 @@ disableNunjucks: true
 最近打算学习django这门web框架，先收集点教程，之后慢慢总结．
 
 [别人收集的django入门教程](https://www.jianshu.com/p/b9fdc977bb96)
+
 [django1.8 中文文档　国人翻译](https://django-intro-zh.readthedocs.io/zh_CN/latest/)
 
+
+
 **python版本：3.6.3** 
+
 官方文档：[https://docs.python.org/3.6/library/index.html](https://docs.python.org/3.6/library/index.htm)
+
 中文文档：[http://www.pythondoc.com/pythontutorial3/index.html](http://www.pythondoc.com/pythontutorial3/index.html)
+
 **django版本：2.2.7** 
- 官方文档：[https://docs.djangoproject.com/en/2.2/](https://docs.djangoproject.com/en/2.2/)
+官方文档：[https://docs.djangoproject.com/en/2.2/](https://docs.djangoproject.com/en/2.2/)
+
 中文文档：[django2.2基础教程](https://code.ziqiangxuetang.com/django/django-tutorial.html)
+
+
 
 
 # 问题汇总（此部分和正文无关，略过）
@@ -31,6 +40,7 @@ disableNunjucks: true
 
 # 环境搭建
 1. 安装：`pip install Django**2.2.7` (需要先安装python)
+
 2. 检查django是否安装成功:
 	```python
 	>>> import django
@@ -40,10 +50,15 @@ disableNunjucks: true
 	>>> django.get_version()
 	'2.2.7'
 	```
+	
 3. 搭建多个互不干扰的开发环境
-这里使用virtualenvwrapper ；
-Linux/MacOS: `(sudo) pip install virtualenv virtualenvwrapper`
-修改~/.bash_profile或其它环境变量相关文件(如 .bashrc 或用 ZSH 之后的 .zshrc)，添加以下语句
+
+这里使用virtualenvwrapper ；其他请看：[Python创建虚拟环境](https://www.cnblogs.com/shyern/p/11284127.html)
+
+	Linux/MacOS: `(sudo) pip install virtualenv virtualenvwrapper`
+	
+	修改~/.bash_profile或其它环境变量相关文件(如 .bashrc 或用 ZSH 之后的 .zshrc)，添加以下语句
+	
 	```bash
 	export WORKON_HOME=$HOME/.virtualenvs
 	export PROJECT_HOME=$HOME/workspace
@@ -52,28 +67,47 @@ Linux/MacOS: `(sudo) pip install virtualenv virtualenvwrapper`
 	修改后使之立即生效(也可以重启终端使之生效)：`source ~/.bash_profile`
 
 如果 source ~/.bashrc 后系统报错提示：
+
 bash: /usr/local/bin/virtualenvwrapper.sh: 没有那个文件或目录
+
 修改 `source /usr/local/bin/virtualenvwrapper.sh`为`source ~/.local/bin/virtualenvwrapper.sh`
+
 题外话：pycharm导入该虚拟环境运行项目
+
 ![在这里插入图片描述](http://blog.cdn.ionluo.cn/blog/20200908114418567.png)
 
 
 
 	Window: `pip install virtualenv virtualenvwrapper-win`
-【可选】Windows下默认虚拟环境是放在用户名下面的Envs中的，与桌面，我的文档，下载等文件夹在一块的。更改方法：计算机，属性，高级系统设置，环境变量，添加WORKON_HOME，如图（windows 10 环境变量设置截图）：
+【可选】Windows下默认虚拟环境是放在用户名下面的Envs中的，与桌面，我的文档，下载等文件夹在一块的。更改方法：计算机，属性，高级系统设置，环境
+
+变量，添加WORKON_HOME，如图（windows 10 环境变量设置截图）：
+
 ![在这里插入图片描述](http://blog.cdn.ionluo.cn/blog/20200104151426354.png)
-	虚拟环境使用方法：
-	`mkvirtualenv test`：创建运行环境test
-	`workon test`: 工作在 test环境 或 从其它环境切换到 test环境
-	`deactivate`: 退出终端环境
-	`rmvirtualenv test`：删除运行环境test
-	`mkproject test`：创建test项目和运行环境test
-	`mktmpenv`：创建临时运行环境
-	`lsvirtualenv`: 列出可用的运行环境
-	`lssitepackages`: 列出当前环境安装了的包
-	虚拟环境默认位置：`C:\Users\Administrator\Envs`
+
+​	虚拟环境使用方法：
+
+​	`mkvirtualenv test`：创建运行环境test
+
+​	`workon test`: 工作在 test环境 或 从其它环境切换到 test环境
+
+​	`deactivate`: 退出终端环境
+
+​	`rmvirtualenv test`：删除运行环境test
+
+​	`mkproject test`：创建test项目和运行环境test
+
+​	`mktmpenv`：创建临时运行环境
+
+​	`lsvirtualenv`: 列出可用的运行环境
+
+​	`lssitepackages`: 列出当前环境安装了的包
+
+​	虚拟环境默认位置：`C:\Users\Administrator\Envs`
 
 > 创建运行环境时可以通过 `-p` 设置python的版本 `mkvirtualenv -p /usr/bin/python3.7(python的路径) env37(虚拟环境名)`
+
+
 
 # 基础命令
 尝试下面命令前可以用虚拟环境去执行。
@@ -81,13 +115,24 @@ bash: /usr/local/bin/virtualenvwrapper.sh: 没有那个文件或目录
 > workon virtualenv_name
 > pip install Django**2.2.7
 ```
+
+
 ## 新建一个 django project
+
 `django-admin.py startproject project_name`
 *project_name是项目名，django-admin.py可以改成django-admin*
+
+
+
 ##  新建 app
+
 `python manage.py startapp app_name`或 `django-admin.py startapp app_name`
 *一般一个项目有多个app, 当然通用的app也可以在多个项目中使用。*
+
+
+
 ##  创建数据库表 或 更改数据库表或字段
+
 ```bash
 # 1. 创建更改的文件
 python manage.py makemigrations
@@ -99,6 +144,7 @@ python manage.py migrate
 	
 ## 使用开发服务器
 *开发服务器，即开发时使用，一般修改代码后会自动重启，方便调试和开发，但是由于性能问题，建议只用来测试，不要用在生产环境。*
+
 ```bash
 python manage.py runserver
  
@@ -112,8 +158,12 @@ python manage.py runserver 0.0.0.0:8001
 # 如果是外网或者局域网电脑上可以用其它电脑查看开发服务器
 # 访问对应的 ip加端口，比如 http://172.16.20.2:8000
 ```
+
+
 ##  清空数据库
+
 `python manage.py flush`
+
 *此命令会询问是 yes 还是 no, 选择 yes 会把数据全部清空掉，只留下空表。*
 
 上面我们通常不会这么做，对于表结构有更改的情况下，上面的操作并不能使得通过mysqldump备份的数据库应用到本地的项目中。有两种解决方案：
@@ -126,7 +176,10 @@ mysql -hlocalhost -uroot -p --database=local_db < db.sql
 python manage.py makemigrations
 python manage.py migrate
 ```
+
+
 ## 超级管理员操作
+
 ```bash
 #创建(需要先建立好数据库)
 python manage.py createsuperuser
@@ -152,23 +205,35 @@ In [6]: user = User.objects.get(username='ion')
 In [7]: user.delete()
 In [8]: user.save()
 ```
+
+
 ## 导出、导入数据
+
 ```bash
 python manage.py dumpdata appname > appname.json
 python manage.py loaddata appname.json
 ```
+
+
 ## Django 项目环境终端
+
 `python manage.py shell`
 *如果你安装了 bpython 或 ipython 会自动用它们的界面，推荐安装 bpython。
 这个命令和 直接运行 python 或 bpython 进入 shell 的区别是：你可以在这个 shell 里面调用当前项目的 models.py 中的 API，对于操作数据，还有一些小测试非常方便。*
+
+
+
 ## 数据库命令行
+
 `python manage.py dbshell` 
 *Django 会自动进入在settings.py中设置的数据库，如果是 MySQL 或 postgreSQL,会要求输入数据库用户密码。在这个终端可以执行数据库的SQL语句。如果您对SQL比较熟悉，可能喜欢这种方式。*
 10. 更多命令 
 终端上输入 `python manage.py` 可以看到详细的列表，在忘记子名称的时候特别有用。
 
 
+
 # 视图与网址
+
 1. 首先，新建一个项目(project), 名称为 mysite
 `django-admin startproject mysite`
 运行后,如果成功的话, 我们会看到如下的目录样式   (没有成功的请参见环境搭建一节)：
@@ -306,7 +371,10 @@ def index(request):
     print(add_url)  # '/add/444/555/'
     return render(request, 'homepage.html')
 ```
+
+
 ## 用户收藏夹中收藏的URL是旧的，如何让以前的 /add?a=3&b=4自动跳转到现在新的网址呢？
+
 要知道Django不会帮你做这个，这个需要自己来写一个跳转方法：
 ```python
 from django.http import HttpResponseRedirect
@@ -322,7 +390,9 @@ def add(request):
 这里修改了原来的 *add/?a=3&b=4* 这个链接定向到新的链接 *add/3/4*
 
 
+
 # Django模板
+
 网站模板的设计，一般的，我们做网站有一些通用的部分，比如 导航，底部，广告等等。
 可以写一个 `base.html` 来包含这些通用文件（include)
 ```html
@@ -360,7 +430,10 @@ def add(request):
 
 `Django 模板查找机制：` Django 查找模板的过程是在每个 app 的 templates 文件夹中找（而不只是当前 app 中的代码只在当前的 app 的 templates 文件夹中找）。各个 app 的 templates 形成一个文件夹列表，Django 遍历这个列表，一个个文件夹进行查找，当在某一个文件夹找到的时候就停止，所有的都遍历完了还找不到指定的模板的时候就是 Template Not Found （过程类似于Python找包）。这样设计有利当然也有弊，有利是的地方是一个app可以用另一个app的模板文件，弊是有可能会找错了。`所以我们使用的时候在 templates 中建立一个 app 同名的文件夹，这样就好了。这样，使用的时候，模板就是 "app1/index.html" 和 "app2/index.html" 这样有app作为名称的一部分，就不会混淆。`
 
+
+
 # Django模板进阶
+
 主要内容：
 1. 列表，字典，类的实例的使用
 2. 循环：迭代显示列表，字典等中的内容
@@ -368,7 +441,10 @@ def add(request):
 4. 标签：for，if 这样的功能都是标签。
 5. 过滤器：管道符号后面的功能，比如{{ var|length }}，求变量长度的 length 就是一个过滤器。
 
+
+
 ## 实例一，显示字符串，列表，字典的内容
+
 views.py
 ```python
 # -*- coding: utf-8 -*-
@@ -401,7 +477,11 @@ homepage.html
 ```
 结果如下：
 ![在这里插入图片描述](http://blog.cdn.ionluo.cn/blog/20191228165414731.png)
+
+
+
 ## 实例二，for 循环的详细操作
+
 在for循环中还有很多有用的东西，如下：
 
 | 变量                | 描述                                                 |
@@ -425,14 +505,20 @@ homepage.html
 </ul>
 ```
 
+
+
 ## 实例三，条件判断
+
 ```html
 {% for item in list %}
     {{ item }}{% if not forloop.last %},{% endif %} 
 {% endfor %}
 ```
 
+
+
 ## 实例四，逻辑操作
+
 ` **, !=, >=, <=, >, < 这些比较都可以在模板中使用`
 `and, or, not, in, not in 也可以在模板中使用`
 ```html
@@ -443,7 +529,10 @@ homepage.html
 {% endif %}
 ```
 
+
+
 ## 实例五，模板中 获取当前网址，当前用户等
+
 在 views.py 中用的 render 函数，而不是 render_to_response，这样在 模板中我们就可以获取到 request 变量。
 1.  获取当前用户：`{{ request.user }}`
 举个栗子，如果登陆就显示内容，不登陆就不显示内容：
@@ -458,13 +547,18 @@ homepage.html
 3. 获取当前 GET 参数：`{{ request.GET.urlencode }}`
 	举个栗子，url是 http://127.0.0.1:8010/?a=1&b=2，拿到结果为：a=1&b=2
 
+
+
 ## 实例六，模板中定义变量
+
 ```python
 {% with x=1+2 y=x+1 %}
 	{{ x }}, {{ y }}
 {% endwith %}
 ```
 如上，变量在with
+
+
 
 ## 内置过滤器大全
 
@@ -548,7 +642,9 @@ homepage.html
 46、`wordcount`：返回字符串中单词的数目
 
 
+
 # Django模型(数据库)
+
 `Django 模型是与数据库相关的`，与数据库相关的代码一般写在 models.py 中，Django 支持 sqlite3, MySQL, PostgreSQL等数据库，只需要在settings.py中配置即可，不用更改models.py中的代码，丰富的API极大的方便了使用。
 另外，django中默认安装的数据库是`sqlite3`, 在 setting.py 文件可以看到：
 ![在这里插入图片描述](http://blog.cdn.ionluo.cn/blog/20191228171927164.png)
@@ -619,7 +715,9 @@ filter是找出满足条件的，当然也有排除符合某条件的
 `User.objects.filter(name__contains="ion").exclude(age=23)`  # 找出名称含有ion, 但是排除年龄是23岁的
 
 
+
 # Django QuerySet API
+
 **从数据库中查询出来的结果一般是一个集合，这个集合叫做 QuerySet。**
 
 **1.QuerySet 创建对象的方法**
@@ -751,7 +849,10 @@ qs = qs1 | qs2 | qs3
 qs = qs.distinct()
 ```
 
+
+
 # Django QuerySet API进阶
+
 用到再总结
 
 
@@ -799,7 +900,9 @@ class CompressedTextField(models.TextField):
 ```
 
 
+
 # Django 数据表更改
+
 我们设计数据库的时候，早期设计完后，后期会发现不完善，要对数据表进行更改，这时候就要用到本节的知识。
 **Django 1.7.x 和后来的版本：**
 Django 1.7.x 及以后的版本集成了 South 的功能，在修改models.py了后运行：
@@ -863,7 +966,10 @@ Django 1.7.x 及以后的版本集成了 South 的功能，在修改models.py了
 [https://docs.djangoproject.com/en/dev/ref/contrib/admin/#django.contrib.admin.ModelAdmin.list_filter](https://docs.djangoproject.com/en/dev/ref/contrib/admin/#django.contrib.admin.ModelAdmin.list_filter)
 新增或修改时的布局顺序：[https://docs.djangoproject.com/en/dev/ref/contrib/admin/#django.contrib.admin.ModelAdmin.fieldsets](https://docs.djangoproject.com/en/dev/ref/contrib/admin/#django.contrib.admin.ModelAdmin.fieldsets)
 
+
+
 # Django 表单
+
 在 learn 文件夹中新建一个 forms.py 文件
 ```python
 from django import forms
@@ -921,7 +1027,10 @@ urlpatterns = patterns('',
 - 数据的验证工作，某一些输入不合法也不会丢失已经输入的数据。
 - 还可以定制更复杂的验证工作，如果提供了10个输入框，必须必须要输入其中两个以上，在 forms.py 中都很容易实现
 
+
+
 # Django关系
+
 **反查：**
 
 在表关系里 related_name = '反查name'，自己不设置，django也会默认设置为class的小写名字+_set , example: book_set.
@@ -993,7 +1102,9 @@ class ModelStudy(View):
 ```
 
 
+
 # Django 配置
+
 **os**
 运行 `django-admin.py startproject [project-name] ` 命令会生成一系列文件，在Django 2.2.7版本的 settings.py 文件中有以下语句：
 
@@ -1328,8 +1439,13 @@ tmp_file = os.path.join(settings.MEDIA_ROOT,path)
 ![在这里插入图片描述](http://blog.cdn.ionluo.cn/blog/20200818095754906.png#pic_center)
 
 
+
 # 参考
+
 [django2.2基础教程](https://code.ziqiangxuetang.com/django/django-tutorial.html)
+
 [django在开发中取消外键约束的实现](https://www.jb51.net/article/186943.htm)
+
+[Python创建虚拟环境](https://www.cnblogs.com/shyern/p/11284127.html)
 
 

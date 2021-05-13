@@ -1,8 +1,9 @@
 ---
 title: 【Django】站内搜索引擎
-date: 2021-05-06 19:28:02
 tags:
-    - django
+  - django
+abbrlink: 64d3445
+date: 2021-05-06 19:28:02
 ---
 
 
