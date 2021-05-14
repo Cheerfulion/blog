@@ -27,7 +27,7 @@ https://wkhtmltopdf.org/usage/wkhtmltopdf.txt
 
    ![1609915985022](http://blog.cdn.ionluo.cn/blog/1609915985022.png)
 
-​	原因是：此异常为是因为引用了外部的资源，如：字体，图片，iframe加载等。检查对应的外部资源是否可以加载。
+​	**原因是：**此异常为是因为引用了外部的资源，如：字体，图片，iframe加载等。检查对应的外部资源是否可以加载。
 
 
 
@@ -40,18 +40,20 @@ https://wkhtmltopdf.org/usage/wkhtmltopdf.txt
    ```bash
    /var/www/beta_bio_cyagen_net/bin/wkhtmltopdf/0.12.3/wkhtmltopdf-amd64 --enable-local-file-access --encoding utf8 --footer-html /tmp/wkhtmltopdfNy5zuH.html --header-html /tmp/wkhtmltopdfGmy8DK.html --margin-bottom 10 --margin-top 16 --margin-bottom 10 --margin-top 15 --page-size A3 --quiet False /tmp/wkhtmltopdfRBSsIs.html -
    ```
-
-![1609922196902](http://blog.cdn.ionluo.cn/blog/1609922196902.png)
-
-​	可以看到，这里是权限拒绝，命令前面加上`sudo`, 输入root密码再执行一次。
-
-![1609922338350](http://blog.cdn.ionluo.cn/blog/1609922338350.png)
-
-​	这个问题看了GitHub，没有什么头绪。先看下是否可以打印网页，
-
-```bash
-sudo /var/www/beta_bio_cyagen_net/bin/wkhtmltopdf/0.12.3/wkhtmltopdf-amd64 'https://www.baidu.com' /tmp/baidu.pdf
-```
+   
+   ![1609922196902](http://blog.cdn.ionluo.cn/blog/1609922196902.png)
+   
+   ​	可以看到，这里是权限拒绝，命令前面加上`sudo`, 输入root密码再执行一次。
+   
+   ![1609922338350](http://blog.cdn.ionluo.cn/blog/1609922338350.png)
+   
+   ​	这个问题看了GitHub，没有什么头绪。先看下是否可以打印网页，
+   
+   ```bash
+   sudo /var/www/beta_bio_cyagen_net/bin/wkhtmltopdf/0.12.3/wkhtmltopdf-amd64 'https://www.baidu.com' /tmp/baidu.pdf
+   ```
+   
+   
 
 ​	依旧如此：
 
@@ -180,3 +182,9 @@ cyagen@QhBetaBio:/$ sudo /var/www/beta_bio_cyagen_net/bin/wkhtmltopdf/0.12.3/wkh
    最终效果如下：
    
    ![image-20210508131642306](http://blog.cdn.ionluo.cn/blog/image-20210508131642306.png)
+
+7. `TypeError: expected string or buffer`
+
+   ![image-20210514103233308](http://blog.cdn.ionluo.cn/blog/image-20210514103233308.png)
+
+   数据不是字符串，这里和插件无关，仅为记录。
