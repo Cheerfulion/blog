@@ -18,140 +18,206 @@ date: 2021-05-13 22:36:00
    > 可以扩展到前中后序遍历，根据前中序还原二叉树，根据中后序还原二叉树，线索二叉树，平衡二叉树，哈夫曼树等等。
    
    ```java
-   // 构造一棵二叉树（Binary Tree）
-   // 二叉树(Binary Tree)是一种树形结构，它的特点是每个节点最多只有两个分支节点。
-   // 二叉树的存储结构有两种：顺序存储和链式存储。由于顺序存储对于一个很深的且子树都只有一个结点的极端情况会造成大量空间浪费，因此不推荐， 这里介绍链式存储的方式。（满二叉树和完全二叉树可以使用顺序存储）。
-   
-   // 构造一棵空二叉树
-   function InitBiTree(){
-       // 根节点
-       this.root = null;
-   
-       // 创建结点
-       this.createNode = function (value) {
-           return {
-               value: value,
-               lchild: null,  // 指向左节点
-               rchild: null, // 指向右节点
-               parent: null // 指向父节点
-           }
-       }
-       // 插入子树
-       this.insertChild = function(p, LR, c){
-           // p: 需要插入的结点位置，如果不传则是根节点
-           // LR: 插入左边还是右边
-           // c: 子树
-           if (!p && !LR && c){
-               this.root = c;
-               return this.root;
-           }
-           if (!p || !LR || !c) return;
-   
-           if (LR === 'left'){
-               p.lchild = c;
-           } else if (LR === 'right'){
-               p.rchild = c;
-           }
-           c.parent = p;
-       }
-       // 删除子树
-       this.deleteChild = function(p, LR){
-           if (!p || !LR) return;
-   
-           if (LR === 'left'){
-               p.lchild = null;
-           } else if (LR === 'right'){
-               p.rchild = null;
-           }
-       }
-       // 清空二叉树
-       this.clearBiTree = function(){
-           this.root = null;
-       }
-       // 销毁二叉树
-       this.DestroyBiTree = function(bitree){
-           bitree = null;
-       }
-       // 根据定义构造二叉树(这里举例两种常用的二叉树)
-       this.createBiTree = function(arr=[], definition='normal'){
-           // 创建普通的二叉树
-           function createNormalTree(arr){
-               for(let i in arr){
-                   i = parseInt(i);
-                   let node = this.createNode(arr[i]);
-                   arr[i] = node;
-                   if (i === 0) continue;
-   
-                   if (i % 2 === 1) {
-                       // 父节点的左子树
-                       arr[(i-1)/2].lchild = node;
-                       node.parent = arr[(i-1)/2];
-                   } else {
-                       // 父节点的右子树
-                       arr[i/2-1].rchild = node;
-                       node.parent = arr[i/2-1];
-                   }
-               }
-               this.root = arr[0];
-               return this.root;
-           }
-           // 创建哈夫曼树
-           function createHuffmanTree(){
-               // 未完成
-           }
-           // 创建哈夫曼树
-           function createAVLTree(){
-               // 未完成
-           }
-           // 根据顺序存储（数组）来构造二叉树
-           switch (definition){
-               case 'normal':
-                   // 数组的元素是从上往下，从左往右记录的，不存在的为null
-                   // 表示一个深度为k的二叉树，需要数组长度2^k - 1
-                   createNormalTree.call(this, arr);
-                   break;
-               case 'huffman': 
-                   // 哈夫曼树(最优二叉树)
-                   createHuffmanTree(arr);
-                   break;
-               case 'AVL':
-                   // 平衡二叉树
-                   createAVLTree(arr);
-                   break;
-           }
-           return this.root;
-       }
-       // 二叉树是否为空
-       this.biTreeEmpty = function(){
-           return this.root === null;
-       }
-       // 返回二叉树的深度
-       this.biTreeDepth = function(){
-   
-       }
-       // 先序遍历
-       this.preOrderTraverse = function(){
-   
-       }
-       // 中序遍历
-       this.InOrderTraverse = function(){
-   
-       }
-       // 后序遍历
-       this.PostOrderTraverse = function(){
-   
-       }
-       // 层次遍历
-       this.levelOrderTraverse = function(){
-   
-       }
-   }
-   
-   var biTree = new InitBiTree();
-   
-   biTree.createBiTree([1,2,3,4,5,6,null])
-       console.log('biTree', biTree.root)
-   
+   <!DOCTYPE html>
+   <html>
+   	<head>
+   		<meta charset="utf-8">
+   		<title></title>
+   	</head>
+   	<body>
+            <script>
+                // 构造一棵二叉树（Binary Tree）
+                // 二叉树(Binary Tree)是一种树形结构，它的特点是每个节点最多只有两个分支节点。
+                // 二叉树的存储结构有两种：顺序存储和链式存储。由于顺序存储对于一个很深的且子树都只有一个结点的极端情况会造成大量空间浪费，因此不推荐， 这里介绍链式存储的方式。（满二叉树和完全二叉树可以使用顺序存储）。
+                
+                // 构造一棵空二叉树
+                function InitBiTree(){
+                    // 根节点
+                    this.root = null;
+                    
+                    // 创建结点
+                    this.createNode = function (value) {
+                        return {
+                            value: value,
+                            lchild: null,  // 指向左节点
+                            rchild: null, // 指向右节点
+                            parent: null // 指向父节点
+                        }
+                    }
+                    // 插入子树
+                    this.insertChild = function(p, LR, c){
+                        // p: 需要插入的结点位置，如果不传则是根节点
+                        // LR: 插入左边还是右边
+                        // c: 子树
+                        if (!p && !LR && c){
+                            this.root = c;
+                            return this.root;
+                        }
+                        if (!p || !LR || !c) return;
+                
+                        if (LR === 'left'){
+                            p.lchild = c;
+                        } else if (LR === 'right'){
+                            p.rchild = c;
+                        }
+                        c.parent = p;
+                    }
+                    // 删除子树
+                    this.deleteChild = function(p, LR){
+                        if (!p || !LR) return;
+                        
+                        if (LR === 'left'){
+                            p.lchild = null;
+                        } else if (LR === 'right'){
+                            p.rchild = null;
+                        }
+                    }
+                    // 清空二叉树
+                    this.clearBiTree = function(){
+                        this.root = null;
+                    }
+                    // 销毁二叉树
+                    this.DestroyBiTree = function(bitree){
+                        bitree = null;
+                    }
+                    // 根据定义构造二叉树(这里举例两种常用的二叉树)
+                    this.createBiTree = function(arr=[], definition='normal'){
+                        // 创建普通的二叉树
+                        function createNormalTree(arr){
+                            for(let i in arr){
+                                i = +i;  // 字符串转数字
+                                if (arr[i] === null) continue;
+                                
+                                let node = this.createNode(arr[i]);
+                                arr[i] = node;
+                                if (i === 0) continue;
+                                
+                                if (i % 2 === 1) {
+                                    // 父节点的左子树
+                                    arr[(i-1)/2].lchild = node;
+                                    node.parent = arr[(i-1)/2];
+                                } else {
+                                    // 父节点的右子树
+                                    arr[i/2-1].rchild = node;
+                                    node.parent = arr[i/2-1];
+                                }
+                            }
+                            this.root = arr[0];
+                            return this.root;
+                        }
+                        // 创建哈夫曼树
+                        function createHuffmanTree(){
+                            // 未完成
+                        }
+                        // 创建哈夫曼树
+                        function createAVLTree(){
+                            // 未完成
+                        }
+                        // 根据顺序存储（数组）来构造二叉树
+                        switch (definition){
+                            case 'normal':
+                                // 数组的元素是从上往下，从左往右记录的，不存在的为null
+                                // 表示一个深度为k的二叉树，需要数组长度2^k - 1
+                                createNormalTree.call(this, arr);
+                                break;
+                            case 'huffman': 
+                                // 哈夫曼树(最优二叉树)
+                                createHuffmanTree(arr);
+                                break;
+                            case 'AVL':
+                                // 平衡二叉树
+                                createAVLTree(arr);
+                                break;
+                        }
+                        return this.root;
+                    }
+                    // 二叉树是否为空
+                    this.biTreeEmpty = function(){
+                        return this.root === null;
+                    }
+                    // 返回二叉树的深度
+                    this.biTreeDepth = function(){
+                        if (this.root === null) return 0;
+                        
+                        let depth = 1;
+                        function getDepth(node, temp){
+                            if(!node.lchild && !node.rchild){
+                                depth = temp > depth ? temp : depth;
+                                return;
+                            }
+                            if (node.lchild){
+                                getDepth(node.lchild, temp+1);
+                            }
+                             
+                             if (node.rchild){
+                                getDepth(node.rchild, temp+1);
+                            }
+                        }
+                        getDepth(this.root, 1);
+                        return depth;
+                    }
+                    // 先序遍历
+                    this.preOrderTraverse = function(){
+                        const result = [];
+                        function preOrder(root){
+                            if (root){
+                                result.push(root.value)
+                                preOrder(root.lchild)
+                                preOrder(root.rchild)
+                            }
+                        }
+                        preOrder(this.root);
+                        return result;
+                    }
+                    // 中序遍历
+                    this.InOrderTraverse = function(){
+                        const result = [];
+                        function inOrder(root){
+                            if (root){
+                                inOrder(root.lchild)
+                                result.push(root.value)
+                                inOrder(root.rchild)
+                            }
+                        }
+                        inOrder(this.root);
+                        return result;
+                    }
+                    // 后序遍历
+                    this.PostOrderTraverse = function(){
+                        const result = [];
+                        function postOrder(root){
+                            if (root){
+                                postOrder(root.lchild)
+                                postOrder(root.rchild)
+                                result.push(root.value)
+                            }
+                        }
+                        postOrder(this.root);
+                        return result;
+                    }
+                    // 层次遍历
+                    this.levelOrderTraverse = function(){
+                        // 要上班了，先不写了。初步想到可以使用队列
+                    }
+                    // 根据数据，使用canvas绘制二叉树
+                    this.drawPic = function(){
+                        
+                    }
+                }
+                
+                var biTree = new InitBiTree();
+                
+                biTree.createBiTree([1,2,3,null,null,6,7])
+                console.log('biTree', biTree.root)
+                console.log('biTreeDepth', biTree.biTreeDepth())
+                // 关于一些非递归的写法，请看：https://www.jianshu.com/p/5e9ea25a1aae
+                console.log('preOrderTraverse', biTree.preOrderTraverse())
+                console.log('InOrderTraverse', biTree.InOrderTraverse())
+                console.log('PostOrderTraverse', biTree.PostOrderTraverse())
+                
+            </script>
+   	</body>
+   </html>
    ```
    
    
@@ -255,4 +321,4 @@ date: 2021-05-13 22:36:00
    sortedStr4(['D', 'a', 'F', 'B', 'c', 'A', 'z']);
    ```
 
-   
+    

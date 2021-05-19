@@ -1,8 +1,8 @@
 ---
 title: 【python】requests请求接口
+tags: python
+abbrlink: 5dfdd5bc
 date: 2021-05-14 13:53:21
-tags:
-	python
 ---
 
 
