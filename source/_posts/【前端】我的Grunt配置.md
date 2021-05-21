@@ -45,27 +45,8 @@ const packageCn = {
 const compileCn = {
     css: [
         'less/web/public.less',
-        'less/web/cn/cn.less',
-        'less/web/cn/about-us.less',
-        'less/web/cn/resource.less',
-        'less/web/cn/community.less',
-        'less/web/cn/project.less'
     ],
     js: [
-        'js/web/cn/angular-validator-rules.js',
-        'js/web/cn/services/web-services.js',
-        'js/web/cn/directives/web-directives.js',
-        'js/web/cn/filters/web-filters.js',
-        'js/web/cn/app.js',
-        'js/web/cn/controllers/public-es6.js',
-        'js/web/cn/controllers/about-us.js',
-        'js/web/cn/controllers/resource.js',
-        'js/web/cn/controllers/community.js',
-        'js/web/cn/controllers/project.js',
-
-        'js/web/cn/controllers/account.js',
-        'js/web/cn/controllers/gene-search.js',
-        'js/web/cn/extra.js',
         'js/web/cn/public.js'
     ]
 };
