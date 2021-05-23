@@ -76,6 +76,44 @@ reason: 'can not read a block mapping entry; a multiline key may not be an impli
 
 
 
+## 样式异常
+
+1. 有序列表的标题掉到序号的下一行
+
+   ![image-20210523150314082](http://blog.cdn.ionluo.cn/blog/image-20210523150314082.png)
+
+   **解决方法：**定位到序号这个地方，可以看到是`main.0cf68a.css`的样式文件，找到该文件（themes\yilia\source\main.0cf68a.css）并按照下面修改即可。
+
+   ```css
+   .article-entry ol li:before {
+       counter-increment: item;
+       content: counter(item) ".";
+       margin-right: 10px;
+       /* 下面是新加的样式 */
+       display: inline-block;
+       float: left;
+   }
+   ```
+
+2. 标题序号不正确。
+
+   ![image-20210523150314082](http://blog.cdn.ionluo.cn/blog/image-20210523150314082.png)
+
+   **解决方法：**和上面一样，找到main.css文件，修改下面样式即可。
+
+   ````css
+   /* 即把.article-entry ol li:before 改成了 .article-entry ol > li:before */
+   .article-entry ol > li:before {
+       counter-increment: item;
+       content: counter(item) ".";
+       margin-right: 10px;
+       display: inline-block;
+       float: left;
+   }
+   ````
+
+   
+
 ## 我的nodejs脚本
 
 把本地的一些之前的markdown写的文章复制到hexo博客中。
