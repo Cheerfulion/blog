@@ -988,6 +988,78 @@ p {
 
 
 
+## 我的记录
+
+1. 生成一些距离的常用类
+
+   ```scss
+   // scss
+   $mapBox: (
+       pd: padding,
+       pdt:padding-top,
+       pdl: padding-left,
+       pdr: padding-right,
+       pdb: padding-bottom,
+       mg: margin,
+       mgt: margin-top,
+       mgl: margin-left,
+       mgr: margin-right,
+       mgb: margin-bottom
+   );
+   @for $num from 0 through 10 {
+       @each $key, $value in $mapBox {
+           .#{$key}#{$num*5} {
+               #{$value}: $num*5px
+           }
+       }
+   }
+   
+   
+   // less
+   .generateGap(@number) {
+       .mg@{number} {
+           margin: ~'@{number}px';
+       }
+       .mgt@{number} {
+           margin-top: ~'@{number}px';
+       }
+       .mgr@{number} {
+           margin-right: ~'@{number}px';
+       }
+       .mgb@{number} {
+           margin-bottom: ~'@{number}px';
+       }
+       .mgl@{number} {
+           margin-left: ~'@{number}px';
+       }
+       .pd@{number} {
+           padding: ~'@{number}px';
+       }
+       .pdt@{number} {
+           padding-top: ~'@{number}px';
+       }
+       .pdr@{number} {
+           padding-right: ~'@{number}px';
+       }
+       .pdb@{number} {
+           padding-bottom: ~'@{number}px';
+       }
+       .pdl@{number} {
+           padding-left: ~'@{number}px';
+       }
+   }
+   
+   .loop(@count) when (@count > -1) {
+       .generateGap(@count);
+       .loop((@count - 5));
+   }
+   .loop(50);
+   ```
+
+2. 对于一些全局变量，尽量放在一个文件之中，如 `global.scss`
+
+
+
 ## 结语
 
 该文章只是跟着官方文档，罗列了一些认为较为基础的使用，对于一些更深入的使用方法和使用技巧并没有列举。有兴趣请移步[官方文档](https://www.sass.hk/docs/)查看。
