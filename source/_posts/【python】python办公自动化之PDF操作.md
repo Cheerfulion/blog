@@ -1,8 +1,9 @@
 ---
 title: 【python】python办公自动化之PDF操作
-date: 2021-05-26 09:49:53
 tags:
-	- python
+  - python
+abbrlink: 407ff8b6
+date: 2021-05-26 09:49:53
 ---
 
 

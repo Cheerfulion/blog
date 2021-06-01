@@ -357,7 +357,20 @@ sudo apt-get install php-gettext
    extension=mbstring.so
    ```
 
-2.  配置文件现在需要一个短语密码。
+2. 变量 $cfg['TempDir'] （./tmp/）无法访问。phpMyAdmin无法缓存模板文件，所以会运行缓慢。
+
+   ![phpMyAdmin无法缓存模板文件](http://blog.cdn.ionluo.cn/blog/phpMyAdmin无法缓存模板文件.png)
+
+   ```bash
+   # 进入phpmyadmin的安装目录
+   cd /var/www/phpmyadmin
+   # 创建缓存目录文件夹
+   mkdir tmp
+   # 给文件夹赋予所有权限
+   chmod 777 tmp
+   ```
+
+3. 配置文件现在需要一个短语密码。
 
    ```bash
    vim /var/www/phpmyadmin/config.inc.php
@@ -366,7 +379,7 @@ sudo apt-get install php-gettext
    $cfg['blowfish_secret'] = 'i am ionluo, you are abcdefghijklmnopqrstuvwxyzabcdefgh';
    ```
 
-3. 使用mysql的账号密码无法登录。
+4. 使用mysql的账号密码无法登录。
 
    - 进入mysql的配置文件目录，打开debian.cnf文件
 
@@ -378,10 +391,8 @@ sudo apt-get install php-gettext
 
    - 新增一个主机名是本地，具有全局权限的账户即可登录。
 
-     
-
      > 如果mysql命令行可以登录的话，也可以直接使用mysql命令去修改账户的信息, 同理也可以添加，这里不赘述了。
-     >
+>
      > ```bash
      > # mysql -u[用户名] -p -P [端口，默认3306]
      > mysql> use mysql;
@@ -390,19 +401,35 @@ sudo apt-get install php-gettext
      > mysql> flush privileges;
      > mysql> quit
      > ```
-
-4. 变量 $cfg['TempDir'] （./tmp/）无法访问。phpMyAdmin无法缓存模板文件，所以会运行缓慢。
-
-   ```bash
-   # 进入phpmyadmin的安装目录
-   cd /var/www/phpmyadmin
-   # 创建缓存目录文件夹
-   mkdir tmp
-   # 给文件夹赋予所有权限
-   chmod 777 tmp
-   ```
-
    
+   
+
+   5. MySQL不需要密码就能登录问题
+
+      因为执行了一个更改数据库root用户密码的命令，当我更改完后，发现用我新密码和旧密码都能登陆，于是感觉没有输密码，直接回车就能登录，而我在配置中也没有进行免密码登陆的操作，最后，执行了一条命令解决`update user set plugin = "mysql_native_password";`
+   
+      修改密码及解决无密码登陆问题都在下面命令中：
+   
+      ```mysql
+      # 无密码即可登录，如mysql, mysql -uroot, mysql -uroot -p 之后不输入密码直接回车
+      mysql -u[用户名] -p -P [端口，默认3306]
+      
+      # 无password字段的版本,也就是版本<=5.7的
+      update mysql.user set authentication_string=password("你的密码") where user='root';  
+      # 有password字段的版本,版本>5.7的
+      update mysql.user set password=password('你的密码') where user='root';
+      
+      update mysql.user set plugin="mysql_native_password"; 
+      
+      flush privileges;
+      
+      exit;
+      
+      # 重启mysql服务
+      service mysql restart
+      ```
+   
+      > 如果上面方式不生效，可以检查下数据库是否存在空用户 ： https://blog.csdn.net/qq_35180983/article/details/82417448
 
 
 
@@ -413,3 +440,5 @@ sudo apt-get install php-gettext
 [Nginx+PHP+MySQL+phpMyAdmin 环境搭建与使用（12.04.4 LTS）](https://blog.csdn.net/duyiwuer2009/article/details/44966841?locationNum=8)
 
 https://www.cnblogs.com/youcong/p/10703478.html
+
+[解决MySQL不需要密码就能登录问题](https://www.cnblogs.com/youpeng/p/11905051.html)
