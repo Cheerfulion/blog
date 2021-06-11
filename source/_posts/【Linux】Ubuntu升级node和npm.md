@@ -94,11 +94,22 @@ node -v
 npm -v
 ```
 
-![image.png](https://segmentfault.com/img/bVbDYoh)
+![image.png](http://blog.cdn.ionluo.cn/blog/bVbDYoh)
 
+5. 环境变量设置（不设置的话安装的node全局包无法调用）
 
+   ```bash
+   sudo vim /etc/profile
+   # 末尾添加
+   export NODE_HOME=/usr/local/node-v10.15.3-linux-x64（node的路径）
+   export PATH=$PATH:$NODE_HOME/bin
+   # 环境立刻生效
+   source /etc/profil
+   ```
 
-
+   > node的位置可以在安装包的时候看到：
+   >
+   > ![image-20210611214542997](http://blog.cdn.ionluo.cn/blog/image-20210611214542997.png)
 
 ## 问题记录
 
