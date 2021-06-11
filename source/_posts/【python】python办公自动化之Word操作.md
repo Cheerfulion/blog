@@ -597,6 +597,75 @@ if __name__ == '__main__':
 
 
 
+### WORD转PDF（Window系统）
+
+```python
+# -*- encoding: utf-8 -*-
+import os
+# pip install win32com
+from win32com import client
+
+
+def doc2pdf(doc_name, pdf_name):
+    """
+    :word文件转pdf
+    :param doc_name word文件名称
+    :param pdf_name 转换后pdf文件名称
+    """
+
+    pdf_path = pdf_name.split(os.sep)[0:-1]
+    pdf_path = os.sep.join(pdf_path)
+    print('pdf_path', pdf_path)
+    if not os.path.exists(pdf_path):
+        os.makedirs(pdf_path)
+
+    w = client.DispatchEx("Word.Application")
+    w.Visible = 0  # 0:后台运行 1:前台运行(可见)
+    w.DisplayAlerts = 0  # 不显示，不警告
+    if os.path.exists(pdf_name):
+        os.remove(pdf_name)
+    word = w.Documents.Open(doc_name, ReadOnly=1)
+    word.SaveAs(pdf_name, FileFormat=17)
+    word.Close()
+    try:
+        w.Documents.Close()
+        w.Quit()
+    except Exception as e:
+        print('error', e)
+
+
+# 遍历获取文件夹下的所有word文件(返回的结果是相对于root的相对路径)
+def dfs_get_word_file(cwd, result=[], root=None):
+    root = root or cwd
+    files = os.listdir(cwd)
+    for file in files:
+        sub_dir = os.path.join(cwd, file)
+        if os.path.isdir(sub_dir):
+            dfs_get_word_file(sub_dir, result, root)
+        elif os.path.splitext(sub_dir)[-1] in ['.docx', '.doc']:
+            result.append(sub_dir.split(root+os.sep)[-1])
+    return result
+
+
+if __name__ == '__main__':
+    # word_path = os.path.join(os.path.abspath(__file__), '..', 'word')
+    # pdf_path = os.path.join(os.path.abspath(__file__), '..', 'pdf')
+    word_path = r'E:\虚拟机共享文件夹\官网\Oricell\产品手册'
+    pdf_path = r'E:\虚拟机共享文件夹\官网\Oricell\产品手册PDF'
+
+    word_files = dfs_get_word_file(word_path, [])
+    for file in word_files:
+        doc_name = os.path.join(word_path, file)
+        pdf_name = os.path.join(pdf_path, file.split('.')[0] + '.pdf')
+        doc2pdf(doc_name, pdf_name)
+    print('done.')
+
+```
+
+
+
+
+
 
 
 ## 参考文献

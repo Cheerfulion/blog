@@ -193,3 +193,36 @@ readFileList(form_path, filesList);
 // console.log(filesList);
 ```
 
+
+
+
+
+## nodejs遍历文件输出
+
+```javascript
+// 统计word文件中的产品编号
+
+var fs = require('fs');
+// 路径操作模块
+const path = require('path');
+
+target_path = String.raw `E:\虚拟机共享文件夹\产品手册`
+
+function readFileList(dir, filesList = []) {
+    const files = fs.readdirSync(dir);
+    files.forEach((item, index) => {
+        var fullPath = path.join(dir, item);
+        const stat = fs.statSync(fullPath);
+        if (stat.isDirectory()) {      
+            readFileList(path.join(dir, item), filesList);  //递归读取文件
+        }
+        filesList.push(path.join(dir, item))
+    });
+    return filesList;
+}
+ 
+var filesList = [];
+readFileList(target_path, filesList);
+console.log(filesList);
+```
+

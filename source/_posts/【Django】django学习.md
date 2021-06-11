@@ -1330,6 +1330,36 @@ Linux中我们可以使用 netstat 工具来进程网络分析，netstat 命令�
 
 
 
+# 功能
+
+## Python提取html中的文字
+
+```python
+from io import StringIO
+from html.parser import HTMLParser
+
+class MLStripper(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.reset()
+        self.strict = False
+        self.convert_charrefs= True
+        self.text = StringIO()
+    def handle_data(self, d):
+        self.text.write(d)
+    def get_data(self):
+        return self.text.getvalue()
+
+def strip_tags(html):
+    s = MLStripper()
+    s.feed(html)
+    return s.get_data()
+```
+
+
+
+
+
 # 其他
 
 ## django依赖文件requirements.txt生成/安装
@@ -1439,6 +1469,14 @@ tmp_file = os.path.join(settings.MEDIA_ROOT,path)
 ![在这里插入图片描述](http://blog.cdn.ionluo.cn/blog/20200818095754906.png#pic_center)
 
 
+
+### django的库
+
+django官方文档：
+https://docs.djangoproject.com/zh-hans/3.0/
+
+django-mptt文档（目录树实现）
+http://django-mptt.github.io/django-mptt/index.html
 
 # 参考
 
