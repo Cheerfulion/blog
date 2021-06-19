@@ -120,11 +120,33 @@ height: 画布内容高度像素大小
     // // 缩放
     // ctx.scale(2, 2)
     // ctx.fillRect(50, 0, 50, 50)
+    
+    
+    // // 设置绘制新形状时应用的合成操作类型
+    // // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
+    // ctx.fillStyle = 'hotpink'
+    // ctx.fillRect(100, 100, 200, 200)
+    // // 源图像： 您打算放置到画布上的绘图     目标图像： 您已经放置在画布上的绘图
+    // // ctx.globalCompositeOperation='source-over'  // 默认值, 在目标图像上显示源图像
+    // // ctx.globalCompositeOperation='source-atop' // 在目标图像顶部显示源图像，源图像位于目标图像之外的部分不可见（即显示目标图像+相交部分的源图像）
+    // // ctx.globalCompositeOperation='source-in' // 在目标图像中显示源图像，只有目标图像之内的源图像部分会显示，目标图像透明（即显示相交部分的源图像）
+    // // ctx.globalCompositeOperation='source-out' // 在目标图像之外显示源图像，只有目标图像之外的源图像部分会显示，目标图像透明（即显示非相交部分的源图像）
+
+    // // ctx.globalCompositeOperation='destination-over' // 在源图像上显示目标图像
+    // // ctx.globalCompositeOperation='destination-atop' // 在源图像顶部显示目标图像，目标图像位于源图像之外的部分不可见（即显示源图像+相交部分的目标图像）
+    // // ctx.globalCompositeOperation='destination-in' // 在源图像中显示目标图像，只有源图像之内的目标图像部分会显示，源图像透明（即显示相交部分的目标图像）
+    // // ctx.globalCompositeOperation='destination-out' // 在源图像之外显示目标图像，只有源图像之外的目标图像部分会显示，源图像透明（即显示非相交部分的目标图像）
 
 
-    // 画笔
-    ctx.save()  // 保存当前画笔的状态（多次save的话，需要恢复到上几次就下面restore几次）
-    ctx.restore()  // 恢复之前保留的画笔状态
+    // // ctx.globalCompositeOperation='lighter' // 显示源图像+目标图像-相交部分
+    // // ctx.globalCompositeOperation='copy' // 显示源图像，忽略目标图像
+    // // ctx.globalCompositeOperation='xor' // 使用异或操作对源图像与目标图像进行组合（效果等同于lighter）
+    // ctx.fillStyle = 'deepskyblue'
+    // ctx.fillRect(200,200,200,200)
+
+    // // 画笔
+    // ctx.save()  // 保存当前画笔的状态（多次save的话，需要恢复到上几次就下面restore几次）
+    // ctx.restore()  // 恢复之前保留的画笔状态
 </script>
 </body>
 </html>
@@ -363,3 +385,270 @@ https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial
 ```
 
 ![image-20210619000256108](http://blog.cdn.ionluo.cn/blog/image-20210619000256108.png)
+
+### 3. 刮刮卡
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+        <style>
+            #ggk {
+                width: 400px;
+                height: 100px;
+                position: relative;
+                cursor: pointer;
+            }
+            
+            #ggk .xxhg {
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                text-align: center;
+                font-size: 30px;
+                line-height: 100px;
+                color: hotpink;
+                user-select: none;
+            }
+            
+            #ggk #canvas {
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+            }
+        </style>
+	</head>
+	<body>
+        <div id="ggk">
+            <div class="xxhg">谢谢惠顾！</div>
+            <canvas id="canvas" width="400" height="100"></canvas>
+        </div>
+		
+        
+        <script>
+            var ggkDom = document.getElementById('ggk')
+            var canvas = document.getElementById('canvas')
+            var ctx = canvas.getContext('2d')
+            
+            ctx.fillStyle = 'darkgray'
+            ctx.fillRect(0, 0, 400, 100)
+            
+            ctx.font = '20px 微软雅黑'
+            ctx.fillStyle = '#fff'
+            ctx.fillText('刮刮卡', 180, 40)
+            
+            var isDraw = false
+            canvas.onmousedown = function(){
+                isDraw = true
+            }
+            
+            canvas.onmousemove = function(e){
+                if (isDraw){
+                    e = e || window.event;
+                    var x = e.clientX - ggkDom.offsetLeft
+                    var y = e.clientY - ggkDom.offsetTop
+                    ctx.globalCompositeOperation='destination-out'
+                    ctx.arc(x, y, 20, 0, 2*Math.PI)
+                    ctx.fill()
+                }
+            }
+            
+            canvas.onmouseup = function(){
+                isDraw = false
+            }
+            
+            // // 设置绘制新形状时应用的合成操作类型
+            // // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
+            // ctx.fillStyle = 'hotpink'
+            // ctx.fillRect(100, 100, 200, 200)
+            // // 源图像： 您打算放置到画布上的绘图     目标图像： 您已经放置在画布上的绘图
+            // // ctx.globalCompositeOperation='source-over'  // 默认值, 在目标图像上显示源图像
+            // // ctx.globalCompositeOperation='source-atop' // 在目标图像顶部显示源图像，源图像位于目标图像之外的部分不可见（即显示目标图像+相交部分的源图像）
+            // // ctx.globalCompositeOperation='source-in' // 在目标图像中显示源图像，只有目标图像之内的源图像部分会显示，目标图像透明（即显示相交部分的源图像）
+            // // ctx.globalCompositeOperation='source-out' // 在目标图像之外显示源图像，只有目标图像之外的源图像部分会显示，目标图像透明（即显示非相交部分的源图像）
+            
+            // // ctx.globalCompositeOperation='destination-over' // 在源图像上显示目标图像
+            // // ctx.globalCompositeOperation='destination-atop' // 在源图像顶部显示目标图像，目标图像位于源图像之外的部分不可见（即显示源图像+相交部分的目标图像）
+            // // ctx.globalCompositeOperation='destination-in' // 在源图像中显示目标图像，只有源图像之内的目标图像部分会显示，源图像透明（即显示相交部分的目标图像）
+            // // ctx.globalCompositeOperation='destination-out' // 在源图像之外显示目标图像，只有源图像之外的目标图像部分会显示，源图像透明（即显示非相交部分的目标图像）
+            
+            
+            // // ctx.globalCompositeOperation='lighter' // 显示源图像+目标图像-相交部分
+            // // ctx.globalCompositeOperation='copy' // 显示源图像，忽略目标图像
+            // // ctx.globalCompositeOperation='xor' // 使用异或操作对源图像与目标图像进行组合（效果等同于lighter）
+            // ctx.fillStyle = 'deepskyblue'
+            // ctx.fillRect(200,200,200,200)
+        </script>
+	</body>
+</html>
+```
+
+![image-20210619110221246](http://blog.cdn.ionluo.cn/blog/image-20210619110221246.png)
+
+### 4. 画板
+
+> 以前的关于这个的文章：https://blog.csdn.net/ion_L/article/details/83020855
+>
+> 这里对原来的一些问题做下优化
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            html, body {
+                width: 100vw;
+                height: 100vh;
+            }
+            
+            
+        </style>
+	</head>
+	<body>
+        <!-- 
+        个人觉得比较好的一些在线画板：
+        https://sumo.app/paint/en
+        https://www.suxieban.com/#
+        画布功能：撤销，保存，清空
+        画笔功能：能够拖动鼠标在页面内绘图，能够设置画笔的粗细，能够设置画笔的颜色
+        橡皮擦功能
+        能够在任意位置绘制折线，并且可以定制长度
+        能够在任意位置绘制圆形，并且可以定制大小
+        能够在任意位置绘制矩形，并且可以定制大小
+        能够在任意位置插入文字，并且可以定制大小
+        能够在任意位置插入图片，并且可以定制大小
+        -->
+        <div class="menu">
+            <div class="btn">画笔</div>
+            <div class="btn">橡皮擦</div>
+            <div class="btn">矩形</div>
+            <div class="btn">圆形</div>
+        </div>
+        <canvas id="canvas"></canvas>
+		
+        
+        <script>
+            var canvas = document.getElementById('canvas')
+            var ctx = canvas.getContext('2d')
+            
+        </script>
+	</body>
+</html>
+```
+
+
+
+### 5.随机验证码
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+        <script>
+            function generatorCapture(w, h){
+                // w: 验证码图片的宽度
+                // h: 验证码图片的高度
+                // 返回正确的验证码字符串
+                
+                // 随机数的生成函数
+                function rn(min, max){
+                    return parseInt(Math.random()*(max-min)+min)
+                }
+                
+                // 随机颜色的生成函数
+                function rc(min, max){
+                    var r = rn(min, max)
+                    var g = rn(min, max)
+                    var b = rn(min, max)
+                    return `rgb(${r}, ${g}, ${b})`
+                }
+                
+                // var canvas = document.getElementById('canvas')
+                var canvas = document.createElement('canvas')
+                canvas.width = w
+                canvas.height = h
+                var ctx = canvas.getContext('2d')
+                // ctx.fillStyle = rc(0, 256)  // 这里尽量采用浅色，字体用深色
+                ctx.fillStyle = rc(180, 230)
+                ctx.fillRect(0, 0, w, h)
+                
+                // 随机字符串
+                var pool = 'ABCDEFGHIGKLMNOPQRSTUVWSYZ1234567890'
+                // 验证码
+                var result = ''
+                
+                for(let i = 0; i < 4; i++){
+                    // 取出随机的字母或者数字
+                    var c = pool[rn(0,pool.length)]
+                    result += c
+                    // 随机字体大小
+                    var fs = rn(18,40)
+                    // 随机旋转角度
+                    var deg = rn(-30,30)
+                    
+                    ctx.font = fs + 'px Simhei'
+                    ctx.textBaseline = 'top'
+                    ctx.fillStyle = rc(80, 150)
+                    ctx.save()
+                    ctx.translate(w/4*i+15, 15)
+                    ctx.rotate(deg*Math.PI/180)
+                    ctx.fillText(c, -10, -10)
+                    ctx.restore()
+                }
+                
+                
+                // 随机生成干扰线
+                for(let i = 0; i < 5; i++){
+                    ctx.beginPath()
+                    ctx.moveTo(rn(0, w), rn(0, h))
+                    ctx.lineTo(rn(0, w), rn(0, h))
+                    ctx.closePath()
+                    ctx.strokeStyle = rc(180, 230)
+                    ctx.stroke()
+                }
+                
+                
+                // 随机生成干扰圆点
+                for(let i = 0; i < 40; i++){
+                    ctx.beginPath()
+                    ctx.arc(rn(0, w), rn(0, h), 1, 0, 2*Math.PI)
+                    ctx.closePath()
+                    ctx.fillStyle = rc(150, 230)
+                    ctx.fill()
+                }
+                
+                // document.body.appendChild(canvas)
+                
+                return {
+                    imgUrl: canvas.toDataURL(),
+                    imgValue: result
+                }                                                                                                                                                                                 
+            }
+            
+            var capture = generatorCapture(120, 40);
+            var img = document.createElement('img')
+            img.src = capture.imgUrl
+            document.body.appendChild(img)
+        </script>
+	</body>
+</html>
+```
+
+![image-20210619160836742](http://blog.cdn.ionluo.cn/blog/image-20210619160836742.png)
