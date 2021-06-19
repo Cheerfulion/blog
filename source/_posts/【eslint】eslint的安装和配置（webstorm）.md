@@ -1,8 +1,9 @@
 ---
 title: 【eslint】eslint的安装和配置（webstorm）
-date: 2021-06-16 14:57:40
 tags:
-	- eslint
+  - eslint
+abbrlink: c91a612c
+date: 2021-06-16 14:57:40
 ---
 
 

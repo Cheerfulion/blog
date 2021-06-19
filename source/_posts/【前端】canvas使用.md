@@ -1,8 +1,9 @@
 ---
 title: 【前端】canvas使用
-date: 2021-06-19 00:06:38
 tags:
-	- canvas
+  - canvas
+abbrlink: 78bd14cd
+date: 2021-06-19 00:06:38
 ---
 
 

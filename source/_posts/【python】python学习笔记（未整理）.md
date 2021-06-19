@@ -1,8 +1,9 @@
 ---
 title: 【python】python学习笔记（未整理）
-date: 2021-06-15 16:04:42
 tags:
-	- python
+  - python
+abbrlink: 52eba3ce
+date: 2021-06-15 16:04:42
 ---
 
 
