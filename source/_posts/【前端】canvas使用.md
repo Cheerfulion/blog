@@ -653,3 +653,23 @@ https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial
 ```
 
 ![image-20210619160836742](http://blog.cdn.ionluo.cn/blog/image-20210619160836742.png)
+
+### 6. canvas实现中国象棋
+
+
+
+
+
+### 7. 粒子效果
+
+https://wow.techbrood.com/fiddle/36443
+
+https://wow.techbrood.com/fiddle/37427
+
+https://wow.techbrood.com/fiddle/34161
+
+https://wow.techbrood.com/fiddle/37104
+
+https://wow.techbrood.com/fiddle/33013
+
+https://wow.techbrood.com/fiddle/33452
