@@ -44,6 +44,10 @@ npm install eslint -g
 }
 ```
 
+> 规则：https://cloud.tencent.com/developer/chapter/12618
+>
+> https://www.cnblogs.com/fsg6/p/14350153.html
+
 **可选配置** 让eslint忽略检测的文件 `.eslintignore` 配置规则与 `.gitignore` 一样
 
 ```.gitignore
