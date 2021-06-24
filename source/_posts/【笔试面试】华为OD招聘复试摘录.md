@@ -143,8 +143,8 @@ date: 2021-05-13 22:36:00
            function preOrder(root){
                if (root){
                    result.push(root.value)
-                       preOrder(root.lchild)
-                       preOrder(root.rchild)
+                   preOrder(root.lchild)
+                   preOrder(root.rchild)
                }
            }
            preOrder(this.root);
@@ -156,8 +156,8 @@ date: 2021-05-13 22:36:00
            function inOrder(root){
                if (root){
                    inOrder(root.lchild)
-                       result.push(root.value)
-                       inOrder(root.rchild)
+                   result.push(root.value)
+                   inOrder(root.rchild)
                }
            }
            inOrder(this.root);
@@ -169,8 +169,8 @@ date: 2021-05-13 22:36:00
            function postOrder(root){
                if (root){
                    postOrder(root.lchild)
-                       postOrder(root.rchild)
-                       result.push(root.value)
+                   postOrder(root.rchild)
+                   result.push(root.value)
                }
            }
            postOrder(this.root);
@@ -192,7 +192,85 @@ date: 2021-05-13 22:36:00
        }
        // 根据数据，使用canvas绘制二叉树
        this.drawPic = function(){
-           // 有时间补充，可以参考：https://blog.csdn.net/weixin_34408717/article/details/88924329
+           // 思路：拿到二叉树的深度，将二叉树当成完全二叉树绘制
+           // 这里可以使用isPointInPath来做一个可以拖拽的二叉树，但是除了交互，对于算法并没有什么意义，这里就不去实现了，纯属记录下
+           const depth = this.biTreeDepth(this.root)
+           // console.log('depth', depth)
+   
+           const depthHeight = 50;  // 二叉树每层的高度
+           const elemeWidth = 60;   // 二叉树元素之间的间距
+           const nodeRadius = 10;   // 元素结点的半径
+           const width = Math.pow(2, depth-1) * elemeWidth
+           const height = depth * depthHeight
+           const canvas = document.createElement('canvas')
+           canvas.width = width + 10  // 加上间距(padding)
+           canvas.height = height + 10 // 加上间距(padding)
+           const ctx = canvas.getContext('2d')
+   
+           // ctx.save()
+           // 修改下坐标，让canvas留些间距
+           ctx.translate(5,5)
+           // 层次遍历，方便标序号
+           const queue = []; // 这里不使用栈(stack)， 而是队列(queue)
+           queue.push({
+               x: width / 2,
+               y: nodeRadius,
+               element: this.root,
+               value: 1
+           });
+           while(queue.length){
+               // js数组模拟队列，但是这样子对于js数组来说需要不断开辟新内存，删除旧内存，比较费性能。因此这里简单的方式可以使用索引来访问。
+               let node = queue.shift();
+   
+               // 连线
+               if (node.element.lchild){
+                   queue.push({
+                       x: node.x - elemeWidth/2,
+                       y: node.y + depthHeight,
+                       element: node.element.lchild,
+                       value: node.value + 1
+                   })
+                   ctx.beginPath()
+                   ctx.moveTo(node.x, node.y)
+                   ctx.lineTo(node.x - elemeWidth/2, node.y + depthHeight)
+                   ctx.stroke()
+                   ctx.closePath()
+               }
+               if (node.element.rchild) {
+                   queue.push({
+                       x: node.x + elemeWidth/2,
+                       y: node.y + depthHeight,
+                       element: node.element.rchild,
+                       value: node.value + 2
+                   })  
+                   ctx.beginPath()
+                   ctx.moveTo(node.x, node.y)
+                   ctx.lineTo(node.x + elemeWidth/2, node.y + depthHeight)
+                   ctx.stroke()
+                   ctx.closePath()
+               } 
+   
+   
+               // 画圆
+               ctx.beginPath()
+               ctx.arc(node.x, node.y, nodeRadius, 0, 2*Math.PI)
+               ctx.stroke()
+               ctx.fillStyle = '#444'
+               ctx.fill()
+               ctx.closePath()
+   
+               // 填序号
+               ctx.beginPath()
+               ctx.font= nodeRadius + 2 + "px 微软雅黑"
+               ctx.fillStyle = '#fff'
+               ctx.textAlign = "center";
+               ctx.textBaseline = "middle";
+               // 现在坐标起点是3点钟开始，所以应该让第一个数字是3
+               ctx.fillText(node.value, node.x, node.y + 1)
+               ctx.closePath()
+           }
+   
+           document.body.appendChild(canvas)
        }
    }
    
@@ -206,6 +284,8 @@ date: 2021-05-13 22:36:00
    console.log('InOrderTraverse', biTree.InOrderTraverse());
    console.log('PostOrderTraverse', biTree.PostOrderTraverse());
    console.log('levelOrderTraverse', biTree.levelOrderTraverse());
+   // canvas绘制二叉树
+   biTree.drawPic()
    ```
    
    
