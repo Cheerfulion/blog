@@ -27,10 +27,10 @@ date: 2021-05-06 22:27:23
 </head>
 <body>
 <script>
-    // 给定一个正整数数组，检查数组中是否存在满足规则数字组合：A=B+2C
-    // 最多只有一组满足规则的数字
+    // 思路： 枚举， 另外把一些题干条件的情况排除掉，如A != B != C
+    // 这里虽然可以推测出一些其他条件，但是想不出更好的方式，该方式比较粗暴，有其他方式欢迎联系我
     function output(arr) {
-        if (arr.length < 3 || arr.length > 100) return 0;
+        if (arr.length < 3) return 0;
 
         for (let i = 0; i < arr.length; i++) {
             for (let j = 0; j < arr.length; j++) {
@@ -47,12 +47,17 @@ date: 2021-05-06 22:27:23
         }
         return 0;
     }
-    arr = [];
-    for(let i = 0; i < 100; i++){
-        arr.push(Math.floor(Math.random() * 65535));
+    
+    function randArr(min, max, len){
+        const arr = [];
+        for(let i = 0; i < len; i++){
+            arr.push(parseInt(Math.random() * (max - min) + min));
+        }
+        console.log(arr);
+        return arr;
+        
     }
-    console.log(arr);
-    console.log(output(arr))
+    console.log(output(randArr(0, 100, 100)))
 </script>
 </body>
 </html>

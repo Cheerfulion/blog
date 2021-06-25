@@ -1,9 +1,10 @@
 ---
 title: 【ts】TypeScript学习
-date: 2021-06-14 10:06:32
 tags:
-	- 前端
-	- typescript
+  - 前端
+  - typescript
+abbrlink: 454fcde8
+date: 2021-06-14 10:06:32
 ---
 
 
