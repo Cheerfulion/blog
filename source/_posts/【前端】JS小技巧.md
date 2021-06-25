@@ -27,17 +27,27 @@ function getQueryParams(){
     if(found){
         found.forEach(item => {
             let temp = item.substring(1).split('=');
-            let key = temp[0];
-            let value = temp[1];
+            let key = decodeURIComponent(temp[0]);
+            let value = decodeURIComponent(temp[1]);
             result[key] = value;
         })
     }
     return result;
 }
-console.log(getQueryParams())
+
+// 根据对象转换成URL查询参数
+function setQueryParams(prefixUrl, paraObj) {
+    var link = "?";
+    Object.keys(paraObj).forEach(function (key) {
+        link += encodeURIComponent(key) + '=' + encodeURIComponent(paraObj[key]) + '&';
+    });
+    link = link.slice(0, -1);
+    return prefixUrl + link;
+};
 
 export {
-	getQueryParams
+	getQueryParams,
+    setQueryParams
 }
 ```
 
@@ -144,6 +154,155 @@ function shuffle(arr) {
 }
 
 export shuffle;
+```
+
+
+
+### 4_格式化UTC时间
+
+```javascript
+Date.prototype.format = function (fmt) {
+    var o = {
+        "M+": this.getMonth() + 1,                 //月份
+        "d+": this.getDate(),                    //日
+        "H+": this.getHours(),                   //小时
+        "m+": this.getMinutes(),                 //分
+        "s+": this.getSeconds(),                 //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds()             //毫秒
+    };
+    if (/(y+)/.test(fmt)){
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    for (var k in o){
+        if (new RegExp("(" + k + ")").test(fmt)){
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        }
+    }
+    return fmt;
+};
+
+// 用法
+new Date().format("yyyy-MM-dd HH:mm:ss");
+// 中间可以插入其他字符，不替换，如
+new Date().format("yyyy-MM-ddTHH:mm:ss");
+```
+
+
+
+### 5_移动端拖拽
+
+```javascript
+var block = document.querySelector("#element");
+    var oW, oH;
+    // 绑定touchstart事件
+    block.addEventListener("touchstart", function (e) {
+        console.log(e);
+        var touches = e.touches[0];
+        oW = touches.clientX - block.offsetLeft;
+        oH = touches.clientY - block.offsetTop;
+    }, false);
+
+    block.addEventListener("touchmove", function (e) {
+        var touches = e.touches[0];
+        var oLeft = touches.clientX - oW;
+        var oTop = touches.clientY - oH;
+        if (oLeft < 0) {
+            oLeft = 0;
+        } else if (oLeft > document.documentElement.clientWidth - block.offsetWidth) {
+            oLeft = (document.documentElement.clientWidth - block.offsetWidth);
+        }
+        block.style.left = oLeft + "px";
+        block.style.top = oTop + "px";
+        e.preventDefault();
+    }, false);
+```
+
+参考：https://www.cnblogs.com/lvmingyin/p/5372678.html
+
+touchstart→touchmove→touchend或者touchstart→touchend→click。
+
+
+
+### 6_PC端拖拽
+
+```javascript
+var running_mouse = document.getElementById('running-mouse');
+
+function loadStatus(element, storage_name) {
+    var storage = window.localStorage.getItem(storage_name);
+    if (storage) {
+        storage = JSON.parse(storage);
+        if (new Date().getTime() - new Date(storage.created_on).getTime() > 24 * 60 * 60 * 1000) {
+            window.localStorage.removeItem(storage_name);
+        } else {
+            element.style.left = storage.left;
+            element.style.top = storage.top;
+            element.style.display = storage.close ? 'none' : 'block';
+        }
+    }
+}
+
+loadStatus(running_mouse, 'running-mouse');
+
+function dragElement(element, url, storage_name) {
+    element.addEventListener('mousedown', function (event) {
+        var originMouseX, originMouseY, moveX, moveY;
+
+        originMouseX = event.clientX;
+        originMouseY = event.clientY;
+        document.addEventListener('mousemove', mouseMove, false);
+        document.addEventListener('mouseup', mouseUp, false);
+
+        function mouseMove(event) {
+            moveX = event.clientX - originMouseX;
+            moveY = event.clientY - originMouseY;
+            originMouseX = event.clientX;
+            originMouseY = event.clientY;
+            element.style.left = +moveX + element.offsetLeft + 'px';
+            element.style.top = +moveY + element.offsetTop + 'px';
+            event.preventDefault();
+        }
+
+        function mouseUp(event) {
+            document.removeEventListener('mousemove', mouseMove, false);
+            document.removeEventListener('mouseup', mouseUp, false);
+            var is_close = false;
+            if (url && !moveX && !moveY) {
+                if (event.target.tagName === "SPAN") {
+                    element.style.display = 'none';
+                    is_close = true;
+                } else {
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.style.display = 'none';
+                    a.click();
+                }
+            }
+
+            window.localStorage.setItem(storage_name, JSON.stringify({
+                left: element.style.left,
+                top: element.style.top,
+                close: is_close,
+                created_on: new Date()
+            }));
+        }
+    }, false)
+}
+
+dragElement(running_mouse, '/cn/zh-cn/public-search.html', 'running-mouse');
+
+```
+
+
+
+
+
+### 7_ 移动到元素上出现滚动条，移出滚动条消失
+
+```html
+<!-- 移动到元素上出现滚动条，移出滚动条消失 -->
+<div onmouseover="this.style.overflowY='auto'"    			     onmouseout="this.style.overflowY='hidden'"></div>
 ```
 
 
