@@ -207,7 +207,136 @@ export default {
 </script>
 ```
 
-> v-for的优先级比v-if高，但是不建议两者一起使用。
+> v-for的优先级比v-if高，但是不建议两者一起使用, 可以利用计算属性的方式生成需要的列表。
+
+### v-on
+
+```vue
+<template>
+    <div>
+        <p>{{num}}</p>
+        <button @click="increment1">+1</button>
+        <button @click="increment2(2, $event)">+2</button>
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            num: 0
+        }
+    },
+    methods: {
+        increment1(event) {
+            // eslint-disable-next-line
+            console.log('event', event, event.__proto__.constructor) // 是原生的 event 对象
+            // eslint-disable-next-line
+            console.log(event.target)
+            // eslint-disable-next-line
+            console.log(event.currentTarget) // 注意，事件是被注册到当前元素的，和 React 不一样
+            this.num++
+
+            // 1. event 是原生的
+            // 2. 事件被挂载到当前元素
+            // 和 DOM 事件一样
+        },
+        increment2(val, event) {
+            // eslint-disable-next-line
+            console.log(event.target)
+            this.num = this.num + val
+        },
+        loadHandler() {
+            // do some thing
+        }
+    },
+    mounted() {
+        window.addEventListener('load', this.loadHandler)
+    },
+    beforeDestroy() {
+        //【注意】用 vue 绑定的事件，组建销毁时会自动被解绑
+        // 自己绑定的事件，需要自己销毁！！！
+        window.removeEventListener('load', this.loadHandler)
+    }
+}
+</script>
+```
+
+![image-20210701222850191](http://blog.cdn.ionluo.cn/blog/image-20210701222850191.png)
+
+![image-20210701222912385](http://blog.cdn.ionluo.cn/blog/image-20210701222912385.png)
+
+
+
+### v-model
+
+```vue
+<template>
+    <div>
+        <p>输入框: {{name}}</p>
+        <input type="text" v-model.trim="name"/>
+        <input type="text" v-model.lazy="name"/>
+        <input type="text" v-model.number="age"/>
+
+        <p>多行文本: {{desc}}</p>
+        <textarea v-model="desc"></textarea>
+        <!-- 注意，<textarea>{{desc}}</textarea> 是不允许的！！！ -->
+
+        <p>复选框 {{checked}}</p>
+        <input type="checkbox" v-model="checked"/>
+
+        <p>多个复选框 {{checkedNames}}</p>
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+
+        <p>单选 {{gender}}</p>
+        <input type="radio" id="male" value="male" v-model="gender"/>
+        <label for="male">男</label>
+        <input type="radio" id="female" value="female" v-model="gender"/>
+        <label for="female">女</label>
+
+        <p>下拉列表选择 {{selected}}</p>
+        <select v-model="selected">
+            <option disabled value="">请选择</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+
+        <p>下拉列表选择（多选） {{selectedList}}</p>
+        <select v-model="selectedList" multiple>
+            <option disabled value="">请选择</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            name: '双越',
+            age: 18,
+            desc: '自我介绍',
+
+            checked: true,
+            checkedNames: [],
+
+            gender: 'male',
+
+            selected: '',
+            selectedList: []
+        }
+    }
+}
+</script>
+```
 
 
 
@@ -267,3 +396,18 @@ export default {
 
 - [React16+Redux 实战企业级大众点评Web App](https://coding.imooc.com/class/evaluation/313.html#Anchor)
 - [React 17 系统精讲 结合TS打造旅游电商平台](https://coding.imooc.com/class/chapter/475.html#Anchor)
+
+
+
+## 其他Vue面试题
+
+- [30 道 Vue 面试题，内含详细讲解（涵盖入门到精通，自测 Vue 掌握程度）](https://juejin.cn/post/6844903918753808398)
+
+- [很全面的vue面试题总结](https://segmentfault.com/a/1190000018630871)
+
+
+
+## 其他React面试题
+
+- [必须要会的 50 个 React 面试题](https://juejin.cn/post/6844903806715559943)
+
