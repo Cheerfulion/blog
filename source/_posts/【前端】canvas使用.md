@@ -654,7 +654,46 @@ https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial
 
 ![image-20210619160836742](http://blog.cdn.ionluo.cn/blog/image-20210619160836742.png)
 
-### 6. canvas实现中国象棋
+
+
+### 6. canvas生成自定义图片
+
+> 通常用于自动生成用户头像，如钉钉注册后默认的头像
+
+```javascript
+
+export default function getImgUrl (img) {
+  const canvas = document.createElement('canvas')
+  const ctx = canvas.getContext('2d')
+
+  img = img || {}
+  canvas.width = img.width || 50
+  canvas.height = img.height || 50
+
+  ctx.rect(0, 0, canvas.width, canvas.height)
+  ctx.fillStyle = img.backgroundColor || '#fff'
+  ctx.fill()
+
+  if (img.text) {
+    ctx.font = img.textFont || '50px 微软雅黑'
+    ctx.textAlign = 'center'
+    ctx.textBaseline = 'middle'
+    ctx.fillStyle = img.textColor || '#444'
+
+    var textWidth = ctx.measureText(img.text).width
+    var scaled = 1
+    if (textWidth > canvas.width) {
+      scaled = canvas.width / textWidth * 0.8 // 不要占满
+      ctx.scale(scaled, scaled)
+    }
+    // ctx.fillText(img.text, 0, 0, canvas.width)
+    ctx.fillText(img.text, canvas.width / 2 / scaled, canvas.height / 2 / scaled)
+  }
+  //   document.body.appendChild(canvas)
+  return canvas.toDataURL()
+}
+
+```
 
 
 
@@ -666,7 +705,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial
 
 
 
-### 8. canvas特效
+### 8. canvas特效或游戏开发
 
 > 下面的代码来自TechbrooD.com， 领先的沉浸式互联网内容门户，一站式学习、创作和展示。
 
