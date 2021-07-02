@@ -29,7 +29,20 @@ https://blog.cdn.ionluo.cn/files/frame-project-interview-master.zip
 
 ## Vue使用
 
-### Computed
+### 说明
+
+```json
+// package.json
+{
+  "dependencies": {
+    "vue": "^2.6.10"
+  }
+}
+```
+
+
+
+### [Computed](https://cn.vuejs.org/v2/guide/computed.html#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7)
 
 ```vue
 <template>
@@ -64,7 +77,7 @@ export default {
 </script>
 ```
 
-### Watch
+### [Watch](https://cn.vuejs.org/v2/guide/computed.html#%E4%BE%A6%E5%90%AC%E5%99%A8)
 
 ```vue
 <template>
@@ -99,7 +112,20 @@ export default {
 </script>
 ```
 
-### Class和Style
+> **扩展：computed 和 watch 的区别和运用的场景？**
+>
+> **computed：** 是计算属性，依赖其它属性值，并且 computed 的值有缓存，只有它依赖的属性值发生改变，下一次获取 computed 的值时才会重新计算 computed  的值；
+>
+> **watch：** 更多的是「观察」的作用，类似于某些数据的监听回调 ，每当监听的数据变化时都会执行回调进行后续操作；
+>
+> **运用场景：**
+>
+> - 当我们需要进行数值计算，并且依赖于其它数据时，应该使用 computed，因为可以利用 computed 的缓存特性，避免每次获取值时，都要重新计算；
+> - 当我们需要在数据变化时执行异步或开销较大的操作时，应该使用 watch，使用 watch 选项允许我们执行异步操作 ( 访问一个 API )，限制我们执行该操作的频率，并在我们得到最终结果前，设置中间状态。这些都是计算属性无法做到的。
+>
+> 关于这个问题，也可以看看这篇文章：https://blog.csdn.net/weixin_39015132/article/details/83310726
+
+### [Class和Style](https://cn.vuejs.org/v2/guide/class-and-style.html)
 
 ```vue
 <template>
@@ -140,7 +166,7 @@ export default {
 </style>
 ```
 
-### v-if和v-show
+### [v-if和v-show](https://cn.vuejs.org/v2/guide/conditional.html)
 
 ```vue
 <template>
@@ -165,7 +191,7 @@ export default {
 </script>
 ```
 
-### v-for
+### [v-for](https://cn.vuejs.org/v2/guide/list.html)
 
 ```vue
 <template>
@@ -209,7 +235,7 @@ export default {
 
 > v-for的优先级比v-if高，但是不建议两者一起使用, 可以利用计算属性的方式生成需要的列表。
 
-### v-on
+### [v-on](https://cn.vuejs.org/v2/guide/events.html)
 
 ```vue
 <template>
@@ -268,7 +294,7 @@ export default {
 
 
 
-### v-model
+### [v-model](https://cn.vuejs.org/v2/guide/forms.html)
 
 ```vue
 <template>
@@ -338,7 +364,712 @@ export default {
 </script>
 ```
 
+> **扩展：直接给一个数组项赋值，Vue 能检测到变化吗？**
+>
+> 由于 JavaScript 的限制，Vue 不能检测到以下数组的变动：
+>
+> - 当你利用索引直接设置一个数组项时，例如：`vm.items[indexOfItem] = newValue`
+> - 当你修改数组的长度时，例如：`vm.items.length = newLength`
+>
+> 为了解决第一个问题，Vue 提供了以下操作方法：
+>
+> ```javascript
+> // Vue.set
+> Vue.set(vm.items, indexOfItem, newValue)
+> // vm.$set，Vue.set的一个别名
+> vm.$set(vm.items, indexOfItem, newValue)
+> // Array.prototype.splice
+> vm.items.splice(indexOfItem, 1, newValue)
+> ```
+>
+> 为了解决第二个问题，Vue 提供了以下操作方法：
+>
+> ```javascript
+> // Array.prototype.splice
+> vm.items.splice(newLength)
+> ```
+>
+>
+> **扩展：对象属性添加和删除，Vue 能检测到变化吗？**
+>
+> 还是由于JavaScript的限制，Vue不能检测对象属性的添加和删除：
+>
+> ```javascript
+> // a的变化可以检测到
+> var vm = new Vue({
+>     data: {
+>         a: 1
+>     }
+> })
+> // b的变化检测不到
+> vm.b = 2
+> ```
+> 对于已经创建的实例，Vue不能动态添加根级别的响应式属性。但是，可以使用 Vue.set(object, key, value) 方法向嵌套对象添加响应式属性。例如，对于：
+>
+> ```javascript
+> var vm = new Vue({
+>     data: {
+>         message: {
+>             text1: 'hello'
+>         }
+>     }
+> })
+> ```
+>
+> 你可以添加一个新的text2属性到message对象：
+>
+> ```javascript
+> Vue.set(vm.message, 'text2', 'world')
+> ```
+>
+> 你还可以使用vm.$set实例方法，它只是全局Vue.set的别名：
+>
+> ```javascript
+> this.$set(this.message, 'text2', 'world')
+> ```
+>
+> 有时你可能需要为已有对象赋予多个新属性，比如使用Object.assign()或_.extend()。在这种情况下，你应该用两个对象的属性创建一个新的对象。所以，如果你想添加新的响应式属性，可以这么做：
+>
+> ```javascript
+> this.message = Object.assign({}, this.message, {
+>     text2: 'wold',
+>     text3: '!'
+> })
+> ```
+>
+> 
 
+
+### [组件通信](https://cn.vuejs.org/v2/guide/components.html)
+
+> 有父子组件通信，子父组件通信，平行组件通信
+
+Index.vue
+
+```vue
+<template>
+    <div>
+        <Input @add="addHandler"/>
+        <List :list="list" @delete="deleteHandler"/>
+    </div>
+</template>
+
+<script>
+import Input from './Input'
+import List from './List'
+
+export default {
+    components: {
+        Input,
+        List
+    },
+    data() {
+        return {
+            list: [
+                {
+                    id: 'id-1',
+                    title: '标题1'
+                },
+                {
+                    id: 'id-2',
+                    title: '标题2'
+                }
+            ]
+        }
+    },
+    methods: {
+        addHandler(title) {
+            this.list.push({
+                id: `id-${Date.now()}`,
+                title
+            })
+        },
+        deleteHandler(id) {
+            this.list = this.list.filter(item => item.id !== id)
+        }
+    },
+    created() {
+        // eslint-disable-next-line
+        console.log('index created')
+    },
+    mounted() {
+        // eslint-disable-next-line
+        console.log('index mounted')
+    },
+    beforeUpdate() {
+        // eslint-disable-next-line
+        console.log('index before update')
+    },
+    updated() {
+        // eslint-disable-next-line
+        console.log('index updated')
+    },
+}
+</script>
+```
+
+Input.vue
+
+```vue
+<template>
+    <div>
+        <input type="text" v-model="title"/>
+        <button @click="addTitle">add</button>
+    </div>
+</template>
+
+<script>
+import event from './event'
+
+export default {
+    data() {
+        return {
+            title: ''
+        }
+    },
+    methods: {
+        addTitle() {
+            // 调用父组件的事件
+            this.$emit('add', this.title)
+
+            // 调用自定义事件
+            event.$emit('onAddTitle', this.title)
+
+            this.title = ''
+        }
+    }
+}
+</script>
+```
+
+List.vue
+
+```vue
+<template>
+    <div>
+        <ul>
+            <li v-for="item in list" :key="item.id">
+                {{item.title}}
+
+                <button @click="deleteItem(item.id)">删除</button>
+            </li>
+        </ul>
+    </div>
+</template>
+
+<script>
+import event from './event'
+
+export default {
+    // props: ['list']
+    props: {
+        // prop 类型和默认值
+        list: {
+            type: Array,
+            default() {
+                return []
+            }
+        }
+    },
+    data() {
+        return {
+
+        }
+    },
+    methods: {
+        deleteItem(id) {
+            this.$emit('delete', id)
+        },
+        addTitleHandler(title) {
+            // eslint-disable-next-line
+            console.log('on add title', title)
+        }
+    },
+    created() {
+        // eslint-disable-next-line
+        console.log('list created')
+    },
+    mounted() {
+        // eslint-disable-next-line
+        console.log('list mounted')
+
+        // 绑定自定义事件
+        event.$on('onAddTitle', this.addTitleHandler)
+    },
+    beforeUpdate() {
+        // eslint-disable-next-line
+        console.log('list before update')
+    },
+    updated() {
+        // eslint-disable-next-line
+        console.log('list updated')
+    },
+    beforeDestroy() {
+        // 及时销毁，否则可能造成内存泄露
+        event.$off('onAddTitle', this.addTitleHandler)
+    }
+}
+</script>
+```
+
+event.js
+
+```javascript
+import Vue from 'vue'
+
+export default new Vue()
+```
+
+
+
+### [组件生命周期](https://cn.vuejs.org/v2/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA)
+
+1. **谈谈你对 Vue 生命周期的理解？**
+
+   **（1）生命周期是什么？**
+
+   Vue 实例有一个完整的生命周期，也就是从开始创建、初始化数据、编译模版、挂载 Dom -> 渲染、更新 -> 渲染、卸载等一系列过程，我们称这是 Vue 的生命周期。
+
+   **（2）各个生命周期的作用**
+
+| 生命周期      | 描述                                                         |
+| ------------- | ------------------------------------------------------------ |
+| beforeCreate  | 组件实例被创建之初，组件的属性生效之前                       |
+| created       | 组件实例已经完全创建，属性也绑定，但真实 dom 还没有生成，$el 还不可用 |
+| beforeMount   | 在挂载开始之前被调用：相关的 render 函数首次被调用           |
+| mounted       | el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子    |
+| beforeUpdate  | 组件数据更新之前调用，发生在虚拟 DOM 打补丁之前              |
+| update        | 组件数据更新之后                                             |
+| activited     | keep-alive 专属，组件被激活时调用                            |
+| deactivated   | keep-alive 专属，组件被销毁时调用                            |
+| beforeDestory | 组件销毁前调用                                               |
+| destoryed     | 组件销毁后调用                                               |
+
+**（3）生命周期示意图**
+
+![1.png](http://blog.cdn.ionluo.cn/blog/16ca74f183827f46)
+
+2. **Vue 的父组件和子组件生命周期钩子函数执行顺序？**
+
+   Vue 的父组件和子组件生命周期钩子函数执行顺序可以归类为以下 4 部分：
+
+- 加载渲染过程
+
+  > 父 beforeCreate -> 父 created -> 父 beforeMount -> 子 beforeCreate -> 子 created -> 子 beforeMount -> 子 mounted -> 父 mounted
+
+- 子组件更新过程
+
+  > 父 beforeUpdate -> 子 beforeUpdate -> 子 updated -> 父 updated
+
+- 父组件更新过程
+
+  > 父 beforeUpdate -> 父 updated
+
+- 销毁过程
+
+  > 父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed
+
+3. **在哪个生命周期内调用异步请求？**
+
+   可以在钩子函数 created、beforeMount、mounted 中进行调用，因为在这三个钩子函数中，data 已经创建，可以将服务端端返回的数据进行赋值。但是本人推荐在 created 钩子函数中调用异步请求，因为在 created 钩子函数中调用异步请求有以下优点：
+
+- 能更快获取到服务端数据，减少页面 loading 时间；
+- ssr 不支持 beforeMount 、mounted 钩子函数，所以放在 created 中有助于一致性；
+
+4. **在什么阶段才能访问操作DOM？**
+
+   在钩子函数 mounted 被调用前，Vue 已经将编译好的模板挂载到页面上，所以在 mounted 中可以访问操作 DOM。
+
+5. **父组件可以监听到子组件的生命周期吗？**
+
+   比如有父组件 Parent 和子组件 Child，如果父组件监听到子组件挂载 mounted 就做一些逻辑处理，可以通过以下写法实现：
+
+```javascript
+// Parent.vue
+<Child @mounted="doSomething"/>
+    
+// Child.vue
+mounted() {
+  this.$emit("mounted");
+}
+```
+
+以上需要手动通过 $emit 触发父组件的事件，更简单的方式可以在父组件引用子组件时通过 @hook 来监听即可，如下所示：
+
+```javascript
+//  Parent.vue
+<Child @hook:mounted="doSomething" ></Child>
+
+doSomething() {
+   console.log('父组件监听到 mounted 钩子函数 ...');
+},
+    
+//  Child.vue
+mounted(){
+   console.log('子组件触发 mounted 钩子函数 ...');
+},    
+    
+// 以上输出顺序为：
+// 子组件触发 mounted 钩子函数 ...
+// 父组件监听到 mounted 钩子函数 ...     
+```
+
+当然 @hook 方法不仅仅是可以监听 mounted，其它的生命周期事件，例如：created，updated 等都可以监听。
+
+
+
+### [自定义组件的v-model](https://cn.vuejs.org/v2/guide/components-custom-events.html#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%BB%84%E4%BB%B6%E7%9A%84-v-model)
+
+Index.vue
+
+```vue
+<template>
+    <div>
+        <p>vue 高级特性</p>
+        <hr>
+
+        <!-- 自定义 v-model -->
+        <p>{{name}}</p>
+        <CustomVModel v-model="name"/>
+    </div>
+</template>
+
+<script>
+import CustomVModel from './CustomVModel'
+
+export default {
+    components: {
+        CustomVModel
+    },
+    data() {
+        return {
+            name: '双越'
+        }
+    }
+}
+</script>
+```
+
+CustomVModel.vue
+
+```vue
+<template>
+    <!-- 例如：vue 颜色选择 -->
+    <input type="text"
+        :value="text1"
+        @input="$emit('change1', $event.target.value)"
+    >
+    <!--
+        1. 上面的 input 使用了 :value 而不是 v-model
+        2. 上面的 change1 和 model.event 要对应起来
+        3. text1 属性对应起来
+    -->
+</template>
+
+<script>
+export default {
+    model: {
+        prop: 'text1', // 对应 props text1
+        event: 'change1'
+    },
+    props: {
+        text1: String,
+        default() {
+            return ''
+        }
+    }
+}
+</script>
+```
+
+
+
+### [$nextTick](https://cn.vuejs.org/v2/api/index.html#Vue-nextTick)
+
+![image-20210702133332538](http://blog.cdn.ionluo.cn/blog/image-20210702133332538.png)
+
+```vue
+<template>
+  <div id="app">
+    <ul ref="ul1">
+        <li v-for="(item, index) in list" :key="index">
+            {{item}}
+        </li>
+    </ul>
+    <button @click="addItem">添加一项</button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'app',
+  data() {
+      return {
+        list: ['a', 'b', 'c']
+      }
+  },
+  methods: {
+    addItem() {
+        this.list.push(`${Date.now()}`)
+        this.list.push(`${Date.now()}`)
+        this.list.push(`${Date.now()}`)
+
+        // 1. 异步渲染，$nextTick 待 DOM 渲染完再回调
+        // 3. 页面渲染时会将 data 的修改做整合，多次 data 修改只会渲染一次
+        this.$nextTick(() => {
+          // 获取 DOM 元素
+          const ulElem = this.$refs.ul1
+          // eslint-disable-next-line
+          console.log( ulElem.childNodes.length )
+        })
+    }
+  }
+}
+</script>
+```
+
+### [slot](https://cn.vuejs.org/v2/guide/components-slots.html)
+
+![image-20210702144002080](http://blog.cdn.ionluo.cn/blog/image-20210702144002080.png)
+
+#### 基本使用
+
+Index.vue
+
+```vue
+<template>
+    <div>
+        <p>vue 高级特性</p>
+        <hr>
+        <!-- slot -->
+        <SlotDemo :url="website.url">
+            {{website.title}}
+        </SlotDemo>
+    </div>
+</template>
+
+<script>
+import SlotDemo from './SlotDemo'
+
+export default {
+    components: {
+        SlotDemo
+    },
+    data() {
+        return {
+            website: {
+                url: 'http://imooc.com/',
+                title: 'imooc',
+                subTitle: '程序员的梦工厂'
+            }
+        }
+    }
+}
+</script>
+```
+
+SlotDemo.vue
+
+```vue
+<template>
+    <a :href="url">
+        <slot>
+            默认内容，即父组件没设置内容时，这里显示
+        </slot>
+    </a>
+</template>
+
+<script>
+export default {
+    props: ['url'],
+    data() {
+        return {}
+    }
+}
+</script>
+```
+
+
+
+#### 作用域插槽
+
+Index.vue
+
+```vue
+<template>
+    <div>
+        <p>vue 高级特性</p>
+        <hr>
+        <ScopedSlotDemo :url="website.url">
+            <!-- 这里通过作用域插槽，拿到了组件里面的作用域（变量website）-->
+            <template v-slot="slotProps">
+                {{slotProps.slotData.title}}
+            </template>
+        </ScopedSlotDemo>
+    </div>
+</template>
+
+<script>
+import ScopedSlotDemo from './ScopedSlotDemo'
+
+export default {
+    components: {
+        ScopedSlotDemo
+    },
+    data() {
+        return {
+            website: {
+                url: 'http://imooc.com/',
+                title: 'imooc',
+                subTitle: '程序员的梦工厂'
+            }
+        }
+    }
+}
+</script>
+```
+
+ScopedSlotDemo.vue
+
+```vue
+<template>
+    <a :href="url">
+        <slot :slotData="website">
+            {{website.subTitle}} <!-- 默认值显示 subTitle ，即父组件不传内容时 -->
+        </slot>
+    </a>
+</template>
+
+<script>
+export default {
+    props: ['url'],
+    data() {
+        return {
+            website: {
+                url: 'http://wangEditor.com/',
+                title: 'wangEditor',
+                subTitle: '轻量级富文本编辑器'
+            }
+        }
+    }
+}
+</script>
+```
+
+
+
+#### 具名插槽
+
+![image-20210702150727795](http://blog.cdn.ionluo.cn/blog/image-20210702150727795.png)
+
+
+
+### [动态组件](https://cn.vuejs.org/v2/guide/components.html#%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6)
+
+有的时候，在不同组件之间进行动态切换是非常有用的，比如在一个多标签的界面里：
+
+![image-20210702153304384](http://blog.cdn.ionluo.cn/blog/image-20210702153304384.png)
+
+```vue
+<template>
+    <div>
+        <p>vue 高级特性</p>
+        <hr>
+
+        <!-- 动态组件(组件会在 `NextTickName` 改变时改变) -->
+        <component :is="NextTickName"/>
+    </div>
+</template>
+
+<script>
+import NextTick from './NextTick'
+
+export default {
+    components: {
+        NextTick
+    },
+    data() {
+        return {
+            NextTickName: "NextTick"
+        }
+    }
+}
+</script>
+```
+
+> 动态组件的缓存需要借助keep-alive: https://cn.vuejs.org/v2/guide/components-dynamic-async.html#%E5%9C%A8%E5%8A%A8%E6%80%81%E7%BB%84%E4%BB%B6%E4%B8%8A%E4%BD%BF%E7%94%A8-keep-alive
+
+
+
+
+
+### [异步组件](https://cn.vuejs.org/v2/guide/components-dynamic-async.html#%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6)
+
+在大型应用中，我们可能需要将应用分割成小一些的代码块，并且只在需要的时候才从服务器加载一个模块。为了简化，Vue 允许你以一个工厂函数的方式定义你的组件，这个工厂函数会异步解析你的组件定义。Vue 只有在这个组件需要被渲染的时候才会触发该工厂函数，且会把结果缓存起来供未来重渲染。例如：
+
+```javascript
+Vue.component('async-example', function (resolve, reject) {
+  setTimeout(function () {
+    // 向 `resolve` 回调传递组件定义
+    resolve({
+      template: '<div>I am async!</div>'
+    })
+  }, 1000)
+})
+```
+下面展示Webpack 和 ES2015 语法加在一起（vue-cli），我们可以这样使用动态导入：
+
+```vue
+<template>
+    <div>
+        <p>vue 高级特性</p>
+        <hr>
+        
+        <!-- 异步组件 -->
+        <FormDemo v-if="showFormDemo"/>
+        <button @click="showFormDemo = true">show form demo</button>
+    </div>
+</template>
+
+<script>
+
+export default {
+    components: {
+        // 这里不用关系这个组件是上面，仅做展示
+        FormDemo: () => import('../BaseUse/FormDemo'),
+    },
+    data() {
+        return {
+            showFormDemo: false
+        }
+    }
+}
+</script>
+```
+
+
+
+### [mixin](https://cn.vuejs.org/v2/guide/mixins.html)
+
+![image-20210702172015545](http://blog.cdn.ionluo.cn/blog/image-20210702172015545.png)
+
+Index.vue
+
+```vue
+
+```
+
+
+
+
+
+### 推荐阅读
+
+- [Vue基础](https://blog.csdn.net/ion_L/article/details/82691731)
+
+- [Vue: export default中的name属性到底有啥作用呢？](https://blog.csdn.net/weixin_39015132/article/details/83573896)
+
+  
 
 ## Vue原理
 

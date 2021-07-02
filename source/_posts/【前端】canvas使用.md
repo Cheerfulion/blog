@@ -160,6 +160,12 @@ https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial
 
 
 
+## 注意事项
+
+- [挖坑指南: canvas元素的宽高属性和css中的宽高(大型翻车现场..)](https://blog.csdn.net/weixin_39015132/article/details/86295280)
+
+
+
 ## 应用
 
 ### 1. 视频播放
