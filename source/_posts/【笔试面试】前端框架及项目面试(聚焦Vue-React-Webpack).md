@@ -23,6 +23,9 @@ https://blog.cdn.ionluo.cn/files/frame-project-interview-master.zip
 
 ### 注意事项
 
+- 关于Vue的基础使用部分，推荐官方文档，这里只是罗列了一些基础的部分，想要学好还是看官方文档。https://cn.vuejs.org/v2/guide/
+- 关于React的基础，官方文档虽然没有Vue那么清晰易懂，但是也是很完善的，也是推荐用官网文档来进行学习。https://reactjs.bootcss.com/
+
 ![image-20210701151037533](http://blog.cdn.ionluo.cn/blog/image-20210701151037533.png)
 
 
@@ -1056,10 +1059,111 @@ export default {
 Index.vue
 
 ```vue
+<template>
+    <div>
+        <p>{{name}} {{major}} {{city}}</p>
+        <button @click="showName">显示姓名</button>
+    </div>
+</template>
 
+<script>
+import myMixin from './mixin'
+
+export default {
+    mixins: [myMixin], // 可以添加多个，会自动合并起来
+    data() {
+        return {
+            name: '双越',
+            major: 'web 前端'
+        }
+    },
+    methods: {
+    },
+    mounted() {
+        // eslint-disable-next-line
+        console.log('component mounted', this.name)
+    }
+}
+</script>
 ```
 
+mixin.js
 
+```javascript
+export default {
+    data() {
+        return {
+            city: '北京'
+        }
+    },
+    methods: {
+        showName() {
+            // eslint-disable-next-line
+            console.log(this.name)
+        }
+    },
+    mounted() {
+        // eslint-disable-next-line
+        console.log('mixin mounted', this.name)
+    }
+}
+```
+
+**mixin的说明**
+
+- 数据对象在内部会进行递归合并，并在发生冲突时以组件数据优先。
+- 同名钩子函数将合并为一个数组，因此都将被调用。另外，混入对象的钩子将在组件自身钩子**之前**调用。
+- 值为对象的选项，例如 `methods`、`components` 和 `directives`，将被合并为同一个对象。两个对象键名冲突时，取组件对象的键值对。
+- 请谨慎使用全局混入，因为它会影响每个单独创建的 Vue 实例 (包括第三方组件)。大多数情况下，只应当应用于自定义选项，就像上面示例一样。推荐将其作为[插件](https://cn.vuejs.org/v2/guide/plugins.html)发布，以避免重复应用混入。
+- 可[自定义选项合并策略](https://cn.vuejs.org/v2/guide/mixins.html#自定义选项合并策略)
+
+**mixin的问题**
+
+- 变量来源不明确，不利于阅读（合理的形式应该像es6的import）
+- 多个mixin可能会造成命名冲突（官方推荐使用一定的规范来避免）
+- mixin和组件可能出现多对多的关系，复杂度高（要极力避免）
+
+
+
+### [Vuex](https://vuex.vuejs.org/zh/guide/)
+
+面试考点并不多，但是基本概念，基本使用和API必须掌握，可能会考察state的数据结构设计。
+
+代码demo见：https://gitee.com/cheerfulion/my_public_demos/tree/master/vuex_demo
+
+![vuex](https://vuex.vuejs.org/vuex.png)
+
+### [Vue-router](https://router.vuejs.org/zh/)
+
+这里的考点我觉得文档上面已经列的很好了，内容也不多，推荐直接点击上面标题阅读源文档。这里就主要讲解几个点吧！
+
+**路由模式**
+
+- hash模式（默认）
+
+- [history模式](https://router.vuejs.org/zh/guide/essentials/history-mode.html)（需要后台支持，文档中给出了各个后端服务器的配置方法，注意该方式需要前端指定404页面）
+
+**动态路由**
+
+![image-20210703102839179](http://blog.cdn.ionluo.cn/blog/image-20210703102839179.png)
+
+| 模式                          | 匹配路径            | $route.params                          |
+| ----------------------------- | ------------------- | -------------------------------------- |
+| /user/:username               | /user/evan          | `{ username: 'evan' }`                 |
+| /user/:username/post/:post_id | /user/evan/post/123 | `{ username: 'evan', post_id: '123' }` |
+| /user/ion*                    | /user/ionluo        | `{ pathMatch: 'luo' }`g                |
+
+除了 `$route.params` 外，`$route` 对象还提供了其它有用的信息，例如，`$route.query` (如果 URL 中有查询参数)、`$route.hash` 等等。你可以查看 [API 文档](https://router.vuejs.org/zh/api/#路由对象) 的详细说明。
+
+详见官方文档。
+
+
+
+**路由懒加载**
+
+其实就是上面的异步组件的webpack实现。
+
+![image-20210703103652695](http://blog.cdn.ionluo.cn/blog/image-20210703103652695.png)
 
 
 
@@ -1073,7 +1177,136 @@ Index.vue
 
 ## Vue原理
 
+- 组件化和MVVM
 
+- 响应式原理
+
+- vdom和diff算法
+
+- 模板编译
+
+- 组件渲染过程
+
+- 前端路由
+
+
+### 关于MVC、MVP和MVVM的理解
+
+![img](http://blog.cdn.ionluo.cn/blog/20181016230357827)
+
+
+MVC作为经典的框架模式，视图层，数据层以及业务逻辑层都有关联，缺点是数据和视图耦合性高，逻辑层臃肿（Jquery）。
+
+MVP视图和数据都通过P这个中间层交互，导致P层特别臃肿。但是去除了数据和视图的耦合性，维护起来更方便（Django）。
+
+MVVM把VM代替上面的C和P层，直接通过数据驱动渲染视图（Angular， React， Vue）。
+
+
+
+### 响应式原理
+
+**核心API** - `Object.defineProperty`
+
+Vue3.0使用`Proxy`实现响应式，因为`Object.defineProperty`具有一些缺点。
+
+> 注意：`Proxy`兼容性不如`Object.defineProperty`，且无法`polyfill`
+
+![image-20210703222522825](http://blog.cdn.ionluo.cn/blog/image-20210703222522825.png)
+
+
+
+下面实现对象和数组的响应式
+
+```javascript
+// 触发更新视图
+function updateView() {
+    console.log('视图更新')
+}
+
+// 重新定义数组原型
+const oldArrayProperty = Array.prototype
+// 创建新对象，原型指向 oldArrayProperty ，再扩展新的方法不会影响原型
+const arrProto = Object.create(oldArrayProperty);
+['push', 'pop', 'shift', 'unshift', 'splice'].forEach(methodName => {
+    arrProto[methodName] = function () {
+        updateView() // 触发视图更新
+        oldArrayProperty[methodName].call(this, ...arguments)
+        // Array.prototype.push.call(this, ...arguments)
+    }
+})
+
+// 重新定义属性，监听起来
+function defineReactive(target, key, value) {
+    // 深度监听
+    observer(value)
+
+    // 核心 API
+    Object.defineProperty(target, key, {
+        get() {
+            return value
+        },
+        set(newValue) {
+            if (newValue !== value) {
+                // 深度监听
+                observer(newValue)
+
+                // 设置新值
+                // 注意，value 一直在闭包中，此处设置完之后，再 get 时也是会获取最新的值
+                value = newValue
+
+                // 触发更新视图
+                updateView()
+            }
+        }
+    })
+}
+
+// 监听对象属性
+function observer(target) {
+    if (typeof target !== 'object' || target === null) {
+        // 不是对象或数组
+        return target
+    }
+
+    // 污染全局的 Array 原型
+    // Array.prototype.push = function () {
+    //     updateView()
+    //     ...
+    // }
+
+    if (Array.isArray(target)) {
+        target.__proto__ = arrProto
+    }
+
+    // 重新定义各个属性（for in 也可以遍历数组）
+    for (let key in target) {
+        defineReactive(target, key, target[key])
+    }
+}
+
+// 准备数据
+const data = {
+    name: 'zhangsan',
+    age: 20,
+    info: {
+        address: '北京' // 需要深度监听
+    },
+    nums: [10, 20, 30]
+}
+
+// 监听数据
+observer(data)
+
+// 测试
+// data.name = 'lisi'
+// data.age = 21
+// // console.log('age', data.age)
+// data.x = '100' // 新增属性，监听不到 —— 所以有 Vue.set
+// delete data.name // 删除属性，监听不到 —— 所有已 Vue.delete
+// data.info.address = '上海' // 深度监听
+data.nums.push(4) // 监听数组
+
+```
 
 
 
