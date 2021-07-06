@@ -67,10 +67,13 @@ export default {
         double1() {
             return this.num * 2
         },
+        // 默认写法是getter， 像setter也可以举例子是fullName = firstName +' ' + lastName为例子
         double2: {
+            // getter
             get() {
                 return this.num * 2
             },
+            // setter
             set(val) {
                 this.num = val/2
             }
@@ -291,9 +294,57 @@ export default {
 </script>
 ```
 
+
+
 ![image-20210701222850191](http://blog.cdn.ionluo.cn/blog/image-20210701222850191.png)
 
+
+
+> 上面漏了一个：
+>
+> ```html
+> <!-- 点击事件只会触发一次 -->
+> <a @click.once="doThis"></a>
+> ```
+
 ![image-20210701222912385](http://blog.cdn.ionluo.cn/blog/image-20210701222912385.png)
+
+> 通用法：
+>
+> ```html
+> <!-- 只有在keyCode 是 13 时调用 vm.submit() -->
+> <!-- 等于写法： <input @keyup.enter="submit"> -->
+> <input @keyup.13="submit">
+> ```
+>
+> 记住所有的keyCode比较困难，所以Vue为最常用的按键提供了别名：
+>
+> ```
+> .enter
+> .tab
+> .delete
+> .esc
+> .space
+> .up
+> .down
+> .left
+> .right
+> .ctrl
+> .alt
+> .shift
+> .meta
+> <!-- 以下为鼠标按键修饰符 -->
+> .left
+> .right
+> .midddle
+> ```
+>
+> 可以通过全局config.keyCodes对象自定义键值修饰符别名：
+>
+> ```javascript
+> // 可以通过 @keyup.f1 使用
+> Vue.config.keyCodes.f1 = 11we2
+> ```
 
 
 
@@ -443,6 +494,7 @@ export default {
 > 
 
 
+
 ### [组件通信](https://cn.vuejs.org/v2/guide/components.html)
 
 > 有父子组件通信，子父组件通信，平行组件通信
@@ -572,7 +624,37 @@ export default {
             default() {
                 return []
             }
+        },
+        // 基础类型检测（如果是null，意思是任何类型都可以）
+        propA: Number, 
+        // 多种类型
+        propB: [Number, String],
+        // 必传且是字符串
+        propC: {
+            type: String,
+            required: true
+        },
+        // 数字，有默认值
+        propD: {
+            type: NUmber,
+            default: 100
+        },
+        // 数组或对象的默认值应当由一个工厂函数返回
+        propE: {
+            type: Object,
+            default: function(){
+                return { message: 'hello word!' }
+            }
+        },
+        // 自定义验证函数
+        propF: {
+            validator: function(value){
+                return value > 10
+            }
         }
+        // type可以是下面原生构造器
+        // String, Number, Boolean, Function, Object, Array, Symbol
+        // type也可以是一个自定义构造器函数，使用instanceof检测
     },
     data() {
         return {
@@ -622,6 +704,49 @@ import Vue from 'vue'
 
 export default new Vue()
 ```
+
+
+
+> **组件扩展：**
+>
+> 1. 给组件绑定原生事件（.native）
+>
+>    ```html
+>    <my-component @click.native="doTheThing"></my-component>
+>    ```
+>
+> 2. 自定更新父组件属性（.sync）
+>
+>    ```html
+>    <!-- 有时候，我们希望实现Props的“双向绑定”,可以使用.sync修饰符，它是一个编译时的语法糖 -->
+>    <my-component :foo.sync="bar"></my-component>
+>    <!-- 编译成： <my-component :foo="bar" @update:foo="value => bar = value"></my-component> -->
+>    <!-- 子组件需要更新foo时，显示触发一个更新事件 -->
+>    this.$emit('update:foo', newValue)
+>    ```
+>
+> 3. 组件命名约定
+>
+>    ```vue
+>    component: {
+>        // 使用 kebab-case 形式注册
+>        'kebab-cased-component': {},
+>        // register using camelCase
+>        'camelCasedComponent': {},
+>        // register using PascalCase
+>        'PascalCaseComponent': {},
+>    }
+>    // 在HTML模板中，请使用kebab-case形式
+>    <kebab-cased-component></kebab-cased-component>
+>    <camel-cased-component></camel-cased-component>
+>    <pascal-case-component></pascal-case-component>
+>    ```
+>
+> 4. 递归组件
+>
+>    参考推荐阅读中的[Vue: export default中的name属性到底有啥作用呢？](https://blog.csdn.net/weixin_39015132/article/details/83573896)
+>
+>    
 
 
 
@@ -1215,7 +1340,17 @@ Vue3.0使用`Proxy`实现响应式，因为`Object.defineProperty`具有一些�
 
 
 
-下面实现对象和数组的响应式
+**Object.defineProperty缺点**
+
+- 深度监听，需要递归到底，一次性计算量大
+- 无法监听新增属性/删除属性(所以Vue提供了Vue.set和 Vue.delete方法)
+- 无法原生监听数组，需要特殊处理
+
+
+
+**下面实现对象和数组的响应式：**
+
+视频讲解见：https://www.bilibili.com/video/BV1VA411x76D
 
 ```javascript
 // 触发更新视图
@@ -1227,6 +1362,7 @@ function updateView() {
 const oldArrayProperty = Array.prototype
 // 创建新对象，原型指向 oldArrayProperty ，再扩展新的方法不会影响原型
 const arrProto = Object.create(oldArrayProperty);
+// 这里是一些常用的数组方法，如果要更多需要添加一下
 ['push', 'pop', 'shift', 'unshift', 'splice'].forEach(methodName => {
     arrProto[methodName] = function () {
         updateView() // 触发视图更新
@@ -1247,7 +1383,7 @@ function defineReactive(target, key, value) {
         },
         set(newValue) {
             if (newValue !== value) {
-                // 深度监听
+                // 深度监听(赋值有可能是对象，需要深度监听)
                 observer(newValue)
 
                 // 设置新值
@@ -1298,17 +1434,191 @@ const data = {
 observer(data)
 
 // 测试
-// data.name = 'lisi'
-// data.age = 21
+data.name = 'lisi'
+data.age = 21
 // // console.log('age', data.age)
 // data.x = '100' // 新增属性，监听不到 —— 所以有 Vue.set
-// delete data.name // 删除属性，监听不到 —— 所有已 Vue.delete
-// data.info.address = '上海' // 深度监听
+// delete data.name // 删除属性，监听不到 —— 所以有 Vue.delete
+data.info.address = '上海' // 深度监听
+data.nums[0] = 0 // 监听数组
 data.nums.push(4) // 监听数组
 
 ```
 
+### 虚拟DOM和diff算法
 
+视频讲解见：https://www.bilibili.com/video/BV1dV411a7mT
+
+
+
+
+
+
+
+- vdom是实现vue和React的重要基石
+- diff算法是vdom中最核心、最关键的部分
+- vdom是一个热门话题，也是面试中热门话题
+
+
+
+**vdom**
+
+- DOM操作非常耗费性能
+- 以前用JQuery，可以自行控制DOM操作的时机，手动调整
+- vdom用JS模拟DOM结构，计算出最小的变更（diff算法）来操作DOM
+- vdom是React提出的，vue2.0后也开始使用。
+
+![image-20210706120827755](http://blog.cdn.ionluo.cn/blog/image-20210706120827755.png)
+
+> 这里的JS模拟在不同的框架中可能不一样的表示，即没有既定的标准， 如`tag`可能有的称为`element`, `style` 可能不放在`props`中。
+
+![image-20210706121127785](http://blog.cdn.ionluo.cn/blog/image-20210706121127785.png)
+
+![image-20210706121404311](http://blog.cdn.ionluo.cn/blog/image-20210706121404311.png)
+
+
+
+
+
+**diff算法**
+
+![image-20210706121725352](http://blog.cdn.ionluo.cn/blog/image-20210706121725352.png)
+
+![image-20210706122349504](http://blog.cdn.ionluo.cn/blog/image-20210706122349504.png)
+
+![image-20210706161234841](http://blog.cdn.ionluo.cn/blog/image-20210706161234841.png)
+
+![image-20210706122406643](http://blog.cdn.ionluo.cn/blog/image-20210706122406643.png)
+
+![image-20210706161306892](http://blog.cdn.ionluo.cn/blog/image-20210706161306892.png)
+
+![image-20210706161326080](http://blog.cdn.ionluo.cn/blog/image-20210706161326080.png)
+
+![image-20210706161343107](http://blog.cdn.ionluo.cn/blog/image-20210706161343107.png)
+
+![image-20210706145131148](http://blog.cdn.ionluo.cn/blog/image-20210706145131148.png)
+
+
+
+### 模板编译
+
+- 前置知识：JS的with语法
+- vue template complier 将模板编译为 render 函数
+- 执行 render 函数生成 vnode
+
+
+
+**with语法**
+
+> with 要慎用，它打破了作用域规则，易读性变差
+
+```javascript ///
+const obj = {a:100, b:200}
+
+console.log(obj.a)  // 100
+console.log(obj.b)  // 200
+console.log(obj.c)  // undefined
+
+// 使用with，能改变 {} 内自由变量的查找方式
+// 将 {} 内自由变量，当做obj的属性来查找
+with (obj) {
+    console.log(a)  // 100
+	console.log(b)  // 200
+	console.log(c)  // 会报错！！！ Uncaught ReferenceError: c is not defined
+}
+```
+
+
+
+**编译模板（vue template complier 将模板编译为 render 函数）**
+
+![image-20210706163521064](http://blog.cdn.ionluo.cn/blog/image-20210706163521064.png)
+
+```javascript
+// "vue-template-compiler": "^2.6.10"
+const compiler = require('vue-template-compiler')
+
+// 插值
+// const template = `<p>{{message}}</p>`
+// with(this){return createElement('p',[createTextVNode(toString(message))])}
+// h -> vnode
+// createElement -> vnode
+
+// // 表达式
+// const template = `<p>{{flag ? message : 'no message found'}}</p>`
+// // with(this){return _c('p',[_v(_s(flag ? message : 'no message found'))])}
+
+// // 属性和动态属性
+// const template = `
+//     <div id="div1" class="container">
+//         <img :src="imgUrl"/>
+//     </div>
+// `
+// with(this){return _c('div',
+//      {staticClass:"container",attrs:{"id":"div1"}},
+//      [
+//          _c('img',{attrs:{"src":imgUrl}})])}
+
+// // 条件
+// const template = `
+//     <div>
+//         <p v-if="flag === 'a'">A</p>
+//         <p v-else>B</p>
+//     </div>
+// `
+// with(this){return _c('div',[(flag === 'a')?_c('p',[_v("A")]):_c('p',[_v("B")])])}
+
+// 循环
+// const template = `
+//     <ul>
+//         <li v-for="item in list" :key="item.id">{{item.title}}</li>
+//     </ul>
+// `
+// with(this){return _c('ul',_l((list),function(item){return _c('li',{key:item.id},[_v(_s(item.title))])}),0)}
+
+// 事件
+// const template = `
+//     <button @click="clickHandler">submit</button>
+// `
+// with(this){return _c('button',{on:{"click":clickHandler}},[_v("submit")])}
+
+// v-model
+const template = `<input type="text" v-model="name">`
+// 主要看 input 事件
+// with(this){return _c('input',{directives:[{name:"model",rawName:"v-model",value:(name),expression:"name"}],attrs:{"type":"text"},domProps:{"value":(name)},on:{"input":function($event){if($event.target.composing)return;name=$event.target.value}}})}
+
+// render 函数
+// 返回 vnode
+// patch
+
+// 编译
+const res = compiler.compile(template)
+console.log(res.render)
+
+// ---------------分割线--------------
+
+// // 从 vue 源码中找到缩写函数的含义
+// function installRenderHelpers (target) {
+//     target._o = markOnce;
+//     target._n = toNumber;
+//     target._s = toString;
+//     target._l = renderList;
+//     target._t = renderSlot;
+//     target._q = looseEqual;
+//     target._i = looseIndexOf;
+//     target._m = renderStatic;
+//     target._f = resolveFilter;
+//     target._k = checkKeyCodes;
+//     target._b = bindObjectProps;
+//     target._v = createTextVNode;
+//     target._e = createEmptyVNode;
+//     target._u = resolveScopedSlots;
+//     target._g = bindObjectListeners;
+//     target._d = bindDynamicKeys;
+//     target._p = prependModifier;
+// }
+
+```
 
 ## Vue面试真题演练
 
