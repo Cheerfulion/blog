@@ -1,8 +1,9 @@
 ---
 title: 前端框架及项目面试(聚焦Vue-React-Webpack)
-date: 2021-07-01 14:54:38
 tags:
 	- 笔试面试
+abbrlink: 6d298630
+date: 2021-07-01 14:54:38
 ---
 
 
@@ -1250,15 +1251,21 @@ export default {
 
 
 
-### [Vuex](https://vuex.vuejs.org/zh/guide/)
+### 周边组件库
+
+#### [Vuex](https://vuex.vuejs.org/zh/guide/)
 
 面试考点并不多，但是基本概念，基本使用和API必须掌握，可能会考察state的数据结构设计。
 
 代码demo见：https://gitee.com/cheerfulion/my_public_demos/tree/master/vuex_demo
 
+> demo这里在小型项目就够用了，大项目的话可以看下module：
+>
+> https://blog.csdn.net/chenzhizhuo/article/details/96872320
+
 ![vuex](https://vuex.vuejs.org/vuex.png)
 
-### [Vue-router](https://router.vuejs.org/zh/)
+#### [Vue-router](https://router.vuejs.org/zh/)
 
 这里的考点我觉得文档上面已经列的很好了，内容也不多，推荐直接点击上面标题阅读源文档。这里就主要讲解几个点吧！
 
@@ -1290,7 +1297,45 @@ export default {
 
 ![image-20210703103652695](http://blog.cdn.ionluo.cn/blog/image-20210703103652695.png)
 
+#### [Axios](http://www.axios-js.com/)
 
+
+
+### UI组件库
+
+#### Element
+
+开发团队：饿了么
+
+核心关键词：PC端UI组件库，不支持Vue1.x
+
+#### Mint UI
+
+开发团队：饿了么
+
+核心关键词：移动端独立组件库，Vue1.x和Vue2.x都支持，体积小（30kb）,但是组件个数偏少
+
+#### iView
+
+核心关键词：PC，中后台产品，Vue1.x和Vue2.x都支持。开源了一个Iview Admin，做后台非常方便。
+
+#### Vux
+
+核心关键词：移动端，WeUI，组件多，不支持Vue1.x。Vux主要服务于微信页面，WeUI是一套同微信原生视觉体验一致的基础样式库，由微信官方设计团队为微信内网页和微信小程序量身设计。
+
+#### 其他
+
+**Bootstrap-Vue**
+
+Bootstrap-VUE提供了基于vue2的Bootstrap V4组件和网格系统的实现，完成了广泛和自动化的WAI ARA可访问性标记。想当初刚流行响应式网站的时候，Bootstrap是世界上最受欢迎的建立移动优先网站的框架，Bootstrap可以说风靡全球。就算放在现在很多企业网站都是采用Bootstrap做的响应式。Bootstrap-Vue可以让你在Vue中也实现Bootstrap的效果。
+
+**Ant Design Vue**
+
+Ant Design Vue是 Ant Design 3.X 的 Vue 实现，开发和服务于企业级后台产品。Ant Design Vue共享Ant Design of React设计工具体系，实现了所有Ant Design of React的组件，支持现代浏览器和 IE9 及以上（需要 polyfills）。可以让熟悉Ant Design的在使用Vue时，很容易的上手。
+
+**Vant**
+
+Vant是一个轻量、可靠的移动端 Vue 组件库。Vant是有赞团队开源的，主要维护也是有赞团队。Vant Weapp 是有赞移动端组件库 Vant 的小程序版本，两者基于相同的视觉规范，提供一致的 API 接口，助力开发者快速搭建小程序应用。
 
 ### 推荐阅读
 
@@ -1325,6 +1370,8 @@ MVC作为经典的框架模式，视图层，数据层以及业务逻辑层都�
 MVP视图和数据都通过P这个中间层交互，导致P层特别臃肿。但是去除了数据和视图的耦合性，维护起来更方便（Django）。
 
 MVVM把VM代替上面的C和P层，直接通过数据驱动渲染视图（Angular， React， Vue）。
+
+![image-20210710173317382](http://blog.cdn.ionluo.cn/blog/image-20210710173317382.png)
 
 
 
@@ -1445,13 +1492,9 @@ data.nums.push(4) // 监听数组
 
 ```
 
-### 虚拟DOM和diff算法
+### 虚拟DOM和diff算法（难点）
 
 视频讲解见：https://www.bilibili.com/video/BV1dV411a7mT
-
-
-
-
 
 
 
@@ -1538,15 +1581,17 @@ with (obj) {
 // "vue-template-compiler": "^2.6.10"
 const compiler = require('vue-template-compiler')
 
+// 说明： _c: createElement 即 h 函数， 参考上面的diff算法中h函数有哪些参数
+// 从下面开始，会把_c这些换成语义更好的对应函数名，方便阅读，实际返回的是一些缩写，如果第一个差值实际返回的是：
+// with(this){return _c('p',[_v(_s(message))])}
+
 // 插值
 // const template = `<p>{{message}}</p>`
 // with(this){return createElement('p',[createTextVNode(toString(message))])}
-// h -> vnode
-// createElement -> vnode
 
-// // 表达式
+// 表达式
 // const template = `<p>{{flag ? message : 'no message found'}}</p>`
-// // with(this){return _c('p',[_v(_s(flag ? message : 'no message found'))])}
+// with(this){return createElement('p',[createTextVNode(toString(flag ? message : 'no message found'))])}
 
 // // 属性和动态属性
 // const template = `
@@ -1554,10 +1599,12 @@ const compiler = require('vue-template-compiler')
 //         <img :src="imgUrl"/>
 //     </div>
 // `
-// with(this){return _c('div',
+// with(this){return createElement('div',
 //      {staticClass:"container",attrs:{"id":"div1"}},
 //      [
-//          _c('img',{attrs:{"src":imgUrl}})])}
+//          createElement('img',{attrs:{"src":imgUrl}})
+// 		]
+// )}
 
 // // 条件
 // const template = `
@@ -1566,7 +1613,9 @@ const compiler = require('vue-template-compiler')
 //         <p v-else>B</p>
 //     </div>
 // `
-// with(this){return _c('div',[(flag === 'a')?_c('p',[_v("A")]):_c('p',[_v("B")])])}
+// with(this){return createElement('div',
+// 		[ (flag === 'a')?createElement('p',[createTextVNode("A")]):createElement('p',[createTextVNode("B") ])
+// 		])}
 
 // 循环
 // const template = `
@@ -1574,18 +1623,18 @@ const compiler = require('vue-template-compiler')
 //         <li v-for="item in list" :key="item.id">{{item.title}}</li>
 //     </ul>
 // `
-// with(this){return _c('ul',_l((list),function(item){return _c('li',{key:item.id},[_v(_s(item.title))])}),0)}
+// with(this){return createElement('ul',renderList((list),function(item){return createElement('li',{key:item.id},[createTextVNode(toString(item.title))])}),0)}
 
 // 事件
 // const template = `
 //     <button @click="clickHandler">submit</button>
 // `
-// with(this){return _c('button',{on:{"click":clickHandler}},[_v("submit")])}
+// with(this){return createElement('button',{on:{"click":clickHandler}},[createTextVNode("submit")])}
 
 // v-model
 const template = `<input type="text" v-model="name">`
 // 主要看 input 事件
-// with(this){return _c('input',{directives:[{name:"model",rawName:"v-model",value:(name),expression:"name"}],attrs:{"type":"text"},domProps:{"value":(name)},on:{"input":function($event){if($event.target.composing)return;name=$event.target.value}}})}
+// with(this){return createElement('input',{directives:[{name:"model",rawName:"v-model",value:(name),expression:"name"}],attrs:{"type":"text"},domProps:{"value":(name)},on:{"input":function($event){if($event.target.composing)return;name=$event.target.value}}})}
 
 // render 函数
 // 返回 vnode
@@ -1599,6 +1648,7 @@ console.log(res.render)
 
 // // 从 vue 源码中找到缩写函数的含义
 // function installRenderHelpers (target) {
+//     target._c = createElement;
 //     target._o = markOnce;
 //     target._n = toNumber;
 //     target._s = toString;
@@ -1620,7 +1670,227 @@ console.log(res.render)
 
 ```
 
+**总结**
+
+- 模板编译为 render 函数，执行 render 函数返回 vnode
+
+- 基于 vnode 再执行 patch 和 diff
+
+- 使用 webpack vue-loader ， 会在开发环境编译模板
+
+  
+
+**[使用 render 代替 template](https://cn.vuejs.org/v2/guide/render-function.html)**
+
+了解过上面的 render 函数，则在一些特殊情况下，也可以定义组件的时候不用 template 而是直接使用render
+
+```javascript
+Vue.component('heading', {
+    // template: `xxxxx`,
+    render: function(createElement) {
+        return createElement('h' + this.level, [
+            createElement('a', {
+                attrs: {
+                    name: 'headerId',
+                    href: '#headerId'
+                }
+            }, 'this is a tag')
+        ])
+    },
+    props: {
+        level: {
+            type: Number,
+            required: true
+        }
+    }
+})
+```
+
+
+
+### 组件渲染和更新过程
+
+**初次渲染过程**
+
+- 解析模板为 render 函数（或在开发环境已完成，vue-loader）
+
+- 触发响应式，监听 data 属性 getter setter
+
+- 执行 render 函数， 生成 vnode， patch(elem, vnode)
+
+  ![image-20210710152740094](http://blog.cdn.ionluo.cn/blog/image-20210710152740094.png)
+
+
+
+**更新过程**
+
+- 修改 data，触发 setter（此前在getter中已被监听）
+
+- 重新执行 render 函数，生成 newVnode
+
+- patch(vnode, newVnode)
+
+  ![image-20210710152944644](http://blog.cdn.ionluo.cn/blog/image-20210710152944644.png)
+
+
+
+### 前端路由原理
+
+![image-20210710164753426](http://blog.cdn.ionluo.cn/blog/image-20210710164753426.png)
+
+#### hash路由
+
+- hash 变化会触发网页跳转，即浏览器的前进、后退
+
+- hash 变化不会刷新页面，SPA必须的特点
+
+- hash 永远不会提交到 server 端
+- 核心API：window.onhashchange
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>hash test</title>
+</head>
+<body>
+    <p>hash test</p>
+    <button id="btn1">修改 hash</button>
+
+    <script>
+        // hash 变化，包括：
+        // a. JS 修改 url
+        // b. 手动修改 url 的 hash
+        // c. 浏览器前进、后退
+        window.onhashchange = (event) => {
+            console.log('old url', event.oldURL)
+            console.log('new url', event.newURL)
+
+            console.log('hash:', location.hash)
+        }
+
+        // 页面初次加载，获取 hash
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('hash:', location.hash)
+        })
+
+        // JS 修改 url
+        document.getElementById('btn1').addEventListener('click', () => {
+            location.href = '#/user'
+        })
+    </script>
+</body>
+</html>
+```
+
+
+
+
+
+#### history路由
+
+- 用 url 规范的路由，但跳转时不刷新页面
+- 正式环境需要 server 端配合，可参考 https://router.vuejs.org/zh/guide/essentials/history-mode.html#%E5%90%8E%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%BE%8B%E5%AD%90
+- 核心API：history.pushState、window.onpopstate
+- https://developer.mozilla.org/zh-CN/docs/Web/API/History
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>history API test</title>
+</head>
+<body>
+    <p>history API test</p>
+    <button id="btn1">修改 url</button>
+
+    <script>
+        // 页面初次加载，获取 pathname
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('load', location.pathname)
+        })
+
+        // 打开一个新的路由
+        // 【注意】用 pushState 方式，浏览器不会刷新页面
+        document.getElementById('btn1').addEventListener('click', () => {
+            const state = { name: 'page1' }
+            console.log('切换路由到', 'page1')
+            history.pushState(state, '', 'page1') // 重要！！
+        })
+
+        // 监听浏览器前进、后退
+        window.onpopstate = (event) => { // 重要！！
+            console.log('onpopstate', event.state, location.pathname)
+        }
+    </script>
+</body>
+</html>
+```
+
+
+
 ## Vue面试真题演练
+
+1. 为什么要在v-for中用key
+
+   - 必须用 key，且不能是 index 和 random
+   - diff算法中通过 tagName 和 key 来判断，是否是 sameNode
+   - 减少渲染次数，提高渲染性能
+
+   
+
+2. 描述 Vue 组件生命周期（父子组件）
+
+   - 单组件生命周期图
+   - 父子组件生命周期关系
+   - 详见 `Vue使用` 下的 `组件生命周期` 一节
+
+   
+
+3. Vue组件如何通讯
+
+   - 父 --> 子： props 
+   - 子 --> 父： this.$emit --> this.$on
+
+   - EventBus  (平行组件)
+
+   - vuex  (中大型项目组件通讯，可以任意组件互相通讯（未设置命名空间情况下）)
+
+   - 详见  `Vue使用`  下的 `组件通信`  一节
+
+     
+
+4. 描述组件渲染和更新过程
+
+   详见  `Vue原理`  下的 `组件渲染和更新过程`  一节
+
+   ![image-20210710152944644](http://blog.cdn.ionluo.cn/blog/image-20210710152944644.png)
+
+
+
+5. 双向数据绑定 v-model 的实现原理（注意不是问响应式数据的原理）
+
+   - input 元素的 value = this.name
+
+   - 绑定 input 事件 this.name = $event.target.value
+
+   - data 更新触发 re-render
+
+   - 详见  `Vue原理`  下的 `模板编译`  一节
+
+     
+
+6. 对MVVM的理解
+
+   详见  `Vue原理`  下的 `关于MVC、MVP和MVVM的理解`  一节
+
+   ![image-20210710173317382](http://blog.cdn.ionluo.cn/blog/image-20210710173317382.png)
 
 
 
