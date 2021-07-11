@@ -459,7 +459,9 @@ export default {
 > // b的变化检测不到
 > vm.b = 2
 > ```
-> 对于已经创建的实例，Vue不能动态添加根级别的响应式属性。但是，可以使用 Vue.set(object, key, value) 方法向嵌套对象添加响应式属性。例如，对于：
+> **扩展：对于已经创建的实例，Vue不能动态添加根级别的响应式属性。**
+>
+> 但是，可以使用 Vue.set(object, key, value) 方法向嵌套对象添加响应式属性。例如，对于：
 >
 > ```javascript
 > var vm = new Vue({
@@ -771,8 +773,8 @@ export default new Vue()
 | update        | 组件数据更新之后                                             |
 | activited     | keep-alive 专属，组件被激活时调用                            |
 | deactivated   | keep-alive 专属，组件被销毁时调用                            |
-| beforeDestory | 组件销毁前调用                                               |
-| destoryed     | 组件销毁后调用                                               |
+| beforeDestroy | 组件销毁前调用                                               |
+| destroyed     | 组件销毁后调用                                               |
 
 **（3）生命周期示意图**
 
@@ -1894,9 +1896,200 @@ Vue.component('heading', {
 
 
 
-## Vue3预学习
 
 
+7. [computed有何特点](https://www.yuque.com/song-study/blog/egbe3q)
+   - 使用方式相当于data中的数据（属性），声明方式相当于method（函数）
+   - 计算结果会缓存，只有相关数据改变才会重新计算
+
+
+
+8. 为何组件 data 必须是一个函数
+
+   组件在编译后是一个类(构造器)，组件的使用就是类的实例化。如果data不是函数的话，复用组件就会导致数据共享而造成组件混乱。而不用复用的Vue实例(`new Vue({ data: {} })`)的data就可以是对象就是这个原因。
+
+
+
+9. ajax请求应该放在哪个生命周期
+
+   这个问题视频中说放mounted，网上感觉各有争议，我这里自己归纳下
+
+   - 放哪个生命周期看业务需求。极端点情况，不需要使用返回结果的时候，你甚至可以在beforeCreate和destroyed生命周期里面发起ajax请求。
+   - 当使用服务器渲染(ssr)的时候并且页面结构由ajax请求数据渲染得出，这时候需要在`created`生命周期发起请求，因为ssr没有mounted生命周期
+   - 当页面结构由ajax请求数据渲染得出且请求结束需要进行DOM操作的话，放在mounted生命周期。
+   - 当在keep-alive动态组件中需要激活时请求刷新数据，在activated发起ajax请求
+   - 当数据更新时，……等等
+
+   **总结：**ajax在哪个生命周期发起请求需要看具体的业务需求，考虑正常的ajax拿去数据初始化页面，则可以放在created生命周期，虽然和放mounted生命周期性能上的差异很小，但是如此可以兼容服务端的渲染，而不需要到时候调整代码位置。
+
+
+
+
+10. 如何将组件所有props传递给子组件
+
+    ```html
+    <User v-bind = '$props' />
+    <!-- 细节知识点，了解即可 -->
+    ```
+
+    > 更多可移步此处：https://blog.csdn.net/xueyue616/article/details/105379009
+
+
+
+11. 如何自己实现 v-model
+
+    这里视频介绍的是组件的v-model，实现如下图，但是下图也仅仅展示了子组件的写法，父组件需要加上 v-model="text"。详见  `Vue使用`  下的 `自定义组件的v-model`  一节。如果只是普通的v-model就是：
+
+    ```html
+    <input type='text' :value="text" @input="text = $event.target.value">
+    ```
+
+    
+
+    ![image-20210711152529834](http://blog.cdn.ionluo.cn/blog/image-20210711152529834.png)
+
+    
+
+12. 多个组件有相同的逻辑，如何抽离？
+
+    mixin以及mixin的一些缺点，详见  `Vue使用`  下的 `mixin`  一节
+
+    
+
+13. 何时要使用异步组件
+
+    - 加载大组件
+    - 路由异步加载
+
+    
+
+14. 何时用使用beforeDestroy
+
+    - 解绑自定义事件 event.$off
+    - 解绑自定义DOM事件，如 window.onsroll 等
+    - 清除定时器
+
+
+
+15. Vuex中 action 和 mutation 有何区别
+    - action 中处理异步， mutation不可以
+    - mutation做原子操作（不可分割的操作，要不全部完成，要不全部不完成）
+    - action 可以整合多个 mutation
+
+
+
+16. 请用 vnode 描述一个 DOM 结构
+
+    ![image-20210706120827755](http://blog.cdn.ionluo.cn/blog/image-20210706120827755.png)
+
+
+
+17. Vue监听 data 变化的核心 API 是上面
+
+    - Object.defineProperty
+
+    - 深度监听，监听数组
+
+    - 有何缺点
+
+    - 详见  `Vue原理 ` 的 `响应式原理`  一节
+
+      
+
+18. Vue如何监听数组变化
+
+    - Object.definePropery 不能监听数组变化
+    - 重新定义原型，重写 数组方法（如 push, pop 等），实现监听
+    - Vue3 的 Proxy 则可以原生支持监听数组的变化
+
+19. diff算法的时间复杂度
+
+    - O(n)
+    - 在 O(3) 做了些调整使得时间复杂度降为 O(n)  (同级比较，tag不同销毁重建，tag和key相同认为是相同的结点)
+
+20. 简述 diff 算法过程
+
+    - patch(elem, vnode) 和 patch(vnode, newVnode)
+    - patchVnode 和 addVnodes 和 removeVnodes
+    - updateChildren ( key的重要性 )
+
+21. Vue为何是异步渲染，$nextTick何用
+
+    - 异步渲染（以及合并 data 修改）都是用以提高渲染性能的
+    - $nextTick 在 DOM 更新完之后触发回调
+
+22. Vue常见的性能优化方式
+
+    - 合理使用 v-show 和 v-if
+    - 合理使用computed
+    - v-for 加 key， 以及避免v-for和v-if同时使用（如果要同时使用的情况也请用计算属性）
+    - 自定义事件、DOM事件、定时器及时销毁（防止内存泄漏）
+    - 合理使用异步组件
+    - 合理使用keep-alive
+    - data 层级不要太深 （响应式是要递归的，所以data层级尽量扁平些）
+    - 使用 vue-loader 在开发环境做模板编译
+    - [webpack层面优化](https://segmentfault.com/a/1190000007891318)
+    - [前端通用的性能优化](https://mp.weixin.qq.com/s/0g_GdTSS0O622DyGTnQnHA)，如图片懒加载
+    - 使用ssr
+
+
+
+
+## Vue3学习
+
+### Vue3 升级内容
+
+- 全部用 ts 重写（响应式，vdom，模板编译等）
+- 性能提升，代码量减少
+- 会调整部分API
+
+### Vue2.x马上要过时了吗
+
+- Vue3从正式发布到推广开来，还需要一段时间
+- Vue2.x应用范围非常广，有大量项目需要维护升级
+- Proxy存在浏览器兼容性问题，且不能polyfill 
+
+### Proxy实现响应式
+
+**Proxy基本使用**
+
+```javascript
+const data = {
+    name: 'zhangsan',
+    age:20
+}
+// const data = ['a', 'b', 'c']
+
+const proxyData = new Proxy(data, {
+    get(target, key, receiver) {
+        const result = Reflect.get(target, key, receiver)
+        console.log('get', key)
+        return result  // 返回结果
+    },
+    set(target, key, val, receiver) {
+        const result = Reflect.set(target, key, val, receiver)
+        console.log('set', key, val)
+        return result // 是否设置成功
+    },
+    deleteProperty(target, key) {
+        const result = Reflect.deleteProperty(target, key)
+        console.log('delete property', key)
+        return result // 是否删除成功
+    }
+})
+// get
+console.log(proxyData.age)
+// set
+proxyData.age = 30
+// deleteProperty
+delete proxyData.age
+
+// get push
+// get length
+// set 3 d
+// set length 4
+// proxyData.push('d')
+```
 
 
 
