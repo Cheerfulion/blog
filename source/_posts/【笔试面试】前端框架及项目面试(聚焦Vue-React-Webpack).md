@@ -12,6 +12,12 @@ date: 2021-07-01 14:54:38
 
 ## 导学
 
+### 课程链接
+
+https://coding.imooc.com/class/419.html
+
+
+
 ### 前端面试常见流程
 
 ![image-20210701145911454](http://blog.cdn.ionluo.cn/blog/image-20210701145911454.png)
@@ -2056,7 +2062,7 @@ Vue.component('heading', {
 ```javascript
 const data = {
     name: 'zhangsan',
-    age:20
+    age: 20
 }
 // const data = ['a', 'b', 'c']
 
@@ -2091,13 +2097,63 @@ delete proxyData.age
 // proxyData.push('d')
 ```
 
+vue3使用Proxy实现响应式（未完成，不完整视频）
+
+```javascript
+// 测试数据
+const data = {
+    name: 'zhangsan',
+    age: 20
+}
+
+const proxyData = reactive(data)
+
+
+// 创建响应式
+function reactive(target = {}) {
+    if (typeof target !== 'object' || target === null) {
+        // 不是对象或数组，则返回
+        return target
+    }
+
+    // 代理配置
+    const proxyConf = {
+        get(target, key, receiver) {
+            // 只处理本身（非原型的）属性
+            const result = Reflect.get(target, key, receiver)
+            console.log('get', key)
+            return reactive(result)  // 返回结果
+        },
+        set(target, key, val, receiver) {
+            // 重复的数据，不处理
+            if (val === target[key]) {
+                return true
+            }
+
+            const result = Reflect.set(target, key, val, receiver)
+            console.log('set', key, val)
+            return result // 是否设置成功
+        },
+        deleteProperty(target, key) {
+            const result = Reflect.deleteProperty(target, key)
+            console.log('delete property', key)
+            return result // 是否删除成功
+        }
+    }
+
+    // 生成代理对象
+    const observed = new Proxy(target, proxyConf)
+    return observed
+}
+```
+
+
+
 
 
 ## React使用
 
-
-
-
+![image-20210711232307435](http://blog.cdn.ionluo.cn/blog/image-20210711232307435.png)
 
 ## React原理
 
