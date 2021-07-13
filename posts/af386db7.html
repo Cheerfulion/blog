@@ -16,7 +16,7 @@
 <meta property="og:description" content="-">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-02-12T05:31:15.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:09:50.025Z">
+<meta property="article:modified_time" content="2021-07-01T13:43:23.368Z">
 <meta property="article:author" content="ionluo">
 <meta property="article:tag" content="Web前端">
 <meta property="article:tag" content="笔试面试">
@@ -203,6 +203,43 @@
       
         <p><a target="_blank" rel="noopener" href="https://class.imooc.com/fearchitect#Anchor">https://class.imooc.com/fearchitect#Anchor</a></p>
 <p><a target="_blank" rel="noopener" href="https://class.imooc.com/webfullstack#Anchor">https://class.imooc.com/webfullstack#Anchor</a></p>
+<h2 id="module-exports与exports，export与export-default之间的关系和区别"><a href="#module-exports与exports，export与export-default之间的关系和区别" class="headerlink" title="module.exports与exports，export与export default之间的关系和区别"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fayin/p/6831071.html">module.exports与exports，export与export default之间的关系和区别</a></h2><p>首先我们要明白一个前提，CommonJS模块规范和ES6模块规范完全是两种不同的概念。</p>
+<p><strong>1. CommonJS模块规范</strong></p>
+<p><strong>Node</strong>应用由模块组成，采用CommonJS模块规范。</p>
+<p>根据这个规范，每个文件就是一个模块，有自己的作用域。在一个文件里面定义的变量、函数、类，都是私有的，对其他文件不可见。</p>
+<p>CommonJS规范规定，每个模块内部，module变量代表当前模块。这个变量是一个对象，它的exports属性（即module.exports）是对外的接口。加载某个模块，其实是加载该模块的module.exports属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">var</span> addX = <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> value + x;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">module</span>.exports.x = x;</span><br><span class="line"><span class="built_in">module</span>.exports.addX = addX;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码通过module.exports输出变量x和函数addX。</p>
+<p>require方法用于加载模块。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> example = <span class="built_in">require</span>(<span class="string">&#x27;./example.js&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(example.x); <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">console</span>.log(example.addX(<span class="number">1</span>)); <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>2. exports 与 module.exports</strong></p>
+<p><strong>优先使用 module.exports</strong></p>
+<p>为了方便，Node为每个模块提供一个exports变量，指向module.exports。这等同在每个模块头部，有一行这样的命令。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">exports</span> = <span class="built_in">module</span>.exports;</span><br></pre></td></tr></table></figure>
+
+<p>于是我们可以直接在 exports 对象上添加方法，表示对外输出的接口，如同在module.exports上添加一样。</p>
+<p><em>注意</em>，因为 <strong>Node 模块是通过 module.exports 导出</strong>的，如果直接将exports变量指向一个值，就切断了exports与module.exports的联系，导致意外发生：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">exports</span> = <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// b.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">&#x27;./a.js&#x27;</span>) <span class="comment">// a 是一个空对象</span></span><br></pre></td></tr></table></figure>
+
+<p>参考 <a target="_blank" rel="noopener" href="https://blog.tableflip.io/the-difference-between-module-exports-and-exports/">the-difference-between-module-exports-and-exports</a></p>
+<p><strong>ES6模块规范</strong></p>
+<p>不同于CommonJS，ES6使用 export 和 import 来导出、导入模块。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// profile.js</span></span><br><span class="line"><span class="keyword">var</span> firstName = <span class="string">&#x27;Michael&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> lastName = <span class="string">&#x27;Jackson&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> year = <span class="number">1958</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;firstName, lastName, year&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>需要特别注意的是，export命令规定的是对外的接口，必须与模块内部的变量建立一一对应关系。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写法一</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> m = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写法二</span></span><br><span class="line"><span class="keyword">var</span> m = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;m&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写法三</span></span><br><span class="line"><span class="keyword">var</span> n = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;n <span class="keyword">as</span> m&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. export default 命令</strong></p>
+<p>使用export default命令，为模块指定默认输出。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// export-default.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 相关链接：</strong></p>
+<p>CommonJS规范，<a target="_blank" rel="noopener" href="http://javascript.ruanyifeng.com/nodejs/module.html">http://javascript.ruanyifeng.com/nodejs/module.html</a></p>
+<p>ES6 Module 的语法，<a target="_blank" rel="noopener" href="http://es6.ruanyifeng.com/#docs/module">http://es6.ruanyifeng.com/#docs/module</a></p>
 
       
       <!-- 首页不展示文章所有内容结束 -->
@@ -315,18 +352,18 @@
   
 <nav id="article-nav">
   
-    <a href="/blog/posts/b1f47f66.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/posts/edb97d18.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          谷歌浏览器（chrome）允许跨域设置的方法
+          我的Grunt配置
         
       </div>
     </a>
   
   
-    <a href="/blog/posts/c0fa8060.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">远程构建</div>
+    <a href="/blog/posts/8e4c0560.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">移动端不支持dbclick事件解决</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -743,6 +780,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Sass</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">程序人生</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
               </li>
             
             <div class="clearfix"></div>

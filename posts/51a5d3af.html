@@ -16,7 +16,7 @@
 <meta property="og:description" content="前言这里仅摘录一些感觉比较有意义，且有难度的题目。 正文1、在大数据量场景下，以下哪种js中字符串连接方式较为高效（   ） a+&#x3D;b  a &#x3D; a+b  Array.join()  Array.push()    +的处理机制是：新建一个临时字符串，将新字符串赋值为a+b，然后返回这个临新字符串并同时销毁原始字符串，所以字符串连接效率较低。所以用Array.join()不会新建临时字符串效率更高">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-10T09:12:10.000Z">
-<meta property="article:modified_time" content="2021-06-15T03:09:50.023Z">
+<meta property="article:modified_time" content="2021-07-12T04:07:07.410Z">
 <meta property="article:author" content="ionluo">
 <meta property="article:tag" content="Web前端">
 <meta property="article:tag" content="笔试面试">
@@ -288,11 +288,11 @@
 <h3 id="7、如何准确判断一个变量是数组类型"><a href="#7、如何准确判断一个变量是数组类型" class="headerlink" title="7、如何准确判断一个变量是数组类型?"></a>7、如何准确判断一个变量是数组类型?</h3><p>下面对比下js各种判断数据类型的方法和局限：</p>
 <ol>
 <li><p><code>typeof</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># typeof的返回值有下面几种类型：</span></span><br><span class="line">- <span class="string">&#x27;undefined&#x27;</span>              --未定义的变量或值</span><br><span class="line">- <span class="string">&#x27;boolean&#x27;</span>                --布尔类型的变量或值</span><br><span class="line">- <span class="string">&#x27;string&#x27;</span>                 --字符串类型的变量或值</span><br><span class="line">- <span class="string">&#x27;number&#x27;</span>                 --数字类型的变量或值</span><br><span class="line">- <span class="string">&#x27;symbol&#x27;</span>                 --Symbol类型的变量或值</span><br><span class="line">- <span class="string">&#x27;object&#x27;</span>                 --对象类型的变量或值，或者null(这个是js历史遗留问题，将null作为object类型处理)</span><br><span class="line">- <span class="string">&#x27;function&#x27;</span>               --函数类型的变量或值(!!!)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># typeof的返回值有下面几种类型：</span></span><br><span class="line">- <span class="string">&#x27;undefined&#x27;</span>              --未定义的变量或值</span><br><span class="line">- <span class="string">&#x27;boolean&#x27;</span>                --布尔类型的变量或值</span><br><span class="line">- <span class="string">&#x27;string&#x27;</span>                 --字符串类型的变量或值</span><br><span class="line">- <span class="string">&#x27;number&#x27;</span>                 --数字类型的变量或值</span><br><span class="line">- <span class="string">&#x27;bigint&#x27;</span>                 --BigInt类型的变量或值</span><br><span class="line">- <span class="string">&#x27;symbol&#x27;</span>                 --Symbol类型的变量或值</span><br><span class="line">- <span class="string">&#x27;object&#x27;</span>                 --对象类型的变量或值，或者null(这个是js历史遗留问题，将null作为object类型处理)</span><br><span class="line">- <span class="string">&#x27;function&#x27;</span>               --函数类型的变量或值(!!!)</span><br></pre></td></tr></table></figure>
 
-<p><strong>由上面可知，当需要区分的是undefined，boolean，string，number，symbol，function这几个类型的时候的确可以使用typeof来进行判断。但是当存在Array，Map，Set等等其他类型的时候，就需要用其他方法了。</strong></p>
+<p><strong>由上面可知，当需要区分的是undefined，boolean，string，number，symbol，function, bigint这几个类型的时候的确可以使用typeof来进行判断。但是当存在Array，Map，Set等等其他类型的时候，就需要用其他方法了。</strong></p>
 <blockquote>
-<p>这里用个简单的记法：<code>fubsns</code>, 或者js的七种数据类型 - null - object + function</p>
+<p>这里用个简单的记法：<code>fubbsns</code>, 或者js的8种数据类型 - null - object + function</p>
 </blockquote>
 </li>
 <li><p><code>instanceof</code></p>
@@ -343,9 +343,7 @@
 
 
 
-
-
-<h2 id="11、下面代码的执行结果是？"><a href="#11、下面代码的执行结果是？" class="headerlink" title="11、下面代码的执行结果是？"></a>11、下面代码的执行结果是？</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; ++i)&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(i)&#125;, <span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="11、下面代码的执行结果是？"><a href="#11、下面代码的执行结果是？" class="headerlink" title="11、下面代码的执行结果是？"></a>11、下面代码的执行结果是？</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; ++i)&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(i)&#125;, <span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -466,18 +464,18 @@
   
 <nav id="article-nav">
   
-    <a href="/blog/posts/e0d4478a.html" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/posts/51a5d3ae.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          【前端】如何中断Promise的链式调用
+          某公司前端工程师笔试题
         
       </div>
     </a>
   
   
-    <a href="/blog/posts/51a5d3ae.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">某公司前端工程师笔试题</div>
+    <a href="/blog/posts/db88cc42.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Ubuntu安装WPS</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -894,6 +892,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Sass</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">程序人生</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
               </li>
             
             <div class="clearfix"></div>

@@ -17,7 +17,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/image-20210616155853323.png">
 <meta property="article:published_time" content="2021-06-16T06:57:40.000Z">
-<meta property="article:modified_time" content="2021-06-16T07:59:37.865Z">
+<meta property="article:modified_time" content="2021-06-21T02:05:11.521Z">
 <meta property="article:author" content="ionluo">
 <meta property="article:tag" content="eslint">
 <meta name="twitter:card" content="summary">
@@ -210,6 +210,10 @@
 <p><strong>step3</strong>：创建一个<code>.eslintrc</code>文件，放在你项目的根目录下( <a target="_blank" rel="noopener" href="https://github.com/eslint/eslint">https://github.com/eslint/eslint</a> )</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;extends&quot;</span>: <span class="string">&quot;eslint:recommended&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;env&quot;</span>:&#123;</span><br><span class="line">        <span class="attr">&quot;node&quot;</span>:<span class="literal">true</span>,</span><br><span class="line">        <span class="attr">&quot;es6&quot;</span>:<span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">&quot;rules&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">&quot;semi&quot;</span>: [<span class="string">&quot;error&quot;</span>, <span class="string">&quot;always&quot;</span>],</span><br><span class="line">        <span class="attr">&quot;quotes&quot;</span>: <span class="string">&quot;off&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;no-console&quot;</span>:<span class="string">&quot;off&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;no-unused-vars&quot;</span>:<span class="string">&quot;off&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;no-unreachable&quot;</span>:<span class="string">&quot;off&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;no-redeclare&quot;</span>:<span class="string">&quot;warn&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>规则：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/chapter/12618">https://cloud.tencent.com/developer/chapter/12618</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fsg6/p/14350153.html">https://www.cnblogs.com/fsg6/p/14350153.html</a></p>
+</blockquote>
 <p><strong>可选配置</strong> 让eslint忽略检测的文件 <code>.eslintignore</code> 配置规则与 <code>.gitignore</code> 一样</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># 如果 .eslintrc 开启了 env  nodejs 那么 默认 node_modules是自动忽略的</span><br><span class="line">node_modules</span><br><span class="line">&#x2F;node_modules&#x2F;**</span><br><span class="line">*.sh</span><br><span class="line">game-server&#x2F;web-server</span><br><span class="line">game-server&#x2F;web-server&#x2F;**</span><br><span class="line">tools</span><br><span class="line">tools&#x2F;**</span><br><span class="line">test</span><br><span class="line">test&#x2F;**</span><br><span class="line">game-server&#x2F;purchase-server&#x2F;lib&#x2F;seedrandom.js</span><br><span class="line">game-server&#x2F;app&#x2F;staticData&#x2F;data&#x2F;temp&#x2F;*.js</span><br></pre></td></tr></table></figure>
 
@@ -751,6 +755,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Sass</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">程序人生</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">React</a>
               </li>
             
             <div class="clearfix"></div>
