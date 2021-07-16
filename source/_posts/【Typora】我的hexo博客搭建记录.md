@@ -396,8 +396,10 @@ Hexo 整合 OpenWrite 平台的 readmore 插件,实现博客的每一篇文章�
 
    作者提供以下模型的模型包，模型包预览地址见下面的链接，选择你想用的模型，记住名字，选择对应的后缀模型包
 
-   [作者各种模型包展示](https://huaji8.top/post/live2d-plugin-2.0/)
+   ~~[作者各种模型包展示](https://huaji8.top/post/live2d-plugin-2.0/)~~
 
+   上面链接已失效，可以到这个地方查看：https://github.com/xiazeyu/live2d-widget-models
+   
    ```
    live2d-widget-model-chitose
    live2d-widget-model-epsilon2_1
