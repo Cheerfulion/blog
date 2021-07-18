@@ -810,6 +810,8 @@ setup() {
 
 [生命周期](https://v3.cn.vuejs.org/guide/composition-api-lifecycle-hooks.html)
 
+![image-20210718163322742](http://blog.cdn.ionluo.cn/blog/image-20210718163322742.png)
+
 在 setup 中使用的 hook 名称和原来生命周期的对应关系
 
 - beforeCreate -> 不需要
@@ -821,10 +823,12 @@ setup() {
 - beforeUnmount -> onBeforeUnmount
 - unmounted -> onUnmounted
 - errorCaptured -> onErrorCaptured
-- renderTracked -> onRenderTracked
-- renderTriggered -> onRenderTriggered
+- renderTracked -> onRenderTracked （调试用）
+- renderTriggered -> onRenderTriggered （调试用）
 
 ```javascript
+import { onMounted, onUpdated, onRenderTriggered } from ‘vue’
+
 setup() {
   onMounted(() => {
     console.log('mounted')
