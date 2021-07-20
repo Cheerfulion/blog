@@ -12,7 +12,141 @@ tags:
 ## 正文
 
 ```javascript
+const os = require('os')
+var diskinfo = require('diskinfo')
 
+var dealMem = (mem) => {
+  var G = 0
+  var M = 0
+  var KB = 0;
+  (mem > (1 << 30)) && (G = (mem / (1 << 30)).toFixed(2));
+  (mem > (1 << 20)) && (mem < (1 << 30)) && (M = (mem / (1 << 20)).toFixed(2));
+  (mem > (1 << 10)) && (mem > (1 << 20)) && (KB = (mem / (1 << 10)).toFixed(2))
+  return G > 0 ? G + 'G' : M > 0 ? M + 'M' : KB > 0 ? KB + 'KB' : mem + 'B'
+}
+
+/**
+ * @swagger
+ * /host-state:
+ *   get:
+ *     tags:
+ *       - other
+ *     security:
+ *       - Bearer: []
+ *     summary: 获取服务器状态信息
+ *     description: ''
+ *     responses:
+ *       200:
+ *         description: '返回服务器状态信息'
+ *         schema:
+ *           properties:
+ *             cpuUsage:
+ *               type: string
+ *               description: cpu利用率(%)
+ *             diskUsage:
+ *               type: string
+ *               description: 磁盘使用率(%)
+ *             memoryUsage:
+ *               type: string
+ *               description: 内存使用率(%)
+ */
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+class OSUtils {
+  constructor () {
+    this.cpuUsageMSDefault = 1000 // CPU 利用率默认时间段
+  }
+
+  /**
+ * 获取某时间段 CPU 利用率
+ * @param { Number } Options.ms [时间段，默认是 1000ms，即 1 秒钟]
+ * @param { Boolean } Options.percentage [true（以百分比结果返回）|false]
+ * @returns { Promise }
+ */
+  async getCPUUsage (options = {}) {
+    const that = this
+    let { cpuUsageMS, percentage } = options
+    cpuUsageMS = cpuUsageMS || that.cpuUsageMSDefault
+    const t1 = that._getCPUInfo() // t1 时间点 CPU 信息
+
+    await sleep(cpuUsageMS)
+
+    const t2 = that._getCPUInfo() // t2 时间点 CPU 信息
+    const idle = t2.idle - t1.idle
+    const total = t2.total - t1.total
+    let usage = 1 - idle / total
+
+    if (percentage) usage = (usage * 100.0).toFixed(2) + '%'
+
+    return usage
+  }
+
+  /**
+ * 获取 CPU 信息
+ * @returns { Object } CPU 信息
+ */
+  _getCPUInfo () {
+    const cpus = os.cpus()
+    let user = 0; let nice = 0; let sys = 0; let idle = 0; let irq = 0; let total = 0
+
+    for (const cpu in cpus) {
+      const times = cpus[cpu].times
+      user += times.user
+      nice += times.nice
+      sys += times.sys
+      idle += times.idle
+      irq += times.irq
+    }
+
+    total += user + nice + sys + idle + irq
+
+    return {
+      user,
+      sys,
+      idle,
+      total
+    }
+  }
+}
+const osUtils = new OSUtils()
+
+function getDrives () {
+  return new Promise((resolve, reject) => {
+    diskinfo.getDrives((err, aDrives) => {
+      if (err) reject(err)
+      resolve(aDrives)
+    })
+  })
+}
+
+const getHostState = async function (req, res, next) {
+  const cpuUsage = await osUtils.getCPUUsage({ percentage: true })
+
+  // window系统的话我们会考虑观察所有盘的磁盘占用情况，所以这里把各个盘都返回
+  const diskUsage = {}
+  // 获得所有磁盘空间
+  const aDrives = await getDrives()
+  // 遍历所有磁盘信息
+  for (var i = 0; i < aDrives.length; i++) {
+    diskUsage[aDrives[i].mounted] = aDrives[i].capacity
+  }
+
+  hostInfo.freemem = dealMem(os.freemem()).match(/[\d.]+/)[0]
+  hostInfo.totalmem = dealMem(os.totalmem()).match(/[\d.]+/)[0]
+  let memoryUsage = (1 - hostInfo.freemem / hostInfo.totalmem) * 100
+  memoryUsage = memoryUsage.toFixed(2) + '%'
+
+  res.json({
+    // nodejs获取服务器的上传下载速度比较麻烦，占不实现
+    cpuUsage: cpuUsage,
+    diskUsage: diskUsage,
+    memoryUsage: memoryUsage
+  })
+}
+
+module.exports = {
+  getHostState
+}
 ```
 
 
@@ -48,7 +182,7 @@ Linux 下 CPU 的利用率分为**用户态**（用户模式下执行时间）�
 
 **CPU 利用率是指非系统空闲进程 / CPU 总执行时间**。
 
-```go
+```bash
 > cat /proc/stat
 cpu  2255 34 2290 22625563 6290 127 456
 cpu0 1132 34 1441 11311718 3675 127 438
