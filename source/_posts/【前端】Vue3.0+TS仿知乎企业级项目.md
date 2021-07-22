@@ -810,21 +810,29 @@ setup() {
 
 [生命周期](https://v3.cn.vuejs.org/guide/composition-api-lifecycle-hooks.html)
 
+> 生命周期基本没有变化，给 beforeDestroy 和 destroyed 两个生命周期起了别名为 beforeUnmount 和 unmounted。主要就关注下Composition API中生命周期钩子的使用，如下：
+
 ![image-20210718163322742](http://blog.cdn.ionluo.cn/blog/image-20210718163322742.png)
 
-在 setup 中使用的 hook 名称和原来生命周期的对应关系
+在 setup 中使用的 hook 名称和原来生命周期的对应关系：
 
-- beforeCreate -> 不需要
-- created -> 不需要
-- beforeMount -> onBeforeMount
-- mounted -> onMounted
-- beforeUpdate -> onBeforeUpdate
-- updated -> onUpdated
-- beforeUnmount -> onBeforeUnmount
-- unmounted -> onUnmounted
-- errorCaptured -> onErrorCaptured
-- renderTracked -> onRenderTracked （调试用）
-- renderTriggered -> onRenderTriggered （调试用）
+| 选项式 API        | Hook inside `setup` |
+| ----------------- | ------------------- |
+| `beforeCreate`    | Not needed*         |
+| `created`         | Not needed*         |
+| `beforeMount`     | `onBeforeMount`     |
+| `mounted`         | `onMounted`         |
+| `beforeUpdate`    | `onBeforeUpdate`    |
+| `updated`         | `onUpdated`         |
+| `beforeUnmount`   | `onBeforeUnmount`   |
+| `unmounted`       | `onUnmounted`       |
+| `errorCaptured`   | `onErrorCaptured`   |
+| `renderTracked`   | `onRenderTracked`   |
+| `renderTriggered` | `onRenderTriggered` |
+| `activated`       | `onActivated`       |
+| `deactivated`     | `onDeactivated`     |
+
+详细用法见：https://vue3js.cn/docs/zh/api/options-lifecycle-hooks.html#beforecreate
 
 ```javascript
 import { onMounted, onUpdated, onRenderTriggered } from ‘vue’
@@ -847,25 +855,25 @@ setup() {
 [Watch 文档地址](https://v3.cn.vuejs.org/guide/reactivity-computed-watchers.html#watch)
 
 ```javascript
-// watch 简单应用
+// watch 简单应用（data是一个ref对象，setup中的普通变量不能改变所以不需要监控？）
 watch(data, () => {
   document.title = 'updated ' + data.count
 })
-// watch 的两个参数，代表新的值和旧的值
+// watch 的两个参数，代表新的值和旧的值（refData是refData对象）
 watch(refData.count, (newValue, oldValue) => {
   console.log('old', oldValue)
   console.log('new', newValue)
   document.title = 'updated ' + data.count
 })
 
-// watch 多个值，返回的也是多个值的数组
+// watch 多个值，返回的也是多个值的数组(greetings和data是setup中的ref对象)
 watch([greetings, data], (newValue, oldValue) => {
   console.log('old', oldValue)
   console.log('new', newValue)
   document.title = 'updated' + greetings.value + data.count
 })
 
-// 使用 getter 的写法 watch reactive 对象中的一项
+// 使用 getter 的写法 watch reactive 对象中的一项 （这里的data是一个reactive对象）
 watch([greetings, () => data.count], (newValue, oldValue) => {
   console.log('old', oldValue)
   console.log('new', newValue)
