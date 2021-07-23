@@ -307,11 +307,13 @@ export default {
 
 
 
-> 上面漏了一个：
+> 上面漏了2个：
 >
 > ```html
 > <!-- 点击事件只会触发一次 -->
 > <a @click.once="doThis"></a>
+> <!-- 给组件绑定点击事件 -->
+> <my-component @click.native="doThis"></my-component>
 > ```
 
 ![image-20210701222912385](http://blog.cdn.ionluo.cn/blog/image-20210701222912385.png)
