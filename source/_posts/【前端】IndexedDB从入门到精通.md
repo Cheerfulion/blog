@@ -1,8 +1,9 @@
 ---
 title: 【前端】IndexedDB从入门到精通
+tags:
+  - 前端
+abbrlink: 73f973f4
 date: 2021-07-20 18:41:26
-tags:	
-	- 前端
 ---
 
 

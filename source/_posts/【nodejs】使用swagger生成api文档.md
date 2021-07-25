@@ -1,9 +1,10 @@
 ---
 title: 【nodejs】使用swagger生成api文档
-date: 2021-07-15 16:32:27
 tags:
-	- nodejs
-	- express
+  - nodejs
+  - express
+abbrlink: 186bff9a
+date: 2021-07-15 16:32:27
 ---
 
 

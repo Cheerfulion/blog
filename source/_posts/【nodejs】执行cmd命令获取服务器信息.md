@@ -1,8 +1,9 @@
 ---
 title: 【nodejs】执行cmd命令获取服务器信息
-date: 2021-07-19 12:01:14
 tags:
-	- nodejs
+  - nodejs
+abbrlink: dfe2ecc1
+date: 2021-07-19 12:01:14
 ---
 
 
