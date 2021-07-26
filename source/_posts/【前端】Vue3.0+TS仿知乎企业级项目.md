@@ -898,7 +898,7 @@ onUnmounted(() => {
   document.removeEventListener('click', updateMouse)
 })
 
-// 将组件内逻辑抽象成可复用的函数
+// 将组件内逻辑抽象成可复用的函数（下面代码可以写到新的文件中， 如 hooks/useMousePosition.ts）
 function useMouseTracker() {
   // const positions = reactive<MousePostion>({
   //   x: 0,
@@ -920,6 +920,10 @@ function useMouseTracker() {
 }
 
 export default useMouseTracker
+
+// 使用  
+// import useMousePosition from './hooks/useMousePosition'
+// const { x, y }  = useMousePosition()
 ```
 
 **vue3 这种实现方式的优点**
@@ -932,7 +936,7 @@ export default useMouseTracker
 
 [axios 文档地址](https://github.com/axios/axios)
 
-```bash
+```javascript
 // 安装 axios 注意它是自带 type 文件的，所以我们不需要给它另外安装 typescript 的定义文件
 npm install axios --save
 import { ref } from 'vue'
@@ -970,7 +974,7 @@ export default useURLLoader
 [免费获取狗狗图片的 API 地址](https://dog.ceo/api/breeds/image/random)
 
 ```javascript
-// 使用 urlLoader 展示狗狗图片
+// 使用 urlLoader 展示狗狗图片(注意，这里没有使用await什么的)
 const { result, loading, loaded } = useURLLoader('https://dog.ceo/api/breeds/image/random')
 
 ...
@@ -1004,9 +1008,41 @@ const { result, loading, loaded } = useURLLoader<CatResult[]>('https://api.theca
 
 [defineComponent 文档地址](https://v3.cn.vuejs.org/api/global-api.html#definecomponent)
 
-### Teleport - 瞬间移动 第一部分
+> 使用该函数可以方便定义组件，使得组件定义时有相应的语法提示。
+>
+> ```javascript
+> // 下面是一个vue3中组件的定义，普通的对象IDE无法智能提示，试着用 defineComponent() 编写下。
+> // import { defineComponent } from 'vue'
+> // const component = defineComponent({})
+> const component = {
+>     name: 'HelloWorld',
+>     props: { msg: 'this is a word!' },
+>     setup(props, context){
+>         // props：组件接收的props  
+>         // context：组件的上下文对象，相当于vue2的this，但是只实现了三个方法(attrs, slots, emit)
+>     }
+> }
+> ```
+>
+> 
+
+
+
+### Teleport - 1
 
 [Teleport 文档地址](https://v3.cn.vuejs.org/guide/teleport.html)
+
+> Teleport 瞬间移动
+
+在日常使用中，我们会遇到子组件使用到弹窗（Dialog）, 这是弹窗是在子组件中的，那么使得Dialog容易受到组件的样式污染，同时在DOM结构上，Dialog也应该出现在最顶层的结点上，不干扰子组件的DOM结构。如此就可以用到Teleport了，它就类似一个传送门，把Modal组件渲染到顶层的另外一个DOM结点中。
+
+![image-20210725125355462](http://blog.cdn.ionluo.cn/blog/image-20210725125355462.png)
+
+![image-20210725131357273](http://blog.cdn.ionluo.cn/blog/image-20210725131357273.png)
+
+![image-20210725131413872](http://blog.cdn.ionluo.cn/blog/image-20210725131413872.png)
+
+
 
 ```javascript
 <template>
@@ -1032,17 +1068,17 @@ const { result, loading, loaded } = useURLLoader<CatResult[]>('https://api.theca
 </style>
 ```
 
-### Teleport - 瞬间移动 第二部分
+### Teleport - 2
 
-Modal 组件
+Modal 组件完善（打开、关闭）
 
 ```vue
 <template>
 <teleport to="#modal">
   <div id="center" v-if="isOpen">
-    <h2><slot>this is a modal</slot></h2>
+    <slot>this is a modal</slot>
     <button @click="buttonClick">Close</button>
-  </div>
+  </div> 
 </teleport>
 </template>
 <script lang="ts">
@@ -1052,10 +1088,16 @@ export default defineComponent({
     isOpen: Boolean,
   },
   emits: {
+// 带验证写法
+//     'close-mmodal': (payload: any) => {
+//        return payload.type === 'close'
+//     },
     'close-modal': null
   },
   setup(props, context) {
     const buttonClick = () => {
+      // 带验证写法
+      // context.emit('close-modal', {type: 'close'})
       context.emit('close-modal')
     }
     return {
@@ -1094,7 +1136,13 @@ const onModalClose = () => {
 <modal :isOpen="modalIsOpen" @close-modal="onModalClose"> My Modal !!!!</modal>
 ```
 
-### Suspense - 异步请求好帮手第一部分
+### Suspense - 1
+
+> 异步请求好帮手第一部分
+>
+> - 解决异步请求的困境
+> - Suspense 是 Vue3 推出的一个内置的特殊组件
+> - 如果使用 Suspense， 要返回一个 promise
 
 定义一个异步组件，在 setup 返回一个 Promise，AsyncShow.vue
 
@@ -1121,6 +1169,7 @@ export default defineComponent({
 在 App 中使用
 
 ```html
+<!-- 省略了script里面的导入，这里async-show即是异步组件 -->
 <Suspense>
   <template #default>
     <async-show />
@@ -1131,7 +1180,9 @@ export default defineComponent({
 </Suspense>
 ```
 
-### Suspense - 异步请求好帮手第二部分
+### Suspense - 2
+
+> 异步请求好帮手第二部分
 
 使用 async await 改造一下异步请求, 新建一个 DogShow.vue 组件
 
@@ -1215,6 +1266,43 @@ app.config.globalProperties.customProperty = () => {}
 
 // 当配置结束以后，我们再把 App 使用 mount 方法挂载到固定的 DOM 的节点上。
 app.mount(App, '#app')
+```
+
+
+
+**全局API修改：**
+
+全局配置：Vue.config -> app.config
+
+- config.productionTip被删除
+- config.ignoredElements改名为 config.isCustomElement
+- config.keyCodes 被删除
+
+全局注册类API
+
+- Vue.component -> app.component
+- Vue.directive -> app.directive
+
+行为扩展类API
+
+- Vue.mixin -> app.mixin
+- Vue.use -> app.use
+
+Global API Treeshaking
+
+```javascript
+// vue2
+import Vue from 'vue'
+Vue.nextTick(() => {})
+const obj = Vue.observable({})
+
+// vue3
+import Vue, { nextTick, observable } from 'vue'
+Vue.nextTick // undefined
+nextTick(() => {})
+// https://segmentfault.com/a/1190000019292569
+// https://www.52cik.com/2020/02/29/vue-observable.html
+const obj = observable({})
 ```
 
 
