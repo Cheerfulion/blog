@@ -296,9 +296,7 @@ docker-compose ps -a
 
 
 
-
-
-## docker部署sentry相关文章推荐
+## 相关文章推荐
 
 1. https://blog.csdn.net/arnolan/article/details/105595994
 
@@ -308,3 +306,4 @@ docker-compose ps -a
 
    > 最后一篇微信上的文章就是犯了使用25端口的错误，在通常的正式环境下，推荐还是使用ssl的465端口，因为一般服务运营商为了防止使用者搭建群发邮件的服务，都会禁掉25端口的。
 
+4. [前端开发中的Error以及异常捕获](https://juejin.cn/post/6844903751271055374)

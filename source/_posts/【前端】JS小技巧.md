@@ -307,6 +307,10 @@ dragElement(running_mouse, '/cn/zh-cn/public-search.html', 'running-mouse');
 
 
 
+### 8_ 全局异常处理
+
+https://juejin.cn/post/6844903751271055374
+
 
 
 ## 推荐阅读

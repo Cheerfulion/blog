@@ -1307,7 +1307,47 @@ const obj = observable({})
 
 
 
-## [第4章 项目起航 - 准备工作和第一个页面](http://docs.vikingship.xyz/first-page.html)
+## 第4章 项目记录
+
+Vue3没有提供项目结构参考。这里采用结构如下：
+
+```bash
+/assets
+	image.png
+    logo.png
+        	
+/components
+	ColumnList.vue
+    Dropdown.vue
+    ...
+/hooks
+	useURLloader.ts
+    ...
+/views
+	Home.vue
+    ...
+App.vue
+main.ts
+store.ts
+router.ts
+...
+```
+
+
+
+### 自建样式库
+
+CSS样式库有Bootstrap、tailwindcss、Foundation
+
+
+
+项目配置：
+
+```json
+// settings.json
+// 实现template中一些自定义分析和补全
+"vutur.experimental.templateInterpolationService": true
+```
 
 
 
