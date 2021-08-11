@@ -8,9 +8,7 @@ date: 2021-06-16 14:57:40
 
 
 
-
-
-**step1**:  安装node环境（百度）。
+**step1**:  安装node环境（百度）
 
  
 
@@ -48,10 +46,11 @@ npm install eslint -g
 >
 > https://www.cnblogs.com/fsg6/p/14350153.html
 
-**可选配置** 让eslint忽略检测的文件 `.eslintignore` 配置规则与 `.gitignore` 一样
+**可选配置** 让eslint忽略检测的文件 `.eslintignore` 配置规则与 `.gitignore` 类似。
+
+> 更多见：https://blog.csdn.net/qq_43382853/article/details/105372302
 
 ```.gitignore
-
 # 如果 .eslintrc 开启了 env  nodejs 那么 默认 node_modules是自动忽略的
 node_modules
 /node_modules/**
@@ -65,6 +64,8 @@ test/**
 game-server/purchase-server/lib/seedrandom.js
 game-server/app/staticData/data/temp/*.js
 ```
+
+
 
 **step4：**打开webstorm, 选择File | Settings, 搜索ESLint，配置后点击OK即可
 

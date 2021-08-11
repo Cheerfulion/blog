@@ -1,5 +1,5 @@
 ---
-title: Ubuntu安装WPS
+title: 【Linux】Ubuntu安装WPS
 tags:
   - 运维
   - Linux

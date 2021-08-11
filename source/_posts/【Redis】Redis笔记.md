@@ -1,5 +1,5 @@
 ---
-title: 报错记录
+title: 【Redis】redis笔记
 description: '-'
 tags:
   - Redis
@@ -9,7 +9,135 @@ date: 2021-03-06 12:57:00
 
 
 
-## 1. not able to persist on disk
+## Windows10环境下Redis使用
+
+### 安装
+
+1. 安装[redis](https://github.com/microsoftarchive/redis/releases)
+
+   这里我使用的是msi文件（[Redis-x64-3.2.100.msi](https://github.com/microsoftarchive/redis/releases/download/win-3.2.100/Redis-x64-3.2.100.msi)）安装。
+
+2. 安装redis桌面管理工具：[Redis Desktop Manager](https://www.wmzhe.com/soft-56215.html)
+
+   ![image-20210810140134861](http://blog.cdn.ionluo.cn/blog/image-20210810140134861.png)
+
+### 设置密码
+
+找到redis安装根目录的`redis.windows.conf`文件，设置密码为123456，修改如下：
+
+```bash
+# requirepass foobared
+requirepass 123456
+```
+
+
+
+### 重启redis
+
+```bash
+# redis安装根目录执行
+# 启动redis（如果提示 Creating Server TCP listening socket *:6379: bind: No error，需要重启redis）
+# 这里使用关闭后启动的方式来重启
+redis-server redis.windows.conf
+
+# 原本无密码情况关闭redis
+redis-cli -h 127.0.0.1 -p 6379 shutdown
+
+# 原本有密码情况关闭redis
+redis-cli.exe
+auth "你的密码"
+shutdown
+```
+
+启动redis成功界面如下：
+
+![image-20210810141005003](http://blog.cdn.ionluo.cn/blog/image-20210810141005003.png)
+
+### 设置redis后台运行
+
+```bash
+# 首先关闭所有redis的cmd窗口
+
+# 设置redis服务
+redis-server --service-install redis.windows.conf --loglevel verbose
+
+# 如果设置失败，可能之前设置过了，卸载服务重新设置
+# HandleServiceCommands: system error caught. error code=1073, message = CreateService failed: unknow
+redis-server --service-uninstall
+redis-server --service-install redis.windows.conf --loglevel verbose
+
+# 启动服务
+redis-server --service-start
+# 启动指定的配置文件
+redis-server --service-start redis.windows-service.conf
+
+# 停止服务
+redis-server --service-stop
+```
+
+### Redis Desktop Manager使用
+
+点击**连接到Redis服务器**，如下图填写设置后点击**测试连接**来判断是否成功连接redis
+
+![image-20210810142818966](http://blog.cdn.ionluo.cn/blog/image-20210810142818966.png)
+
+
+
+
+
+## Express下使用redis
+
+更多方法可以参考：https://www.cnblogs.com/wjlbk/p/12633315.html
+
+我这里列举我常用的方式：
+
+1. 将redisClient存储在node的全局对象global中（小型项目推荐）
+
+   ```javascript
+   /**  /bin/www 
+    * Init redisClient.
+    */
+   global.redisClient = require('redis').createClient({
+     host: '1270.0.1',
+     port: 6379,
+     password: '123456'
+   })
+   global.redisClient.on('error', function (err) {
+     console.log('redis 连接失败 ' + err)
+   })
+   
+   // 其他地方就可以直接使用了
+   // redisClient.hmset("user:"+uid ,{uid:uid,name:"wuwanyu",age:"21"},next);
+   ```
+
+2. 将redis初始化方法，封装在index.js中，然后exports出去（中大型项目推荐）
+
+   ```javascript
+   exports.init = function(){
+       var configs = require('../config.json');
+   
+       var redis = require("redis"),
+           redisClient = redis.createClient(configs.redis);
+   
+       redisClient.on("error", function (err) {
+           console.log("Error " + err);
+       });
+   
+       return redisClient;
+   };
+   // 使用
+   // var redisClient = require("../database/index.js").init();
+   // redisClient.hgetall("user:"+uid,next);
+   ```
+
+> 注意，node的redis库不支持promise，如果处理可以参考官方示例：https://www.npmjs.com/package/redis
+
+
+
+## 报错记录
+
+**1. not able to persist on disk**
+
 ```bash
 MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.
 ```

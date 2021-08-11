@@ -2157,6 +2157,19 @@ function reactive(target = {}) {
 
 ![image-20210711232307435](http://blog.cdn.ionluo.cn/blog/image-20210711232307435.png)
 
+```bash
+# 创建项目
+create-react-app 
+```
+
+JSX基本使用
+
+- 变量、表达式
+- class style
+- 子元素和组件
+
+
+
 ## React原理
 
 

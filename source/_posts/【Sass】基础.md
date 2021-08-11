@@ -1058,7 +1058,24 @@ p {
 
 2. 对于一些全局变量，尽量放在一个文件之中，如 `global.scss`
 
+   举例：响应式变量
 
+   ```scss
+   $min768: 'screen and (min-width: 768px)';
+   $min992: 'screen and (min-width: 992px)';
+   $min1280: 'screen and (min-width: 1280px)';
+   
+   $max768: 'screen and (max-width: 768px)';
+   $max992: 'screen and (max-width: 992px)';
+   $max1280: 'screen and (max-width: 1280px)';
+   
+   // 使用 
+   @media #{$max768} {
+       font-size: 1em;
+   }
+   ```
+
+   
 
 ## 结语
 
