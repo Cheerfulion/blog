@@ -118,6 +118,26 @@ All done!
 
 
 
+## MySQL不需要密码也能登陆问题
+
+```bash
+> use mysql;
+
+# 可以通过select user,host,authentication_string from user;来判断有木有authentication_string
+# 无password字段的版本,也就是版本<=5.7的 
+> update user set authentication_string=password("你的密码") where user='root';
+# 有password字段的版本,版本>5.7的 
+> update user set password=password('你的密码') where user='root';
+
+> update user set plugin="mysql_native_password"; 
+
+> flush privileges;
+
+> exit;
+```
+
+
+
 ## Navicat远程连接
 
 **！！！生产环境不建议开放数据库的远程访问。**
@@ -401,7 +421,7 @@ sudo apt-get install php-gettext
      > mysql> flush privileges;
      > mysql> quit
      > ```
-   
+
    
 
    5. MySQL不需要密码就能登录问题

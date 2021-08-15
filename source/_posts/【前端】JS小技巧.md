@@ -313,6 +313,192 @@ https://juejin.cn/post/6844903751271055374
 
 
 
+### 9_ 同步阻塞法实现sleep函数
+
+```javascript
+const sleep = delay => {
+    const start = new Date().getTime();
+    while (new Date().getTime() < start + delay) {
+       continue;
+    };
+};
+console.log(1);
+sleep(3000);
+console.log(2);
+```
+
+
+
+### 10_ 利用 new URL 解析 URL
+
+```javascript
+const parseURL = (url = '') => {
+    // https://developer.mozilla.org/zh-CN/docs/Web/API/URL/URL
+    const res = new URL(url);
+    res.queryParams = key => {
+        if (key) {
+           return res.searchParams.get(key)
+        };
+        const params = {};
+        const paramGroup = res.search.replace(/^\?/,'').split('&');
+        paramGroup.forEach(param => {
+            const [key, val] = param.split('=');
+            params[key] = val;
+        });
+        return params;
+    };
+    return res;
+};
+parseURL('https://www.example.com/a/b?c=1&d=2');
+```
+
+
+
+### 11_ 一行代码实现星级评分
+
+```javascript
+const getRate = (rate = 0) => '★★★★★☆☆☆☆☆'.slice(5 - rate, 10 - rate);
+getRate(3);
+```
+
+
+
+### 12_用位运算提升效率
+
+```javascript
+// ｜ 取整
+let num1 = 1.7;
+num1 = num1 | 0;
+
+// >> 取半
+let num2 = 6;
+num2 = num2 >> 1; // 3
+
+// << 加倍
+
+let num3 = 6;
+num3 = num3 << 1; / / 12
+
+// ^ 交换值
+let num4 = 10;
+let num5 = 20;
+
+num4 ^= num5;
+num5 ^= num4;
+num4 ^= num5; // num4 === 2, num5 === 1
+
+// & 判断奇数
+let num6 = 10;
+let num7 = 11;
+
+num6 & 1 === 1; // true
+num7 & 1 === 1; // false
+
+// ~ 判断是否存在
+const data = '123456';
+const key = '3';
+const keyIsExist = !!~data.indexOf(key); // true
+
+// 是否 2 的整数幂
+const isPowerOf2 = num => (num & (num - 1)) === 0;
+isPowerOf2(8) // true
+isPowerOf2(7) // false
+```
+
+
+
+### 13_判断是否是千分符字符
+
+```javascript
+const numberIsThousand = str => /^-?\d{1,3}(,\d{3})*(\.\d+)?$/.test(str);
+numberIsThousand('100,000,000,000') // true
+numberIsThousand('100,000,000,00') // false
+```
+
+
+
+
+
+### 14_复制文本到剪切板
+
+```javascript
+const copyToClipboard = content => {
+    const clipboardData = window.clipboardData;
+    if (clipboardData) {
+        clipboardData.clearData();
+        clipboardData.setData('Text', content);
+        return true;
+    } else if (document.execCommand) {
+        const el = document.createElement('textarea');
+        el.value = content;
+        el.setAttribute('readonly', '');
+        el.style.position = 'absolute';
+        el.style.left = '-9999px';
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        return true;
+    }
+    return false;
+};copyToClipboard('hello world');
+```
+
+
+
+### 15_一行代码生成指定长度的数组
+
+```javascript
+const List = len => [...new Array(len).keys()];
+const list = List(10); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+
+
+### 16_判断数据类型
+
+```javascript
+const type = data => {
+      let toString = Object.prototype.toString;
+      const dataType =
+        data instanceof Element
+          ? 'element' // 为了统一DOM节点类型输出
+          : toString
+              .call(data)
+              .replace(/\[object\s(.+)\]/, '$1')
+              .toLowerCase()
+      return dataType
+};
+
+type({}); // object
+```
+
+
+
+### 17_正则判断字符重复次数不超过两次
+
+```javascript
+const strIsRepeatThan2 = (str = '') => /^(?!.*(.).*\1{2})[\da-zA-Z].+$/.test(str);
+strIsRepeatThan2('123456'); // true
+strIsRepeatThan2('1234566'); // true
+strIsRepeatThan2('12345666'); // false
+```
+
+
+
+### 18_正则匹配可以只有 0 但开头不能是 0 的数字
+
+```javascript
+const getCorrectNumber = (str = '') => /^(\d|[1-9]\d*)$/.test(str);
+getCorrectNumber('0'); // true
+getCorrectNumber('011'); // false
+getCorrectNumber('101'); // true
+```
+
+
+
+
+
 ## 推荐阅读
 
 - [一文帮你搞定90%的JS手写题，真香！](https://mp.weixin.qq.com/s/lgeKcq2Q5Biot6VhXn20rQ)
