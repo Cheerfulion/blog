@@ -1,8 +1,9 @@
 ---
 title: 【docker】docker笔记
-date: 2021-08-09 14:45:14
 tags:
-	- docker
+  - docker
+abbrlink: c46cd1c6
+date: 2021-08-09 14:45:14
 ---
 
 
