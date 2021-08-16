@@ -497,6 +497,20 @@ getCorrectNumber('101'); // true
 
 
 
+### 19_获取显示器分辨率
+
+```javascript
+const radio = window.devicePixeRatio;
+// screen获取屏幕分辨率，如果是高清显示屏（4K显示器、Retina屏等），一个像素可能包括2,3,4个甚至更多的物理分辨率，所以需要乘以设备像素比(devicePixeRatio)。
+screen.width * radio + 'X' + screen.height * radio
+```
+
+
+
+### 20_
+
+
+
 
 
 ## 推荐阅读
