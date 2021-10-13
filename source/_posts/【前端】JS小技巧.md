@@ -505,7 +505,7 @@ const radio = window.devicePixeRatio;
 screen.width * radio + 'X' + screen.height * radio
 ```
 
-
+关于设备分辨率和物理分辨率可以参考：https://mp.weixin.qq.com/s/Sb4qj4m5WGiWiNEP98RC0A
 
 ### 20_
 
