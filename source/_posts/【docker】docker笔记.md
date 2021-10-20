@@ -115,7 +115,6 @@ WORKDIR /app/NeteaseCloudMusicApi
 RUN npm config set registry https://registry.npm.taobao.org 
 RUN npm install
 CMD [ "node", "app.js" ]
-12345678
 ```
 
 **Dockerfile.app**
@@ -129,7 +128,6 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 CMD npm run dev
-12345678
 ```
 
 **构建镜像**
@@ -185,6 +183,30 @@ docker-compose up
 ```
 
 
+
+## win10安装docker
+
+https://blog.csdn.net/zzq060143/article/details/91050272
+
+
+
+## docker 搭建node+vue应用
+
+1. 使用nginx+vue打包好静态页面
+2. 使用node+vue直接跑起来
+
+
+
+```bash
+# 先查看当前node的版本（v14.0.0）
+node -v
+
+# 到dockerhub中下载指定版本node镜像
+# https://hub.docker.com/_/node?tab=tags&page=1&ordering=last_updated&name=14.0.0
+docker pull node:14.0.0-alpine
+
+
+```
 
 
 
