@@ -16,7 +16,7 @@
 <meta property="og:description" content="出名的CSS预处理器介绍 SCSS&#x2F;SASS SASS (.scss)。于2007年诞生，最早也是最成熟的CSS预处理器，拥有ruby社区的支持和compass这一最强大的css框架，目前受LESS影响，已经进化到了全面兼容CSS的SCSS。  Sass有两套语法：  第一种或更新的语法被称为SCSS。它是CSS语法的扩展。这意味着每个有效的CSS样式表都是具有相同含义的有效SCSS文件。下文描述">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-23T01:57:21.000Z">
-<meta property="article:modified_time" content="2021-08-31T01:47:36.546Z">
+<meta property="article:modified_time" content="2023-06-10T09:57:39.577Z">
 <meta property="article:author" content="ionluo">
 <meta property="article:tag" content="前端">
 <meta property="article:tag" content="Sass">
@@ -699,18 +699,18 @@
 
 
 
-<h2 id="我的记录"><a href="#我的记录" class="headerlink" title="我的记录"></a>我的记录</h2><ol>
-<li><p>生成一些距离的常用类</p>
-<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// scss</span></span><br><span class="line"><span class="variable">$mapBox</span>: (</span><br><span class="line">    pd: padding,</span><br><span class="line">    pdt:padding-top,</span><br><span class="line">    pdl: padding-left,</span><br><span class="line">    pdr: padding-right,</span><br><span class="line">    pdb: padding-bottom,</span><br><span class="line">    mg: margin,</span><br><span class="line">    mgt: margin-top,</span><br><span class="line">    mgl: margin-left,</span><br><span class="line">    mgr: margin-right,</span><br><span class="line">    mgb: margin-bottom</span><br><span class="line">);</span><br><span class="line"><span class="keyword">@for</span> <span class="variable">$num</span> from <span class="number">0</span> through <span class="number">10</span> &#123;</span><br><span class="line">    <span class="keyword">@each</span> <span class="variable">$key</span>, <span class="variable">$value</span> in <span class="variable">$mapBox</span> &#123;</span><br><span class="line">        .#&#123;<span class="variable">$key</span>&#125;#&#123;<span class="variable">$num</span>*5&#125; &#123;</span><br><span class="line">            #&#123;<span class="variable">$value</span>&#125;: <span class="variable">$num</span>*<span class="number">5px</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// less</span><br><span class="line">.generateGap(@number) &#123;</span><br><span class="line">    .mg@&#123;number&#125; &#123;</span><br><span class="line">        margin: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.mgt</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">margin-top</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.mgr</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">margin-right</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.mgb</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">margin-bottom</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.mgl</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">margin-left</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.pd</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">padding</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.pdt</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">padding-top</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.pdr</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">padding-right</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.pdb</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">padding-bottom</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.pdl</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">padding-left</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.loop</span>(<span class="keyword">@count</span>) when (<span class="keyword">@count</span> &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="selector-class">.generateGap</span>(<span class="keyword">@count</span>);</span><br><span class="line">    <span class="selector-class">.loop</span>((<span class="keyword">@count</span> - <span class="number">5</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.loop</span>(50);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对于一些全局变量，尽量放在一个文件之中，如 <code>global.scss</code></p>
+<h2 id="我的记录"><a href="#我的记录" class="headerlink" title="我的记录"></a>我的记录</h2><h4 id="1-生成一些距离的常用类"><a href="#1-生成一些距离的常用类" class="headerlink" title="1. 生成一些距离的常用类"></a>1. 生成一些距离的常用类</h4><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// scss</span></span><br><span class="line"><span class="variable">$mapBox</span>: (</span><br><span class="line">    pd: padding,</span><br><span class="line">    pdt:padding-top,</span><br><span class="line">    pdl: padding-left,</span><br><span class="line">    pdr: padding-right,</span><br><span class="line">    pdb: padding-bottom,</span><br><span class="line">    mg: margin,</span><br><span class="line">    mgt: margin-top,</span><br><span class="line">    mgl: margin-left,</span><br><span class="line">    mgr: margin-right,</span><br><span class="line">    mgb: margin-bottom</span><br><span class="line">);</span><br><span class="line"><span class="keyword">@for</span> <span class="variable">$num</span> from <span class="number">0</span> through <span class="number">10</span> &#123;</span><br><span class="line">    <span class="keyword">@each</span> <span class="variable">$key</span>, <span class="variable">$value</span> in <span class="variable">$mapBox</span> &#123;</span><br><span class="line">        .#&#123;<span class="variable">$key</span>&#125;#&#123;<span class="variable">$num</span>*5&#125; &#123;</span><br><span class="line">            #&#123;<span class="variable">$value</span>&#125;: <span class="variable">$num</span>*<span class="number">5px</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// less</span><br><span class="line">.generateGap(@number) &#123;</span><br><span class="line">    .mg@&#123;number&#125; &#123;</span><br><span class="line">        margin: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.mgt</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">margin-top</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.mgr</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">margin-right</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.mgb</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">margin-bottom</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.mgl</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">margin-left</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.pd</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">padding</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.pdt</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">padding-top</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.pdr</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">padding-right</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.pdb</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">padding-bottom</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.pdl</span>@&#123;number&#125; &#123;</span><br><span class="line">        <span class="attribute">padding-left</span>: ~<span class="string">&#x27;@&#123;number&#125;px&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.loop</span>(<span class="keyword">@count</span>) when (<span class="keyword">@count</span> &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="selector-class">.generateGap</span>(<span class="keyword">@count</span>);</span><br><span class="line">    <span class="selector-class">.loop</span>((<span class="keyword">@count</span> - <span class="number">5</span>));</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.loop</span>(50);</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-全局变量"><a href="#2-全局变量" class="headerlink" title="2. 全局变量"></a>2. 全局变量</h4><p>对于一些全局变量，尽量放在一个文件之中，如 <code>global.scss</code></p>
 <p>举例：响应式变量</p>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$min768</span>: <span class="string">&#x27;screen and (min-width: 768px)&#x27;</span>;</span><br><span class="line"><span class="variable">$min992</span>: <span class="string">&#x27;screen and (min-width: 992px)&#x27;</span>;</span><br><span class="line"><span class="variable">$min1280</span>: <span class="string">&#x27;screen and (min-width: 1280px)&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$max768</span>: <span class="string">&#x27;screen and (max-width: 768px)&#x27;</span>;</span><br><span class="line"><span class="variable">$max992</span>: <span class="string">&#x27;screen and (max-width: 992px)&#x27;</span>;</span><br><span class="line"><span class="variable">$max1280</span>: <span class="string">&#x27;screen and (max-width: 1280px)&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 </span></span><br><span class="line"><span class="keyword">@media</span> #&#123;<span class="variable">$max768</span>&#125; &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">1em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h4 id="3-倍图使用"><a href="#3-倍图使用" class="headerlink" title="3. 倍图使用"></a>3. 倍图使用</h4><p>图标</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> bg-icon(<span class="variable">$url</span>) &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: url(<span class="variable">$url</span> + <span class="string">&quot;.png&quot;</span>);</span><br><span class="line">  <span class="keyword">@media</span> (min-device-pixel-ratio:<span class="number">2</span>), (min-device-pixel-ratio:<span class="number">3</span>)&#123;</span><br><span class="line">    <span class="attribute">background-image</span>: url(<span class="variable">$url</span> + <span class="string">&quot;@2x.png&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.icon-menu</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-block;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">17px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">17px</span>;</span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">  <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">  <span class="attribute">background-size</span>: <span class="number">464px</span> <span class="number">33px</span>;</span><br><span class="line">  <span class="keyword">@include</span> bg-icon(<span class="string">&quot;~assets/img/icon_menu&quot;</span>);</span><br><span class="line"></span><br><span class="line">  &amp;<span class="selector-class">.icon-onlyread</span> &#123;</span><br><span class="line">    <span class="attribute">background-position</span>: <span class="number">0</span> -<span class="number">17px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// &lt;span class=&quot;icon-menu icon-onlyread&quot;&gt;&lt;/span&gt;</span></span><br></pre></td></tr></table></figure>
 
-
-</li>
-</ol>
+<blockquote>
+<p>更多：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/bonly-ge/p/10727892.html">https://www.cnblogs.com/bonly-ge/p/10727892.html</a></p>
+</blockquote>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>该文章只是跟着官方文档，罗列了一些认为较为基础的使用，对于一些更深入的使用方法和使用技巧并没有列举。有兴趣请移步<a target="_blank" rel="noopener" href="https://www.sass.hk/docs/">官方文档</a>查看。</p>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://ggdreams-scss-tutorial.readthedocs.io/en/latest/index.html">https://ggdreams-scss-tutorial.readthedocs.io/en/latest/index.html</a></li>
@@ -907,7 +907,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 ionluo
+    		&copy; 2023 ionluo
     	</div>
       	<div class="footer-right">
 			<!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -1007,6 +1007,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">WEB开发</a>
               </li>
              
@@ -1019,7 +1023,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1028,10 +1032,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Django</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1044,6 +1044,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">IDE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1063,11 +1067,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color3">转载</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Rendertron</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1083,10 +1091,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">VR</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -1095,11 +1099,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color3">VR</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1119,15 +1131,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">nvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1143,11 +1155,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1155,11 +1167,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
+                <a href="javascript:void(0)" class="js-tag color3">公考</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">公考</a>
+                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1183,7 +1195,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Grunt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">lodash</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1191,11 +1223,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
+                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1219,15 +1251,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">日记</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1239,11 +1271,35 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">草稿</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hide</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VirtualBox</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Centos7</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1280,34 +1336,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">canvas</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
               </li>
             
             <div class="clearfix"></div>

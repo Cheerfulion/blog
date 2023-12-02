@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://www.ionluo.cn/blog">
   <title>【好文收藏】blob流和base64，以及file和base64的相互转换 | ionluo的个人博客站点</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="file文件转换为base64 通常用于得到base64格式图片页面展示或上传  12345var reader &#x3D; new FileReader();reader.readAsDataURL(this.files[0]);reader.onload &#x3D; function(event)&amp;#123;    console.log(event.target.result); &#x2F;&#x2F;获取到base64格式">
+  <meta name="description" content="File、Blob和Base64的互相转换file、blob和base641234var byteArrays &#x3D; [&amp;#x27;1234&amp;#x27;], contentType &#x3D; &amp;#x27;text&#x2F;plain;charset&#x3D;utf-8&amp;#x27;, lastModified &#x3D; Date.now(), filename &#x3D; &amp;#x27;1.txt&amp;#x27;var blob &#x3D; new">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【好文收藏】blob流和base64，以及file和base64的相互转换">
 <meta property="og:url" content="http://www.ionluo.cn/blog/posts/917dbf2a.html">
 <meta property="og:site_name" content="ionluo的个人博客站点">
-<meta property="og:description" content="file文件转换为base64 通常用于得到base64格式图片页面展示或上传  12345var reader &#x3D; new FileReader();reader.readAsDataURL(this.files[0]);reader.onload &#x3D; function(event)&amp;#123;    console.log(event.target.result); &#x2F;&#x2F;获取到base64格式">
+<meta property="og:description" content="File、Blob和Base64的互相转换file、blob和base641234var byteArrays &#x3D; [&amp;#x27;1234&amp;#x27;], contentType &#x3D; &amp;#x27;text&#x2F;plain;charset&#x3D;utf-8&amp;#x27;, lastModified &#x3D; Date.now(), filename &#x3D; &amp;#x27;1.txt&amp;#x27;var blob &#x3D; new">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-07-29T14:23:25.000Z">
-<meta property="article:modified_time" content="2021-08-31T01:47:36.613Z">
+<meta property="article:modified_time" content="2023-10-16T08:37:56.012Z">
 <meta property="article:author" content="ionluo">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -200,24 +200,44 @@
     <div class="article-entry" itemprop="articleBody">
       <!-- 首页不展示文章所有内容开始 -->
       
-        <h3 id="file文件转换为base64"><a href="#file文件转换为base64" class="headerlink" title="file文件转换为base64"></a>file文件转换为base64</h3><blockquote>
+        <h2 id="File、Blob和Base64的互相转换"><a href="#File、Blob和Base64的互相转换" class="headerlink" title="File、Blob和Base64的互相转换"></a>File、Blob和Base64的互相转换</h2><h3 id="file、blob和base64"><a href="#file、blob和base64" class="headerlink" title="file、blob和base64"></a>file、blob和base64</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> byteArrays = [<span class="string">&#x27;1234&#x27;</span>], contentType = <span class="string">&#x27;text/plain;charset=utf-8&#x27;</span>, lastModified = <span class="built_in">Date</span>.now(), filename = <span class="string">&#x27;1.txt&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> blob = <span class="keyword">new</span> Blob(byteArrays, &#123; <span class="attr">type</span>: contentType &#125;);</span><br><span class="line"><span class="keyword">var</span> file = <span class="keyword">new</span> File(byteArrays, filename, &#123;<span class="attr">type</span>: contentType, <span class="attr">lastModified</span>: lastModified&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="file-–-gt-base64"><a href="#file-–-gt-base64" class="headerlink" title="file –&gt; base64"></a>file –&gt; base64</h3><blockquote>
 <p>通常用于得到base64格式图片页面展示或上传</p>
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">reader.readAsDataURL(<span class="built_in">this</span>.files[<span class="number">0</span>]);</span><br><span class="line">reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(event.target.result); <span class="comment">//获取到base64格式图片</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h3 id="base64转换为file"><a href="#base64转换为file" class="headerlink" title="base64转换为file"></a>base64转换为file</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dataURLtoFile</span>(<span class="params">dataurl, filename</span>) </span>&#123;<span class="comment">//将base64转换为文件</span></span><br><span class="line">  <span class="keyword">var</span> arr = dataurl.split(<span class="string">&#x27;,&#x27;</span>), mime = arr[<span class="number">0</span>].match(<span class="regexp">/:(.*?);/</span>)[<span class="number">1</span>],</span><br><span class="line">      bstr = atob(arr[<span class="number">1</span>]), n = bstr.length, u8arr = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(n);</span><br><span class="line">  <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">      u8arr[n] = bstr.charCodeAt(n);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> File([u8arr], filename, &#123;<span class="attr">type</span>:mime&#125;);</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+<h3 id="base64-–-gt-file"><a href="#base64-–-gt-file" class="headerlink" title="base64 –&gt; file"></a>base64 –&gt; file</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dataURLtoFile</span>(<span class="params">dataurl, filename</span>) </span>&#123;<span class="comment">//将base64转换为文件</span></span><br><span class="line">  <span class="keyword">var</span> arr = dataurl.split(<span class="string">&#x27;,&#x27;</span>), mime = arr[<span class="number">0</span>].match(<span class="regexp">/:(.*?);/</span>)[<span class="number">1</span>],</span><br><span class="line">      bstr = atob(arr[<span class="number">1</span>]), n = bstr.length, u8arr = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(n);</span><br><span class="line">  <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">      u8arr[n] = bstr.charCodeAt(n);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> File([u8arr], filename, &#123;<span class="attr">type</span>:mime&#125;);</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
 
 <p>测试案例：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">&quot;file&quot;</span> name=<span class="string">&quot;&quot;</span> id=<span class="string">&quot;imgfile&quot;</span>&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  <span class="keyword">var</span> base64Img = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;imgfile&#x27;</span>).onchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">var</span> fileReader = <span class="keyword">new</span> FileReader();</span><br><span class="line">      fileReader.readAsDataURL(<span class="built_in">this</span>.files[<span class="number">0</span>]);</span><br><span class="line">      fileReader.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">          base64Img = fileReader.result;</span><br><span class="line">          <span class="built_in">console</span>.log(dataURLtoFile(base64Img,<span class="string">&#x27;img11&#x27;</span>))</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">dataURLtoFile</span>(<span class="params">dataurl, filename</span>) </span>&#123;<span class="comment">//将base64转换为文件</span></span><br><span class="line">      <span class="keyword">var</span> arr = dataurl.split(<span class="string">&#x27;,&#x27;</span>), mime = arr[<span class="number">0</span>].match(<span class="regexp">/:(.*?);/</span>)[<span class="number">1</span>],</span><br><span class="line">          bstr = atob(arr[<span class="number">1</span>]), n = bstr.length, u8arr = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(n);</span><br><span class="line">      <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">          u8arr[n] = bstr.charCodeAt(n);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> File([u8arr], filename, &#123;<span class="attr">type</span>:mime&#125;);</span><br><span class="line">  &#125;    </span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="base64转换为blob流"><a href="#base64转换为blob流" class="headerlink" title="base64转换为blob流"></a>base64转换为blob流</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dataURItoBlob</span>(<span class="params">base64Data</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//console.log(base64Data);//data:image/png;base64,</span></span><br><span class="line">    <span class="keyword">var</span> byteString;</span><br><span class="line">    <span class="keyword">if</span>(base64Data.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">0</span>].indexOf(<span class="string">&#x27;base64&#x27;</span>) &gt;= <span class="number">0</span>)</span><br><span class="line">        byteString = atob(base64Data.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">1</span>]);<span class="comment">//base64 解码</span></span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        byteString = <span class="built_in">unescape</span>(base64Data.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> mimeString = base64Data.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">0</span>].split(<span class="string">&#x27;:&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">0</span>];<span class="comment">//mime类型 -- image/png</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// var arrayBuffer = new ArrayBuffer(byteString.length); //创建缓冲数组</span></span><br><span class="line">    <span class="comment">// var ia = new Uint8Array(arrayBuffer);//创建视图</span></span><br><span class="line">    <span class="keyword">var</span> ia = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(byteString.length);<span class="comment">//创建视图</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; byteString.length; i++) &#123;</span><br><span class="line">        ia[i] = byteString.charCodeAt(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([ia], &#123;</span><br><span class="line">        type: mimeString</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> blob;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+<h3 id="base64-–-gt-blob"><a href="#base64-–-gt-blob" class="headerlink" title="base64 –&gt; blob"></a>base64 –&gt; blob</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dataURItoBlob</span>(<span class="params">base64Data</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//console.log(base64Data);//data:image/png;base64,</span></span><br><span class="line">    <span class="keyword">var</span> byteString;</span><br><span class="line">    <span class="keyword">if</span>(base64Data.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">0</span>].indexOf(<span class="string">&#x27;base64&#x27;</span>) &gt;= <span class="number">0</span>)</span><br><span class="line">        byteString = atob(base64Data.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">1</span>]);<span class="comment">//base64 解码</span></span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        byteString = <span class="built_in">unescape</span>(base64Data.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> mimeString = base64Data.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">0</span>].split(<span class="string">&#x27;:&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">0</span>];<span class="comment">//mime类型 -- image/png</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// var arrayBuffer = new ArrayBuffer(byteString.length); //创建缓冲数组</span></span><br><span class="line">    <span class="comment">// var ia = new Uint8Array(arrayBuffer);//创建视图</span></span><br><span class="line">    <span class="keyword">var</span> ia = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(byteString.length);<span class="comment">//创建视图</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; byteString.length; i++) &#123;</span><br><span class="line">        ia[i] = byteString.charCodeAt(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([ia], &#123;</span><br><span class="line">        type: mimeString</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> blob;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
 
-<h3 id="blob流转换为base64"><a href="#blob流转换为base64" class="headerlink" title="blob流转换为base64"></a>blob流转换为base64</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blobToDataURI</span>(<span class="params">blob, callback</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">   reader.readAsDataURL(blob);</span><br><span class="line">   reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">       callback(e.target.result);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="blob-–-gt-base64"><a href="#blob-–-gt-base64" class="headerlink" title="blob –&gt; base64"></a>blob –&gt; base64</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">blobToDataURI</span>(<span class="params">blob, callback</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">   reader.readAsDataURL(blob);</span><br><span class="line">   reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">       callback(e.target.result);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>测试案例，可直接复制运行</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=<span class="string">&quot;file&quot;</span> id=<span class="string">&quot;imgfile&quot;</span>&gt;</span><br><span class="line">&lt;\img src=<span class="string">&quot;&quot;</span> id=<span class="string">&quot;img&quot;</span> alt=<span class="string">&quot;&quot;</span>&gt; <span class="comment">//这里图片总是转义，暂且这么写，知道是img就行</span></span><br><span class="line">&lt;\img src=<span class="string">&quot;&quot;</span> id=<span class="string">&quot;img2&quot;</span> alt=<span class="string">&quot;&quot;</span>&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"> <span class="built_in">document</span>.getElementById(<span class="string">&#x27;imgfile&#x27;</span>).onchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     reads(<span class="built_in">this</span>.files[<span class="number">0</span>],<span class="function"><span class="keyword">function</span>(<span class="params">base64Data</span>)</span>&#123;   <span class="comment">//获取图片的base64格式，显示</span></span><br><span class="line">         <span class="built_in">document</span>.getElementById(<span class="string">&quot;img&quot;</span>).src= base64Data;</span><br><span class="line">         <span class="keyword">var</span> blob = dataURItoBlob(base64Data); <span class="comment">//转换为blob格式</span></span><br><span class="line">         blobToDataURI(blob,<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;    <span class="comment">//blob格式再转换为base64格式</span></span><br><span class="line">             <span class="built_in">document</span>.getElementById(<span class="string">&#x27;img2&#x27;</span>).src = result;</span><br><span class="line">         &#125;)</span><br><span class="line">     &#125;);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">reads</span>(<span class="params">_file,callback</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">     reader.readAsDataURL(_file);</span><br><span class="line">     reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">         callback(reader.result);</span><br><span class="line">     &#125;;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">dataURItoBlob</span>(<span class="params">base64Data</span>) </span>&#123;</span><br><span class="line">     <span class="comment">//console.log(base64Data);//data:image/png;base64,</span></span><br><span class="line">     <span class="keyword">var</span> byteString;</span><br><span class="line">     <span class="keyword">if</span>(base64Data.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">0</span>].indexOf(<span class="string">&#x27;base64&#x27;</span>) &gt;= <span class="number">0</span>)</span><br><span class="line">         byteString = atob(base64Data.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">1</span>]);<span class="comment">//base64 解码</span></span><br><span class="line">     <span class="keyword">else</span>&#123;</span><br><span class="line">         byteString = <span class="built_in">unescape</span>(base64Data.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">1</span>]);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">var</span> mimeString = base64Data.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">0</span>].split(<span class="string">&#x27;:&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&#x27;;&#x27;</span>)[<span class="number">0</span>];<span class="comment">//mime类型 -- image/png</span></span><br><span class="line"></span><br><span class="line">     <span class="comment">// var arrayBuffer = new ArrayBuffer(byteString.length); //创建缓冲数组</span></span><br><span class="line">     <span class="comment">// var ia = new Uint8Array(arrayBuffer);//创建视图</span></span><br><span class="line">     <span class="keyword">var</span> ia = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(byteString.length);<span class="comment">//创建视图</span></span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; byteString.length; i++) &#123;</span><br><span class="line">         ia[i] = byteString.charCodeAt(i);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([ia], &#123;</span><br><span class="line">         type: mimeString</span><br><span class="line">     &#125;);</span><br><span class="line">     <span class="keyword">return</span> blob;</span><br><span class="line"> &#125;  </span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">blobToDataURI</span>(<span class="params">blob, callback</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">     reader.readAsDataURL(blob);</span><br><span class="line">     reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">         callback(e.target.result);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="blob-–-gt-file"><a href="#blob-–-gt-file" class="headerlink" title="blob –&gt; file"></a>blob –&gt; file</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> file = <span class="keyword">new</span> File([blob], filename, &#123;<span class="attr">type</span>: contentType, <span class="attr">lastModified</span>: <span class="built_in">Date</span>.now()&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="file-–-gt-blob"><a href="#file-–-gt-blob" class="headerlink" title="file –&gt; blob"></a>file –&gt; blob</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 即file -&gt; base64 -&gt; blob, 有待完善</span></span><br><span class="line"><span class="keyword">let</span> file = e.target.files[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">reader.readAsDataURL(file);</span><br><span class="line">reader.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> obj = binaryFun(reader.result);</span><br><span class="line">    <span class="keyword">let</span> blob = <span class="keyword">new</span> Blob([obj.u8arr],&#123;<span class="attr">type</span>:obj.mime&#125;);</span><br><span class="line">    <span class="keyword">let</span> url = URL.createObjectURL(blob)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> binaryFun = <span class="function"><span class="params">binary</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> arr = binary.split(<span class="string">&#x27;,&#x27;</span>), mime = arr[<span class="number">0</span>].match(<span class="regexp">/:(.*?);/</span>)[<span class="number">1</span>],</span><br><span class="line">          bstr = atob(arr[<span class="number">1</span>]), n = bstr.length, u8arr = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(n);</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line">       u8arr[n] = bstr.charCodeAt(n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;u8arr,mime&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="下载FILE对象"><a href="#下载FILE对象" class="headerlink" title="下载FILE对象"></a>下载FILE对象</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">downloadFile</span> (<span class="params">file</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> aTag = <span class="built_in">document</span>.createElement(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    aTag.download = file.name</span><br><span class="line">    <span class="keyword">const</span> href = URL.createObjectURL(file)</span><br><span class="line">    aTag.href = href</span><br><span class="line">    aTag.click()</span><br><span class="line">    URL.revokeObjectURL(href)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
       <!-- 首页不展示文章所有内容结束 -->
 
@@ -404,7 +424,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 ionluo
+    		&copy; 2023 ionluo
     	</div>
       	<div class="footer-right">
 			<!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -504,6 +524,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">WEB开发</a>
               </li>
              
@@ -516,7 +540,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -525,10 +549,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Django</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -541,6 +561,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">IDE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -560,11 +584,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color3">转载</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Rendertron</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -580,10 +608,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">VR</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -592,11 +616,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color3">VR</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -616,15 +648,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">nvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,11 +672,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -652,11 +684,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
+                <a href="javascript:void(0)" class="js-tag color3">公考</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">公考</a>
+                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -680,7 +712,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Grunt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">lodash</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -688,11 +740,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
+                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -716,15 +768,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">日记</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -736,11 +788,35 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">草稿</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hide</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VirtualBox</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Centos7</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -777,34 +853,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">canvas</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
               </li>
             
             <div class="clearfix"></div>

@@ -17,7 +17,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/20171219141630.jpg">
 <meta property="article:published_time" content="2021-09-03T08:26:37.000Z">
-<meta property="article:modified_time" content="2022-06-09T03:33:49.851Z">
+<meta property="article:modified_time" content="2023-03-24T11:11:16.045Z">
 <meta property="article:author" content="ionluo">
 <meta property="article:tag" content="兼容问题">
 <meta name="twitter:card" content="summary">
@@ -232,12 +232,30 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> normalInnerHeigth = <span class="built_in">window</span>.innerHeight</span><br><span class="line"><span class="keyword">const</span> factor = <span class="number">20</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;resize&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> resizeInnerHeigth = <span class="built_in">window</span>.innerHeight</span><br><span class="line">    <span class="keyword">const</span> keyboardHeight = normalInnerHeigth - resizeInnerHeigth + factor</span><br><span class="line">    <span class="built_in">window</span>.scrollTo(<span class="number">0</span>, keyboardHeight)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>上面在我的ios机子上发现短时间内resize触发了两次，为什么会出现这种情况未知，除非ios是有让输入框聚焦上移的，但是移动的位置不正确（测试反馈的视频中，输入框一直没有动过，但是我的UC浏览器是输入框会动的，但是动的位置不正确）。表现是：第一次resize后，输入框显示正常，第二次，输入框掉下去了。解决方法可以利用防抖操作，如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> normalInnerHeigth = <span class="built_in">window</span>.innerHeight</span><br><span class="line"><span class="keyword">const</span> factor = <span class="number">20</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;resize&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (resizeTimer) <span class="built_in">clearTimeout</span>(resizeTimer)</span><br><span class="line">    resizeTimer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> resizeInnerHeigth = <span class="built_in">window</span>.innerHeight</span><br><span class="line">        <span class="keyword">const</span> keyboardHeight = normalInnerHeigth - resizeInnerHeigth + factor</span><br><span class="line">        <span class="built_in">window</span>.scrollTo(<span class="number">0</span>, keyboardHeight)</span><br><span class="line">    &#125;, <span class="number">300</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><del>上面在我的ios机子上发现短时间内resize触发了两次，为什么会出现这种情况未知，除非ios是有让输入框聚焦上移的，但是移动的位置不正确（测试反馈的视频中，输入框一直没有动过，但是我的UC浏览器是输入框会动的，但是动的位置不正确）。表现是：第一次resize后，输入框显示正常，第二次，输入框掉下去了。解决方法可以利用防抖操作，如下：</del></p>
+<p>resize 2次问题是ionic自带的键盘处理事件导致</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> normalInnerHeigth = <span class="built_in">window</span>.innerHeight</span><br><span class="line"><span class="keyword">const</span> factor = <span class="number">20</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&#x27;resize&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"> <span class="keyword">if</span> (resizeTimer) <span class="built_in">clearTimeout</span>(resizeTimer)</span><br><span class="line"> resizeTimer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">const</span> resizeInnerHeigth = <span class="built_in">window</span>.innerHeight</span><br><span class="line">     <span class="keyword">const</span> keyboardHeight = normalInnerHeigth - resizeInnerHeigth + factor</span><br><span class="line">     <span class="built_in">window</span>.scrollTo(<span class="number">0</span>, keyboardHeight)</span><br><span class="line"> &#125;, <span class="number">300</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 </blockquote>
 <ol start="3">
 <li><p><strong>参考文档</strong></p>
 <p><a target="_blank" rel="noopener" href="https://www.jb51.net/article/130964.htm">移动端固定输入框在底部会被键盘遮挡的解决方法(必看篇)</a></p>
+</li>
+</ol>
+<ol start="4">
+<li><p>扩展</p>
+<p>在APP内嵌的时候，发现ios的uiwebview（ios13后不支持转为wkwebview）下，也存在输入框被遮挡问题（输入框通过fixed固定在页面底部，输入框的父元素通过position:absolute各个方向为0固定到全屏）</p>
+<blockquote>
+<p>导致原因是ios下的transform特性影响使得所有定位基于父元素高度，而键盘打开时文档高度被拉大（似乎是uiwebview的问题），我找到下面2篇资料，但是没有很好的解释文档高度被拉大的原因</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/95021620">transform与position:fixed的那些恩怨</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/apache/cordova-ios/issues/472">iOS 12 / UIWebView 键盘覆盖页面底部的 INPUT 元素</a></li>
+</ol>
+<p>总之，有2个方案可以解决该问题</p>
+<ol>
+<li>给带有transform样式的元素在键盘打开的时候添加 transform: none !important；样式（不能直接添加，否则会影响动画和滚动）</li>
+<li>用js计算到页面的高度，强制固定它</li>
+</ol>
+</blockquote>
 </li>
 </ol>
 <h2 id="模态框滑屏联动、ios橡皮筋"><a href="#模态框滑屏联动、ios橡皮筋" class="headerlink" title="模态框滑屏联动、ios橡皮筋"></a>模态框滑屏联动、ios橡皮筋</h2><blockquote>
@@ -247,9 +265,7 @@
 <p>ios橡皮筋，就是当页面拉到尽头的时候还能再继续拉动，露出浏览器的底色，松手会回弹回去。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// iOS UC浏览器下滑屏联动和橡皮筋问题</span></span><br><span class="line">&lt;div ng-touchstart=<span class="string">&quot;handleTouchStart($event)&quot;</span>&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// angularjs  #utils是一个工具类 这里会导致页面无法滑动返回上一页在ios上</span></span><br><span class="line">$scope.handleTouchStart = <span class="function"><span class="keyword">function</span> (<span class="params">evt</span>) </span>&#123;</span><br><span class="line">    $utils.$detector.os.name == <span class="string">&#x27;ios&#x27;</span> &amp;&amp; evt.preventDefault()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-
+<p><a target="_blank" rel="noopener" href="https://www.specialagentsqueaky.com/zh/blog-post/ssy5i7qw/2015-06-10-six-things-i-learnt-about-ios-rubberband-overflow-scrolling/">https://www.specialagentsqueaky.com/zh/blog-post/ssy5i7qw/2015-06-10-six-things-i-learnt-about-ios-rubberband-overflow-scrolling/</a></p>
 <p><strong>参考文档</strong></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013952129/article/details/79568970">解决移动端模态框交互问题：滑屏联动、ios橡皮筋</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangxinxin508/article/details/79813269">解决：framework 7 在IOS上，出现模态框的时候，在模态框上滑动，底部页面也跟着滑动的问题</a></p>
@@ -279,10 +295,15 @@
 
 
 
-
-
-
-
+<h2 id="放大模糊问题"><a href="#放大模糊问题" class="headerlink" title="放大模糊问题"></a>放大模糊问题</h2><p>在做缩放功能的时候，ios会遇到放到后模糊问题</p>
+<p>复现步骤：选取一张带文字的高分辨率图片，通过transform: scale3d(10, 10)后在ios存在模糊</p>
+<p>解决办法：ios下不使用transform：3d，改成 transform: scale(10, 10)</p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000002926369">为何使用了 css3 translate3d 会导致显示模糊？</a></p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000021496103">为什么很多2d CSS变换要使用transform:translate3d(x,x,0)？</a></p>
+<blockquote>
+<p>transform:translate3d(0,0,0)可以触发硬件加速，<br>这个属性都会开启GPU硬件加速模式，从而让浏览器在渲染动画时从CPU转向GPU</p>
+</blockquote>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35897953/article/details/107634525">https://blog.csdn.net/qq_35897953/article/details/107634525</a></p>
 
       
@@ -471,7 +492,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 ionluo
+    		&copy; 2023 ionluo
     	</div>
       	<div class="footer-right">
 			<!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -571,6 +592,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">WEB开发</a>
               </li>
              
@@ -583,7 +608,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,10 +617,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Django</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,6 +629,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">IDE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -627,11 +652,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color3">转载</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Rendertron</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -647,10 +676,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">VR</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -659,11 +684,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color3">VR</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -683,15 +716,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">nvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -707,11 +740,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -719,11 +752,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
+                <a href="javascript:void(0)" class="js-tag color3">公考</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">公考</a>
+                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -747,7 +780,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Grunt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">lodash</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -755,11 +808,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
+                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -783,15 +836,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">日记</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -803,11 +856,35 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">草稿</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hide</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VirtualBox</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Centos7</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -844,34 +921,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">canvas</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
               </li>
             
             <div class="clearfix"></div>

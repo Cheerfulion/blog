@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/image-20210316225218741.png">
 <meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/image-20210316225539242.png">
 <meta property="article:published_time" content="2021-03-29T15:21:50.000Z">
-<meta property="article:modified_time" content="2022-05-11T12:49:55.851Z">
+<meta property="article:modified_time" content="2023-11-27T10:43:26.481Z">
 <meta property="article:author" content="ionluo">
 <meta property="article:tag" content="IDE">
 <meta property="article:tag" content="Typora">
@@ -223,7 +223,10 @@
 <p>6、Ursine主题</p>
 <p>7、vue主题</p>
 <p>8、purple主题</p>
-<h2 id="导出其他格式"><a href="#导出其他格式" class="headerlink" title="导出其他格式"></a>导出其他格式</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/horses/article/details/108536784">https://blog.csdn.net/horses/article/details/108536784</a></p>
+<h2 id="导出其他格式"><a href="#导出其他格式" class="headerlink" title="导出其他格式"></a>导出其他格式</h2><p>底层利用的是 Pandoc</p>
+<blockquote>
+<p>拓展：<a target="_blank" rel="noopener" href="https://blog.csdn.net/horses/article/details/108536784">Pandoc：一个超级强大的文档格式转换工具</a></p>
+</blockquote>
 <h2 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h2><ol>
 <li><p>批量上传图片顺序混乱</p>
 <blockquote>
@@ -238,6 +241,14 @@
 <li>开启一个服务，修改host来让七牛云域名指向localhost。该方法对运维知识需要稍有了解，难度三颗星。</li>
 </ul>
 </li>
+<li><p>链接地址中有&amp;not的时候会被转成¬</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://xxx.gitlab.com/group/project/merge_requests?scope=all&amp;state=opened&amp;author_username=myname&amp;not[assignee_username]=myname</span><br><span class="line"><span class="comment"># 解决方法</span></span><br><span class="line">http://xxx.gitlab.com/group/project/merge_requests?scope=all&amp;state=opened&amp;author_username=myname&amp;<span class="string">&quot;not[assignee_username]=myname</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
 </ol>
 <h2 id="关于最新版收费问题"><a href="#关于最新版收费问题" class="headerlink" title="关于最新版收费问题"></a>关于最新版收费问题</h2><p>由于最新版本需要收费，但是低版本的依旧还可以免费使用，这里记录下低版本的下载地址：</p>
 <blockquote>
@@ -245,6 +256,11 @@
 <h3 id="Windows官网历史版本："><a href="#Windows官网历史版本：" class="headerlink" title="Windows官网历史版本："></a>Windows官网历史版本：</h3><p><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://typora.io/windows/dev_release.html">https://typora.io/windows/dev_release.html</a><br> 最新免费版本：<br> <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://download.typora.io/windows/typora-update-x64-1117.exe">Download (Windows x64)</a><br> <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://download.typora.io/windows/typora-update-ia32-1117.exe">Download (Windows x86)</a><br> <a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://download.typora.io/linux/typora_0.11.18_amd64.deb">Download (Linux x64)</a><br> 开始收费版本：1.x</p>
 </blockquote>
 <p>PS: 记得在设置里面关闭自动更新</p>
+<p><strong>2022-08-10 更新</strong></p>
+<p>旧版本现在也会提示需要更新新版本了，但是提示逻辑是每天第一次打开的时候检查系统时间和版本，可以通过修改系统时间的方式继续实现免费使用，比如将启动的Typora快捷方式换成下面bat脚本（需要用管理员权限执行）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> /f <span class="string">&quot;delims= &quot;</span> %%d <span class="keyword">in</span> (<span class="string">&#x27;echo %date%&#x27;</span>) <span class="keyword">do</span> (<span class="built_in">set</span> <span class="string">&quot;now=%%d&quot;</span>)</span><br><span class="line">date 2010/6/11</span><br><span class="line">start /<span class="built_in">wait</span> E:\soft\Typora\Typora.exe %Typora位置%</span><br><span class="line">date %now%</span><br><span class="line">pause %暂停查看%</span><br></pre></td></tr></table></figure>
+
+<p>当然也可以直接使用<a target="_blank" rel="noopener" href="https://blog.cdn.ionluo.cn/files%2Ftypora1.3.8.zip">破解版</a>或者<a target="_blank" rel="noopener" href="https://typoraio.cn/">正版</a>软件</p>
 
       
       <!-- 首页不展示文章所有内容结束 -->
@@ -436,7 +452,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 ionluo
+    		&copy; 2023 ionluo
     	</div>
       	<div class="footer-right">
 			<!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -536,6 +552,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">WEB开发</a>
               </li>
              
@@ -548,7 +568,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -557,10 +577,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Django</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -573,6 +589,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">IDE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,11 +612,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color3">转载</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Rendertron</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -612,10 +636,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">VR</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -624,11 +644,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color3">VR</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -648,15 +676,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">nvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -672,11 +700,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -684,11 +712,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
+                <a href="javascript:void(0)" class="js-tag color3">公考</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">公考</a>
+                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -712,7 +740,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Grunt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">lodash</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -720,11 +768,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
+                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -748,15 +796,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">日记</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -768,11 +816,35 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">草稿</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hide</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VirtualBox</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Centos7</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -809,34 +881,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">canvas</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
               </li>
             
             <div class="clearfix"></div>

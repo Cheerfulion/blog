@@ -8,18 +8,21 @@
   <link rel="dns-prefetch" href="http://www.ionluo.cn/blog">
   <title>【好文收藏】时间标准基础知识 | ionluo的个人博客站点</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原文链接https:&#x2F;&#x2F;www.cnblogs.com&#x2F;doit8791&#x2F;p&#x2F;10398997.html 正文过去世界各地原本各自订定当地时间，但随着交通和电讯的发达，各地交流日益频繁，不同的地方时间，造成许多困扰，于是在西元1884年的国际会议上制定了全球性的标准时，明定以英国伦敦格林威治这个地方为零度经线的起点（亦称为本初子午线），并以地球由西向东每24小时自转一周360°，订定每隔经度15°">
+  <meta name="description" content="时间标准基础知识UTC和ISO8601过去世界各地原本各自订定当地时间，但随着交通和电讯的发达，各地交流日益频繁，不同的地方时间，造成许多困扰，于是在西元1884年的国际会议上制定了全球性的标准时，明定以英国伦敦格林威治这个地方为零度经线的起点（亦称为本初子午线），并以地球由西向东每24小时自转一周360°，订定每隔经度15°，时差1小时。而每15°的经线则称为该时区的中央经线，将全球划分为24个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【好文收藏】时间标准基础知识">
 <meta property="og:url" content="http://www.ionluo.cn/blog/posts/9675484c.html">
 <meta property="og:site_name" content="ionluo的个人博客站点">
-<meta property="og:description" content="原文链接https:&#x2F;&#x2F;www.cnblogs.com&#x2F;doit8791&#x2F;p&#x2F;10398997.html 正文过去世界各地原本各自订定当地时间，但随着交通和电讯的发达，各地交流日益频繁，不同的地方时间，造成许多困扰，于是在西元1884年的国际会议上制定了全球性的标准时，明定以英国伦敦格林威治这个地方为零度经线的起点（亦称为本初子午线），并以地球由西向东每24小时自转一周360°，订定每隔经度15°">
+<meta property="og:description" content="时间标准基础知识UTC和ISO8601过去世界各地原本各自订定当地时间，但随着交通和电讯的发达，各地交流日益频繁，不同的地方时间，造成许多困扰，于是在西元1884年的国际会议上制定了全球性的标准时，明定以英国伦敦格林威治这个地方为零度经线的起点（亦称为本初子午线），并以地球由西向东每24小时自转一周360°，订定每隔经度15°，时差1小时。而每15°的经线则称为该时区的中央经线，将全球划分为24个">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/35ce04b0185b4284b3ff572c5444dcc0tplv-k3u1fbpfcp-zoom-in-crop-mark4536000.webp">
+<meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/ea28f7304c594c188afe5b53ad366daatplv-k3u1fbpfcp-zoom-in-crop-mark4536000.webp">
 <meta property="article:published_time" content="2021-07-15T03:04:46.000Z">
-<meta property="article:modified_time" content="2022-03-02T06:57:17.709Z">
+<meta property="article:modified_time" content="2023-09-15T02:07:20.894Z">
 <meta property="article:author" content="ionluo">
 <meta property="article:tag" content="好文收藏">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://blog.cdn.ionluo.cn/blog/35ce04b0185b4284b3ff572c5444dcc0tplv-k3u1fbpfcp-zoom-in-crop-mark4536000.webp">
   
     <link rel="alternative" href="/atom.xml" title="ionluo的个人博客站点" type="application/atom+xml">
   
@@ -200,8 +203,7 @@
     <div class="article-entry" itemprop="articleBody">
       <!-- 首页不展示文章所有内容开始 -->
       
-        <h2 id="原文链接"><a href="#原文链接" class="headerlink" title="原文链接"></a>原文链接</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/doit8791/p/10398997.html">https://www.cnblogs.com/doit8791/p/10398997.html</a></p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>过去世界各地原本各自订定当地时间，但随着交通和电讯的发达，各地交流日益频繁，不同的地方时间，造成许多困扰，于是在西元1884年的国际会议上制定了全球性的标准时，明定以英国伦敦格林威治这个地方为零度经线的起点（亦称为本初子午线），并以地球由西向东每24小时自转一周360°，订定每隔经度15°，时差1小时。而每15°的经线则称为该时区的中央经线，将全球划分为24个时区，其中包含23个整时区及180°经线左右两侧的2个半时区。东经的时间比西经要早，也就是如果格林威治时间是中午12时，则中央经线15°E的时区为下午1时，中央经线30°E时区的时间为下午2时；反之，中央经线15°W的时区时间为上午11时，中央经线30°W时区的时间为上午10时。如果两人同时从格林威治的0°各往东、西方前进，当他们在经线180°时，就会相差24小时，所以经线180°被定为国际换日线，由西向东通过此线时日期要减去一日，反之，若由东向西则要增加一日。</p>
+        <h2 id="时间标准基础知识UTC和ISO8601"><a href="#时间标准基础知识UTC和ISO8601" class="headerlink" title="时间标准基础知识UTC和ISO8601"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/doit8791/p/10398997.html">时间标准基础知识UTC和ISO8601</a></h2><p>过去世界各地原本各自订定当地时间，但随着交通和电讯的发达，各地交流日益频繁，不同的地方时间，造成许多困扰，于是在西元1884年的国际会议上制定了全球性的标准时，明定以英国伦敦格林威治这个地方为零度经线的起点（亦称为本初子午线），并以地球由西向东每24小时自转一周360°，订定每隔经度15°，时差1小时。而每15°的经线则称为该时区的中央经线，将全球划分为24个时区，其中包含23个整时区及180°经线左右两侧的2个半时区。东经的时间比西经要早，也就是如果格林威治时间是中午12时，则中央经线15°E的时区为下午1时，中央经线30°E时区的时间为下午2时；反之，中央经线15°W的时区时间为上午11时，中央经线30°W时区的时间为上午10时。如果两人同时从格林威治的0°各往东、西方前进，当他们在经线180°时，就会相差24小时，所以经线180°被定为国际换日线，由西向东通过此线时日期要减去一日，反之，若由东向西则要增加一日。</p>
 <p>一、UTC</p>
 <p>十七世纪，格林威治皇家天文台为了海上霸权的扩张计画而进行天体观测。到了1884年决定以通过格林威治的子午线作为划分地球东西两半球的经度零度。观测所门口墙上有一个标志24小时的时钟，显示当下的时间，对全球而言，这里所设定的时间是世界时间参考点，全球都以格林威治的时间作为标准来设定时间，这就是我们耳熟能详的「格林威治标准时间」(Greenwich Mean Time，简称G.M.T.)的由来。</p>
 <p>UTC指的是Coordinated Universal Time－ 世界协调时间（又称世界标准时间、世界统一时间），是经过平均太阳时(以格林威治时间GMT为准)、地轴运动修正后的新时标以及以「秒」为单位的国际原子时所综合精算而成的时间，计算过程相当严谨精密，因此若以「世界标准时间」的角度来说，UTC比GMT来得更加精准。其误差值必须保持在0.9秒以内，若大于0.9秒则由位于巴黎的国际地球自转事务中央局发布闰秒，使UTC与地球自转周期一致。所以基本上UTC的本质强调的是比GMT更为精确的世界时间标准，不过对于现行表款来说，GMT与UTC的功能与精确度是没有差别的。UTC时间+时区偏移量就是当地时间，如北京东8区（GMT+8），则UTC时间+08小时就表示北京时间。</p>
@@ -218,21 +220,210 @@
 <li>如果没有指定与UTC关系则假定是本地时间，为安全的跨时区通讯，应制定与UTC关系。若时间是UTC则在时间后面加Z表示，如“09:30UTC”表示为09：30Z”或“0930Z”。其它时区时间则将与UTC的偏移量附加到时间后面，格式为±[hh]：[mm]，±[hh] [mm]或±[hh]，如“北京时间09:30”表示为”09:30+08:00”或“ 09:30+0800 ” 或“ 09:30+08 ”。</li>
 <li>用字母T分割日期和时间。如20180703T224426Z或2018-07-03T22:44:26Z 。</li>
 </ul>
-<h2 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">new</span> <span class="built_in">Date</span>()).toString()</span><br><span class="line"><span class="comment">// &quot;Thu Jul 15 2021 10:55:08 GMT+0800 (中国标准时间)&quot;</span></span><br><span class="line">(<span class="keyword">new</span> <span class="built_in">Date</span>()).toLocaleString()</span><br><span class="line"><span class="comment">// &quot;2021/7/15 上午10:55:23&quot;</span></span><br><span class="line">(<span class="keyword">new</span> <span class="built_in">Date</span>()).toGMTString()   <span class="comment">// GMT时间（格林威治标准时间）</span></span><br><span class="line"><span class="comment">// &quot;Thu, 15 Jul 2021 02:55:29 GMT&quot;</span></span><br><span class="line">(<span class="keyword">new</span> <span class="built_in">Date</span>()).toISOString()  <span class="comment">// ISO时间（ISO8601时间表示）</span></span><br><span class="line"><span class="comment">// &quot;2021-07-15T02:55:33.689Z&quot;</span></span><br><span class="line">(<span class="keyword">new</span> <span class="built_in">Date</span>()).toUTCString() <span class="comment">// UTC时间（全球标准时间）</span></span><br><span class="line"><span class="comment">// &quot;Thu, 15 Jul 2021 02:55:38 GMT&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">new</span> <span class="built_in">Date</span>()).toString()</span><br><span class="line"><span class="comment">// &quot;Thu Jul 15 2021 10:55:08 GMT+0800 (中国标准时间)&quot;</span></span><br><span class="line">(<span class="keyword">new</span> <span class="built_in">Date</span>()).toLocaleString()</span><br><span class="line"><span class="comment">// &quot;2021/7/15 上午10:55:23&quot;</span></span><br><span class="line">(<span class="keyword">new</span> <span class="built_in">Date</span>()).toGMTString()   <span class="comment">// GMT时间（格林威治标准时间）</span></span><br><span class="line"><span class="comment">// &quot;Thu, 15 Jul 2021 02:55:29 GMT&quot;</span></span><br><span class="line">(<span class="keyword">new</span> <span class="built_in">Date</span>()).toISOString()  <span class="comment">// ISO时间（ISO8601时间表示）</span></span><br><span class="line"><span class="comment">// &quot;2021-07-15T02:55:33.689Z&quot;</span></span><br><span class="line">(<span class="keyword">new</span> <span class="built_in">Date</span>()).toUTCString() <span class="comment">// UTC时间（全球标准时间）</span></span><br><span class="line"><span class="comment">// &quot;Thu, 15 Jul 2021 02:55:38 GMT&quot;</span></span><br></pre></td></tr></table></figure>
 
 
 
 
 
+<h2 id="前端时间国际化入门"><a href="#前端时间国际化入门" class="headerlink" title="前端时间国际化入门"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/7021465702171148296">前端时间国际化入门</a></h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://402.ecma-international.org/2.0/#sec-intl-datetimeformat-constructor">https://402.ecma-international.org/2.0/#sec-intl-datetimeformat-constructor</a></p>
+<p><a target="_blank" rel="noopener" href="https://caniuse.com/internationalization">https://caniuse.com/internationalization</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl</a></p>
+</blockquote>
+<blockquote>
+<p>作者：奇舞精选<br>链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7021465702171148296">https://juejin.cn/post/7021465702171148296</a><br>来源：稀土掘金<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+<blockquote>
+<p>时间只是幻觉。 <strong>—— 阿尔伯特·爱因斯坦</strong></p>
+</blockquote>
+<p>最近在开发一个需要完善国际化方案的前端项目，在处理时间国际化的时候遇到了一些问题。于是花了一些时间研究，有了这篇文章。不过由于网上关于 JavaScript 中 <code>Date</code> 对象的坑的文章已经一抓一大把了，<strong>因此这篇文章不是 JavaScript 中 Date 对象的使用指南，而是只专注于前端时间国际化</strong>。</p>
+<h3 id="从时区说起"><a href="#从时区说起" class="headerlink" title="从时区说起"></a>从时区说起</h3><p>要想处理时间，UTC 是一个绕不开的名字。协调世界时（Coordinated Universal Time）是目前通用的世界时间标准，计时基于原子钟，但并不等于 TAI（国际原子时）。TAI 不计算闰秒，但 UTC 会不定期插入闰秒，因此 UTC 与 TAI 的差异正在不断扩大。UTC 也接近于 GMT（格林威治标准时间），但不完全等同。可能很多人都发现近几年 GMT 已经越来越少出现了，这是因为 GMT 计时基于地球自转，由于地球自转的不规则性且正在逐渐变慢，目前已经基本被 UTC 所取代了。</p>
+<blockquote>
+<p>JavaScript 的 <code>Date</code> 实现不处理闰秒。实际上，由于闰秒增加的不可预测性，Unix/POSIX 时间戳完全不考虑闰秒。在闰秒发生时，Unix 时间戳会重复一秒。这也意味着，一个时间戳对应两个时间点是有可能发生的。</p>
+</blockquote>
+<p>由于 UTC 是标准的，我们有时会使用 UTC+/-N 的方式表达一个时区。这很容易理解，但并不准确。中国通行的 <code>Asia/Shanghai</code> 时区<strong>大部分</strong>情况下可以用 UTC+8 表示，但英国通行的 <code>Europe/London</code> 时区并不能用一个 UTC+N 的方式表示——由于夏令时制度，<code>Europe/London</code> 在夏天等于 UTC+1，在冬天等于 UTC/GMT。</p>
+<blockquote>
+<p>一个时区与 UTC 的偏移并不一定是整小时。如 <code>Asia/Yangon</code> 当前为 UTC+6:30，而 <code>Australia/Eucla</code> 目前拥有奇妙的 UTC+8:45 的偏移。</p>
+</blockquote>
+<p>夏令时的存在表明<strong>时间的表示不是连续的</strong>，时区之间的时差也并不是固定的，我们并不能用固定时差来处理时间，这很容易意识到。但一个不容易意识到的点是，时区还包含了其历史变更信息。中国目前不实行夏令时制度，那我们就可以放心用 UTC+8 来表示中国的时区了吗？你可能已经注意到了上一段中描述 <code>Asia/Shanghai</code> 时区时我使用了<strong>大部分</strong>一词。<code>Asia/Shanghai</code> 时区在历史上实行过夏令时，因此 <code>Asia/Shanghai</code> 在部分时间段可以使用 UTC+9 来表示。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&#x27;1988-04-18 00:00:00&#x27;</span>)</span><br><span class="line"><span class="comment">// Mon Apr 18 1988 00:00:00 GMT+0900 (中国夏令时间)</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>夏令时已经够混乱了，但它实际上比你想象得更混乱——部分穆斯林国家一年有四次夏令时切换（进入斋月时夏令时会暂时取消），还有一些国家使用混沌的 15/30 分钟夏令时而非通常的一小时。</p>
+</blockquote>
+<blockquote>
+<p>不要总是基于 <code>00:00</code> 来判断一天的开始。部分国家使用 0:00-1:00 切换夏令时，这意味着 23:59 的下一分钟有可能是 1:00。</p>
+</blockquote>
+<p>事实上，虽然一天只有 24 个小时，但当前（2021.10）正在使用的时区有超过 300 个。每一个时区都包含了其特定的历史。虽然有些时区在现在看起来是一致的，但它们都包含了不同的历史。时区也会创造新的历史。由于政治、经济或其他原因，一些时区会调整它们与 UTC 的偏差（萨摩亚曾经从 UTC-10 切换到 UTC+14，导致该国 2011.12.30 整一天都消失了），或是启用/取消夏令时，甚至有可能导致一个时区重新划分为两个。因此，为了正确处理各个时区，我们需要一个数据库来存放时区变更信息。还好，已经有人帮我们做了这些工作。目前大多数 *nix 系统和大量开源项目都在使用 <a href="https://link.juejin.cn/?target=https://www.iana.org/time-zones">IANA 维护的时区数据库</a>（IANA TZ Database），其中包含了自 Unix 时间戳 0 以来各时区的变更信息。当然这一数据库也包含了大量 Unix 时间戳 0 之前的时区变更信息，但并不能保证这些信息的准确性。IANA 时区数据库会定期更新，以反映新的时区变更和新发现的历史史实导致的时区历史变更。</p>
+<blockquote>
+<p>Windows 不使用 IANA 时区数据库。微软为 Windows 自己维护了一套<a href="https://link.juejin.cn/?target=https://docs.microsoft.com/zh-cn/troubleshoot/windows-client/system-management-components/daylight-saving-time-help-support">时区数据库</a>，这有时会导致在一个系统上合法的时间在另一系统上不合法。</p>
+</blockquote>
+<p>既然我们不能使用 UTC 偏移来表示一个时区，那就只能为每个时区定义一个标准名称。通常地，我们使用 <code>&lt;大洲&gt;/&lt;城市&gt;</code> 来命名一个时区。这里的城市一般为该时区中人口最多的城市。于是，我们可以将中国的通行时区表示为 <code>Asia/Shanghai</code>。也有一些时区有自己的别名，如太平洋标准时间 <code>PST</code> 和协调世界时 <code>UTC</code>。</p>
+<blockquote>
+<p>时区名称使用城市而非国家，是由于国家的变动通常比城市的变动要快得多。</p>
+</blockquote>
+<blockquote>
+<p><strong>城市不是时区的最小单位</strong>。有很多城市同时处于多个时区，甚至澳大利亚<a href="https://link.juejin.cn/?target=https://en.wikipedia.org/wiki/Gold_Coast_Airport">有一个机场</a>的跑道两端处于不同的时区。</p>
+</blockquote>
+<h3 id="处理时区困难重重"><a href="#处理时区困难重重" class="headerlink" title="处理时区困难重重"></a>处理时区困难重重</h3><p>几个月前的一天，奶冰在他的 Telegram 频道里发了这样的一条消息：</p>
+<p><img src="http://blog.cdn.ionluo.cn/blog/35ce04b0185b4284b3ff572c5444dcc0tplv-k3u1fbpfcp-zoom-in-crop-mark4536000.webp" alt="img"></p>
+<p>你想的没错，这个问题正是由时区与 UTC 偏移的不同造成的。<code>Asia/Shanghai</code> 时区在 1940 年前后和 1986 年前后曾实行过夏令时，<strong>而夏令时的切换会导致一小时的出现和消失</strong>。具体来说，启用夏令时当天会有一个小时消失，如 2021.3.28 英国启用夏令时，1:00 直接跳到 3:00，导致 <code>2021-03-28 01:30:00</code> 在 <code>Europe/London</code> 时区中是不合法的；取消夏令时当天又会有一个小时重复，如 2021.10.31 英国取消夏令时，2:00 会重新跳回 1:00 一次，导致 <code>2021-10-31 01:30:00</code> 在 <code>Europe/London</code> 时区中对应了两个时间点。而在奶冰的例子中，<code>1988-04-10 00:46:50</code> 正好处于因夏令时启用而消失的一小时中，因此系统会认为此时间字符串不合法而拒绝解析。</p>
+<blockquote>
+<p>你可能会注意到在历史上 1988.4.10 这一天 <code>Asia/Shanghai</code> 时区实际上是去掉了 1:00-2:00 这一小时而不是 0:00-1:00。上文问题更深层次的原因是，在 IANA TZDB 2018a 及更早版本中，IANA 因缺乏历史资料而设置了错误的夏令时规则，规则设定了夏令时交界于 0:00-1:00 从而导致上文问题发生。而随后社区<a href="https://link.juejin.cn/?target=http://mm.icann.org/pipermail/tz/2018-August/026760.html">发现了更准确的史实</a>，因此 IANA 更新了数据库。上文的问题在更新了系统的时区数据库后便解决了。</p>
+</blockquote>
+<p><img src="http://blog.cdn.ionluo.cn/blog/ea28f7304c594c188afe5b53ad366daatplv-k3u1fbpfcp-zoom-in-crop-mark4536000.webp" alt="IANA TZDB 2018a 及之前版本的错误数据"></p>
+<p>再来考虑另一种情况。你的应用的某位巴西用户在 2018 年保存了一个未来时间 <code>2022-01-15 12:00</code>（按当时的规律那应该是个夏令时时间），不巧那时候你的应用是以格式化的时间字符串形式保存的时间。之后你发现巴西已经于 2019 年 4 月宣布彻底取消夏令时制度，那么 <code>2022-01-15 12:00</code> 这个时间对应的 Unix 时间戳发生了变化，变得不再准确，要正确处理这一字符串就需要参考这一字符串生成的时间（或生成时计算的 UTC 偏移）来做不同的处理。<strong>因此，应用从一开始就应该避免使用字符串来传输、存储时间，而是使用 Unix 时间戳</strong>。如果不得不使用字符串存储时间，请尽可能：</p>
+<ul>
+<li>使用 UTC 描述时间，你永远不会知道本地时区在未来会发生什么</li>
+<li>如果需要以当地时间描述时间，一定带上当前 UTC 偏移</li>
+</ul>
+<p>时区历史带来的问题往往意想不到而且远比想象得多。实际上时区历史数据非常详细而繁多且跨设备不一致，并没有简单而统一的处理方法。在需要严谨处理时区时可能需要在应用程序中内嵌一套各端统一的时区数据库，但这样的方案放在前端又会带来不少问题：</p>
+<ul>
+<li>体积过大。moment.js 曾经设计过<a href="https://link.juejin.cn/?target=https://github.com/moment/moment-timezone/blob/develop/data/packed/2021a.json">一种简洁的 TZDB 表示</a>，但尽管已经尽可能压缩整个文件仍然达到了 180+KB。在性能优先的 Web 应用中这是不可接受的</li>
+<li>需要持续更新。时区数据一直在变动，需要在时区数据更新时尽快更新应用内的时区数据，这带来了额外的维护成本</li>
+</ul>
+<p>ES6 为我们带来了 <code>Intl</code> <a href="https://link.juejin.cn/?target=https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl">命名空间</a>。在这里，JavaScript 运行时提供了不少时间相关的国际化能力。因此，在不使用额外数据的情况下准确处理时区是可能的，但这并不完美：</p>
+<ul>
+<li>各端不统一。浏览器提供的时区数据受浏览器版本、系统版本等可能变化，最新的时区更新可能无法快速反映到所有设备上</li>
+<li>实现复杂。<code>JavaScript</code> 中 <code>Date</code> 对象的不良设计导致实现完善的时区处理并不容易，且 <code>Intl</code> 命名空间下的对象实例化性能开销较大，需要额外优化</li>
+</ul>
+<blockquote>
+<p><code>Intl</code> 命名空间下还有很多实用的国际化相关方法，值得我们另开一篇文章来讲讲了。</p>
+</blockquote>
+<p>在真实开发中，这需要取舍。目前主流的 JavaScript 时间处理库都已转向浏览器内置方法，并在需要时通过 Polyfill 保证跨端一致性。在这篇文章中，我们将尝试在不使用第三方库的情况下实现基本的时间国际化处理。此外，还有一些诸如需要使用 Unix 时间戳才能正确地在各端交换时间等细节需要注意。</p>
+<h3 id="时区转换"><a href="#时区转换" class="headerlink" title="时区转换"></a>时区转换</h3><p>JavaScript 中的 <code>Date</code> 并不是不包含时区信息——实际上，<code>Date</code> 对象表示的一定是当前时区。通过尝试：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&#x27;1970-01-01T00:00:00Z&#x27;</span>)</span><br><span class="line"><span class="comment">// Thu Jan 01 1970 08:00:00 GMT+0800 (中国标准时间)</span></span><br></pre></td></tr></table></figure>
+
+<p>就可以知道，JavaScript 运行时其实知道当前时区，并会在需要的时候将其他时区的时间转换为当前时区的时间。那么，如何将本地时间转换为其他时区的时间呢？从 <code>Date</code> 的角度看，这并不行，因为我们无法设置一个 <code>Date</code> 对象的时区。但我们可以“投机取巧”：将 <code>Date</code> 对象的时间加上/减去对应的时差，尽管 <code>Date</code> 对象仍然认为自己在本地时区，但这样不就可以正确显示了嘛！但我们会碰到上文提到的问题：时区之间的时间差并不固定，在没有额外数据的情况下很难正确计算。</p>
+<p>还好，ES6 基于 <code>Intl</code> 命名空间扩展了 <code>Date.prototype.toLocaleString()</code> 方法，使其可以接受时区参数并按指定时区格式化时间。如果你在搜索引擎中搜索如何使用 JavaScript 转换时区，你大概率会在 StackOverflow 上找到类似这样的答案：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> convertTimeZone = <span class="function">(<span class="params">date, timeZone</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(date.toLocaleString(<span class="string">&#x27;en-US&#x27;</span>, &#123; timeZone &#125;))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>() <span class="comment">// Wed Oct 13 2021 01:00:00 GMT+0800 (中国标准时间)</span></span><br><span class="line">convertTimeZone(now, <span class="string">&#x27;Europe/London&#x27;</span>) <span class="comment">// Tue Oct 12 2021 18:00:00 GMT+0800 (中国标准时间)</span></span><br></pre></td></tr></table></figure>
+
+<p>很好理解，我们使用 <code>en-US</code> 的区域设置要求 JavaScript 运行时以我们指定的时区格式化时间，再将时间字符串重新解析为时间对象。这里的 <code>timeZone</code> 就是诸如 <code>Asia/Shanghai</code> 等的 IANA TZDB 时区名称。这个字符串确实需要自己提供，但这就是我们唯一需要自己准备的数据了！只要提供了时区名称，浏览器就会自动计算正确的时间，无需我们自行计算。</p>
+<blockquote>
+<p>对于时区名称，你可以考虑使用 <a href="https://link.juejin.cn/?target=https://github.com/vvo/tzdb/">@vvo/tzdb</a>。这是一个声称为自动更新的 IANA TZDB 的 JSON 导出，并已被数个大型项目使用。你可以从这个包中导出所有时区名称。</p>
+</blockquote>
+<p>这个方法看起来还不错，对吧？但实际上，它有两个问题：</p>
+<ul>
+<li>指定了区域设置和时区的 <code>toLocaleString()</code> 实际上每次调用都会在 JavaScript 运行时中创建新的 <code>Intl.DateTimeFormat</code> 对象（在后文详述），而后者会带来昂贵的性能开销（在 Node 14 中，实例化一次会在 V8 中增加内存使用约 46.3Kb。但这是符合预期的，详见 <a href="https://link.juejin.cn/?target=https://github.com/vvo/tzdb/">V8 Issue</a>。因此，在密集调用的情况下需要考虑计算并缓存时差，并在一定时间后或需要时进行更新</li>
+<li>使用 <code>toLocaleString()</code> 并使用 <code>en-US</code> 区域设置格式化的默认时间格式类似于 <code>10/13/2021, 1:00:00 AM</code>。这可以被大部分浏览器正确解析，<strong>但这是不规范的，不同浏览器有可能产生不同结果</strong>。你也可以自行配置格式（同下文的 <code>Intl.DateTimeFormat</code>），但仍然无法构造出规范的字符串</li>
+</ul>
+<p>因此，更佳的方案是，我们需要建立一个可反复使用的格式化器以避免重复创建 <code>Intl.DateTimeFormat</code> 带来的额外开销，并需要手动构造出符合规范的时间字符串，并将其重新解析为 <code>Date</code> 对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> timeZoneConverter = <span class="function">(<span class="params">timeZone</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 新建 DateTimeFormat 对象以供对同一目标时区重用</span></span><br><span class="line">    <span class="comment">// 由于时区属性必须在创建 DateTimeFormat 对象时指定，我们只能为同一时区重用格式化器</span></span><br><span class="line">    <span class="keyword">const</span> formatter = <span class="keyword">new</span> <span class="built_in">Intl</span>.DateTimeFormat(<span class="string">&#x27;zh-CN&#x27;</span>, &#123;</span><br><span class="line">        year: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">        month: <span class="string">&#x27;2-digit&#x27;</span>,</span><br><span class="line">        day: <span class="string">&#x27;2-digit&#x27;</span>,</span><br><span class="line">        hour: <span class="string">&#x27;2-digit&#x27;</span>,</span><br><span class="line">        minute: <span class="string">&#x27;2-digit&#x27;</span>,</span><br><span class="line">        second: <span class="string">&#x27;2-digit&#x27;</span>,</span><br><span class="line">        hour12: <span class="literal">false</span>,</span><br><span class="line">        timeZone</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="comment">// 提供 conver 方法以将提供的 Date 对象转换为指定时区</span></span><br><span class="line">        convert (date) &#123;</span><br><span class="line">            <span class="comment">// zh-CN 的区域设置会返回类似 1970/01/01 00:00:00 的字符串</span></span><br><span class="line">            <span class="comment">// 替换字符即可构造出类似 1970-01-01T00:00:00 的 ISO 8601 标准格式时间字符串并被正确解析</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(formatter.format(date).replace(<span class="regexp">/\//g</span>, <span class="string">&#x27;-&#x27;</span>).replace(<span class="string">&#x27; &#x27;</span>, <span class="string">&#x27;T&#x27;</span>).trim())</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> toLondonTime = timeZoneConverter(<span class="string">&#x27;Europe/London&#x27;</span>) <span class="comment">// 对于同一时区，此对象可重用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>() <span class="comment">// Wed Oct 13 2021 01:00:00 GMT+0800 (中国标准时间)</span></span><br><span class="line">toLondonTime.convert(now) <span class="comment">// Tue Oct 12 2021 18:00:00 GMT+0800 (中国标准时间)</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>目前 <code>zh-CN</code> 的区域设置会产生类似 <code>1970/01/01 00:00:00</code> 的格式化字符串。这一格式目前跨端一致，但由于规范没有指定时间格式，<strong>这个格式在未来有可能变更</strong>。更好的方案是使用 <code>formatToParts()</code> 方法（在后文详述）获取时间字符串的各部分并手动拼接出标准格式的字符串，但在这个例子中直接 <code>replace</code> 拥有更好的性能。</p>
+</blockquote>
+<p>现在，尝试反复转换时间至同一时区 1000 次，耗时从 <code>toLocaleString()</code> 1.5 秒降低到了 0.04 秒。尽管代码长了点，但这次重写在最好的情况下为我们带来了超过 20 倍的性能提升。</p>
+<p>需要注意的是，虽然这看起来就算最终方案了，但这个方案依然不完美。主要有以下两个问题：</p>
+<ul>
+<li>在需要密集转换为不同时区时，由于无法重用格式化器，性能依然较差且难以进一步优化</li>
+<li>由于 <code>Intl.DateTimeFormat</code> 不支持格式化毫秒，在格式化字符串的过程中毫秒会丢失，导致最终结果可能会与期望结果产生最高 999ms 的误差，需要额外处理。比如需要计算时差时，我们可能需要这么写：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> calcTimeDiff = <span class="function">(<span class="params">date, converter</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> secDate = date - date.getMilliseconds() <span class="comment">// 去掉毫秒，避免转换前后精度差异</span></span><br><span class="line">    <span class="keyword">return</span> converter.convert(<span class="keyword">new</span> <span class="built_in">Date</span>(secDate), tzName) - secDate</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">calcTimeDiff(<span class="keyword">new</span> <span class="built_in">Date</span>(), timeZoneConverter(<span class="string">&#x27;Europe/London&#x27;</span>)) <span class="comment">// -25200000</span></span><br></pre></td></tr></table></figure>
+
+<p>无论如何，在折腾一番后我们还是把时区正确转换了。接下来准备格式化时间字符串了吗？不过在此之前，我们得先来聊聊语言、文字和区域。</p>
+<h3 id="语言文字区域傻傻分不清"><a href="#语言文字区域傻傻分不清" class="headerlink" title="语言文字区域傻傻分不清"></a>语言文字区域傻傻分不清</h3><blockquote>
+<p>如何在计算机中表示中文？</p>
+</blockquote>
+<p>“这不简单，”你可能会说，“用 <code>zh</code> 啊。”</p>
+<blockquote>
+<p>那简体中文呢？</p>
+</blockquote>
+<p>“<code>zh-CN</code>。”你或许会说出这个答案。</p>
+<blockquote>
+<p>那用于新加坡的简体中文和用于中国大陆的简体中文该如何区分呢？</p>
+</blockquote>
+<p>嗯……好问题。</p>
+<p>要能正确区分不同的简体中文，我们还得先回到定义上。实际上，“国际化”并不只是语言的翻译而已，国际化包含的是一整套对于各个<strong>区域</strong>的本地化方案。要准确表示一个国际化方案，我们实际至少需要确定三个属性：语言（Language）、文字（Script）和区域（Locale）。</p>
+<ul>
+<li><strong>语言</strong>通常指的是声音语言。不同的语言都有一套自己的发音规则，很难互通。如中文和英语都属于语言</li>
+<li><strong>文字</strong>对应的是某个语言的书写方式，同样的语言可能会有多种书写方案。如中文主要有简体和繁体两种书写方案</li>
+<li><strong>区域</strong>指国际化面向的地区，相同的语言和文字，在不同地区也有可能会有不同的使用习惯。如新加坡和中国大陆都使用简体中文，但两地的用词习惯等有些许差异</li>
+</ul>
+<p>只有确定了这三个属性，我们才能正确定义一个国际化方案（或者说<strong>区域设置</strong>）。当然，还有很多其他属性可以更准确的表达某个区域设置，但通常有语言、文字和区域就已经足够了。</p>
+<p>于是，基于 <a href="https://link.juejin.cn/?target=https://tools.ietf.org/rfc/bcp/bcp47.txt">BCP 47</a>，我们可以知道：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cmn-Hans-CN = 中文普通话-简体-中国大陆</span><br><span class="line">cmn-Hans-SG = 中文普通话-简体-新加坡</span><br><span class="line">cmn-Hant-TW = 中文普通话-繁体-台湾</span><br><span class="line">yue-Hant-HK = 中文粤语-繁体-香港</span><br></pre></td></tr></table></figure>
+
+<p>等等，这都是啥？还有 BCP 47 又是啥？BCP 是 IETF 发布的“最佳当前实践”文档，而 BCP 47 是一些国际化相关的 ISO 和备忘录的集合，也是目前事实上由 HTML 和 ECMAScript 所使用的表达区域设置的标准。BCP 47 定义的区域设置标签实际上比较复杂，但对于大部分简单使用情况，上文示例中的格式已经完全够用了。简单来说，<strong>要表达一个区域设置，我们会使用</strong> <code>语言[-文字][-区域]</code> <strong>的格式，而文字和区域都是可选的</strong>。而对于每个部分的具体代码，BCP 47 也有做具体定义。其中：</p>
+<ul>
+<li>语言使用 ISO 639-1 定义的两位字母代码（如中文为 <code>zh</code>，英文为 <code>en</code>）或 <a href="https://link.juejin.cn/?target=https://iso639-3.sil.org/code_tables/639/data">ISO 639-2/3</a> 定义的三位字母代码（如中文普通话为 <code>cmn</code>，英文为 <code>eng</code>），通常小写</li>
+<li>文字使用 <a href="https://link.juejin.cn/?target=https://unicode.org/iso15924/iso15924-codes.html">ISO 15924</a> 定义的四位字母代码，通常首字母大写。如简体中文是 <code>Hans</code>，繁体中文是 <code>Hant</code></li>
+<li>区域通常使用 <a href="https://link.juejin.cn/?target=https://www.iso.org/iso-3166-country-codes.html">ISO 3166-1</a> 定义的两位字母代码，通常大写，如中国大陆为 <code>CN</code>，英国为 <code>GB</code></li>
+</ul>
+<blockquote>
+<p>ISO 639-1/2/3 的关系实际是：ISO 639-1 是最早制定的规范，使用两位字母表示语言，但语言数量之多并不能只用两位代码表示。因此后来修订了 ISO 639-2 和 3，使用三位字母表示了更多语言。通常 639-1 代码和 ISO-2/3 代码是一对多的关系。如中文 <code>zh</code> 其实是中文普通话 <code>cmn</code> 的宏语言（macrolanguage），同样使用 <code>zh</code> 为宏语言的语言还有 <code>wuu</code>（中文吴语）、<code>hak</code>（中文客家话）、<code>yue</code>（中文粤语）等数十种。<strong>从规范上我们现在应该使用 ISO 639-2/3 代码来替代 ISO 639-1 代码了</strong>，但由于历史阻力和真实需求中分类无需如此细致等原因，<strong>使用 ISO 639-1 指定语言仍然非常常见而且完全可以接受</strong>。此外，特别地，我们在 ISO 639-3 中定义未指明的语言为 <code>und</code>。</p>
+</blockquote>
+<p>因此，对于这一节开头的两个问题，在 BCP 47 中正确答案其实是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">zh = 中文</span><br><span class="line">cmn = 中文普通话</span><br><span class="line"></span><br><span class="line">zh-Hans = 中文-简体</span><br><span class="line">cmn-Hans = 中文普通话-简体</span><br></pre></td></tr></table></figure>
+
+<p>而 <code>zh-CN</code> 实际是指在中国大陆使用的中文，当然也包含在中国大陆使用的繁体中文。<strong>不过，由于大部分情况下一个区域只会通用一种文字，很多情况下我们可以忽略文字这一项</strong>，即使用 <code>zh-CN</code>（或者 <code>cmn-CN</code>）来表示中国大陆的简体中文普通话——毕竟在大部分业务中在中国大陆使用繁体和非普通话的情况非常少。</p>
+<blockquote>
+<p>事实上，类似 <code>zh-Hans</code> 和 <code>zh-Hant</code> 开头的区域设置名称已经被标记为 <code>redundant</code> 废弃，因此尽可能只使用 <code>zh-CN</code> 或者 <code>cmn-Hans-CN</code> 这样的区域设置名称。所有区域设置名称的列表可以在 <a href="https://link.juejin.cn/?target=https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">IANA</a> 找到。</p>
+</blockquote>
+<p>现在我们可以准确定义一个区域设置了。不过我们还有一些小小的需求。比如我们想在 <code>cmn-Hans-CN</code> 的区域设置中使用农历来表示日期，但显然我们上文定义的表示方法并不能表达这一需求。好在，Unicode 为 BCP 47 提供了 u 扩展。在区域设置名称后面加上 <code>-u-[选项]</code> 就可以表达更细致的变体了。所以我们有：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmn-Hans-CN-u-ca-chinese = 中文普通话-简体-中国大陆-u-日历-中国农历</span><br><span class="line">jpn-Jpan-JP-u-ca-japanese = 日语-日文汉字/平假名/片假名-日本-u-日历-日本日历</span><br><span class="line">cmn-Hans-CN-u-nu-hansfin = 中文普通话-简体-中国大陆-u-数字-简体大写数字</span><br></pre></td></tr></table></figure>
+
+<p>u 扩展的具体可选项可以在 <a href="https://link.juejin.cn/?target=https://www.unicode.org/reports/tr35/tr35-21.html%23Unicode_locale_identifier">Unicode 网站</a>上找到。而多个 u 扩展还可以连接——于是我们甚至可以写出 <code>cmn-Hans-CN-u-ca-chinese-nu-hansfin</code> 这种丧心病狂的区域设置名称。当然，相信你现在已经可以看懂这个区域设置的意思了。</p>
+<blockquote>
+<p>不同地区可能会有不同的日历使用习惯，如中国有使用农历的需求，泰国有使用佛历的需求，我们可以通过 u 扩展指定不同的日历。不过，大部分情况下我们会使用标准的 ISO 8601 日历（gregory），JavaScript 的 <code>Date</code> 对象也只支持这种日历。</p>
+</blockquote>
+<blockquote>
+<p>你可以使用 <a href="https://link.juejin.cn/?target=https://r12a.github.io/app-subtags/">BCP47 language subtag lookup</a> 工具快速检查你编写的 BCP 47 区域标签是否规范。</p>
+</blockquote>
+<p>终于我们可以正确表达一个完美符合我们需求的区域设置了。接下来，让我们开始格式化时间吧。</p>
+<h3 id="格式化时间"><a href="#格式化时间" class="headerlink" title="格式化时间"></a>格式化时间</h3><p>这题我会！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> formatDate(date) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;date.getFullYear()&#125;</span>-<span class="subst">$&#123;<span class="string">`<span class="subst">$&#123;date.getMonth() + <span class="number">1</span>&#125;</span>`</span>.padStart(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>)&#125;</span>-<span class="subst">$&#123;<span class="string">`<span class="subst">$&#123;date.getDate()&#125;</span>`</span>.padStart(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>)&#125;</span> <span class="subst">$&#123;<span class="string">`<span class="subst">$&#123;date.getHours()&#125;</span>`</span>.padStart(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>)&#125;</span>:<span class="subst">$&#123;<span class="string">`<span class="subst">$&#123;date.getMinutes()&#125;</span>`</span>.padStart(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>)&#125;</span>:<span class="subst">$&#123;<span class="string">`<span class="subst">$&#123;date.getSeconds()&#125;</span>`</span>.padStart(<span class="number">2</span>, <span class="string">&#x27;0&#x27;</span>)&#125;</span>`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">formatDate(<span class="keyword">new</span> <span class="built_in">Date</span>()) <span class="comment">// 2021-10-13 01:00:00</span></span><br></pre></td></tr></table></figure>
+
+<p>就完事了……吗？先不论这样的格式化代码难以阅读，尽管上文这样的日期格式国际通用，<strong>但并非所有区域都习惯于这样的日期表示方法</strong>。比如英语国家/地区在很多时候习惯在日期中加入星期，而阿拉伯语国家/地区在部分情况下习惯使用阿拉伯语数字（而非常用的阿拉伯-印度数字）；再比如美式英语国家/地区习惯月-日-年的日期表示法，而英式英语国家/地区习惯日-月-年的日期表示法……不同区域在时间表示格式习惯上的差异是巨大的，<strong>我们很难通过一个简单的方法来正确地、国际化地格式化一个日期</strong>。</p>
+<p>好在 ES6 早就为我们铺平了道路。还记得上文提到过的 <code>Intl.DateTimeFormat</code> 吗？我们通过它来实例化一个日期格式化器并用进行日期的国际化。</p>
+<p>直接来看例子吧：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">    year: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">    month: <span class="string">&#x27;short&#x27;</span>,</span><br><span class="line">    day: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">    weekday: <span class="string">&#x27;long&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> enUSFormatter = <span class="keyword">new</span> <span class="built_in">Intl</span>.DateTimeFormat(<span class="string">&#x27;en-US&#x27;</span>, options)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> zhCNFormatter = <span class="keyword">new</span> <span class="built_in">Intl</span>.DateTimeFormat(<span class="string">&#x27;zh-CN&#x27;</span>, options)</span><br><span class="line"><span class="keyword">const</span> zhCNAltFormatter = <span class="keyword">new</span> <span class="built_in">Intl</span>.DateTimeFormat(<span class="string">&#x27;zh-CN-u-ca-chinese&#x27;</span>, options)</span><br><span class="line"><span class="keyword">const</span> zhCNAlt2Formatter = <span class="keyword">new</span> <span class="built_in">Intl</span>.DateTimeFormat(<span class="string">&#x27;zh-CN-u-ca-roc-nu-hansfin&#x27;</span>, options)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> jaFormatter = <span class="keyword">new</span> <span class="built_in">Intl</span>.DateTimeFormat(<span class="string">&#x27;ja&#x27;</span>, options)</span><br><span class="line"><span class="keyword">const</span> jaAltFormatter = <span class="keyword">new</span> <span class="built_in">Intl</span>.DateTimeFormat(<span class="string">&#x27;ja-JP-u-ca-japanese&#x27;</span>, options)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arEGFormatter = <span class="keyword">new</span> <span class="built_in">Intl</span>.DateTimeFormat(<span class="string">&#x27;ar-EG&#x27;</span>, options)</span><br><span class="line"></span><br><span class="line">enUSFormatter.format(now) <span class="comment">// Wednesday, Oct 13, 2021</span></span><br><span class="line"></span><br><span class="line">zhCNFormatter.format(now) <span class="comment">// 2021年10月13日星期三</span></span><br><span class="line">zhCNAltFormatter.format(now) <span class="comment">// 2021辛丑年九月8星期三</span></span><br><span class="line">zhCNAlt2Formatter.format(now) <span class="comment">// 民国壹佰壹拾年拾月拾叁日星期三</span></span><br><span class="line"></span><br><span class="line">jaFormatter.format(now) <span class="comment">// 2021年10月13日水曜日</span></span><br><span class="line">jaAltFormatter.format(now) <span class="comment">// 令和3年10月13日水曜日</span></span><br><span class="line"></span><br><span class="line">arEGFormatter.format(now) <span class="comment">// الأربعاء، ١٣ أكتوبر ٢٠٢١</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在这里我们使用 ISO 639-1 代码来表示语言，是由于事实上 ISO 639-1 代码更加常见与通用。在大部分支持 <code>Intl.DateTimeFormat</code> 的 JavaScript 运行时中我们也可以使用 ISO 639-2/3 代码来表示语言（但实际会 fallback 至对应的 ISO 639-1 代码）。</p>
+</blockquote>
+<blockquote>
+<p>你也可以通过在 <code>options</code> 中设置 <code>calendar</code> 属性和 <code>numberingSystem</code> 属性来替换区域设置名称中对 u 扩展的使用。这也是推荐方式。</p>
+</blockquote>
+<p>这非常直观，我们可以指定区域设置和格式化选项来初始化一个格式化器，并在之后使用格式化器对象的 <code>format</code> 方法来格式化一个 <code>Date</code> 对象。这里的格式化选项其实非常灵活，能格式化的不只是日期，时间也可以被灵活地格式化，有非常多的组合可以选择。我们不会在这里详细解释每一个选项，你可以访问 <a href="https://link.juejin.cn/?target=https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat">MDN 文档</a>来了解更多。</p>
+<blockquote>
+<p>如前文所述，<code>Intl.DateTimeFormat</code> 无法格式化毫秒。</p>
+</blockquote>
+<p>不过需要注意的是，<strong>JavaScript 运行时不一定支持所有区域设置，也不一定支持所有格式化选项</strong>。在遇到不支持的情况时，<code>Intl.DateTimeFormat</code> 默认会静默 fallback 到最匹配的支持项，因此在处理不常见的区域设置或选项时，你可能需要再额外检查。你可以通过 <code>Intl.DateTimeFormat.supportedLocalesOf()</code> 静态方法判断当前运行时是否支持指定的区域设置，也可以在实例化格式化器后在对象上调用 <code>resolvedOptions()</code> 方法来检查运行时的解析结果是否与预期一致。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Intl</span>.DateTimeFormat(<span class="string">&#x27;yue-Hant-CN&#x27;</span>).resolvedOptions()</span><br><span class="line"><span class="comment">// &#123;locale: &#x27;zh-CN&#x27;, calendar: &#x27;gregory&#x27;, …&#125;</span></span><br><span class="line"><span class="comment">// fallback 至 zh-CN，与 yue-CN 的预期不一致</span></span><br></pre></td></tr></table></figure>
+
+<p>此外，正如你所看到的，各种语言在日期格式化中使用的文本 JavaScript 运行时都已经帮我们内置了。因此，我们甚至可以利用这些国际化特性来为我们的应用减少一点需要翻译的字符串——打包进应用的翻译越少，应用体积也就越小了嘛——比如说获取一周七天对应的名字：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getWeekdayNames = <span class="function">(<span class="params">locale</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="comment">// 基于一个固定日期计算，这里选择 1970.1.1</span></span><br><span class="line">     <span class="comment">// 不能使用 0，因为 Unix 时间戳 0 在不同时区的日期不一样</span></span><br><span class="line">    <span class="keyword">const</span> base = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">1970</span>, <span class="number">0</span>, <span class="number">1</span>).getTime()</span><br><span class="line">    <span class="keyword">const</span> formatter = <span class="keyword">new</span> <span class="built_in">Intl</span>.DateTimeFormat(locale, &#123; <span class="attr">weekday</span>: <span class="string">&#x27;short&#x27;</span> &#125;)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Array</span>.from(&#123; <span class="attr">length</span>: <span class="number">7</span> &#125;, <span class="function">(<span class="params">_, day</span>) =&gt;</span> (</span><br><span class="line">        formatter.format(<span class="keyword">new</span> <span class="built_in">Date</span>(base + <span class="number">3600000</span> * <span class="number">24</span> * (-<span class="number">4</span> + day))) <span class="comment">// 1970.1.1 是周四</span></span><br><span class="line">    ))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getWeekdayNames(<span class="string">&#x27;en-US&#x27;</span>) <span class="comment">// [&#x27;Sun&#x27;, &#x27;Mon&#x27;, &#x27;Tue&#x27;, &#x27;Wed&#x27;, &#x27;Thu&#x27;, &#x27;Fri&#x27;, &#x27;Sat&#x27;]</span></span><br><span class="line">getWeekdayNames(<span class="string">&#x27;zh-CN&#x27;</span>) <span class="comment">// [&#x27;周日&#x27;, &#x27;周一&#x27;, &#x27;周二&#x27;, &#x27;周三&#x27;, &#x27;周四&#x27;, &#x27;周五&#x27;, &#x27;周六&#x27;]</span></span><br><span class="line">getWeekdayNames(<span class="string">&#x27;ja&#x27;</span>) <span class="comment">// [&#x27;日&#x27;, &#x27;月&#x27;, &#x27;火&#x27;, &#x27;水&#x27;, &#x27;木&#x27;, &#x27;金&#x27;, &#x27;土&#x27;]</span></span><br><span class="line">getWeekdayNames(<span class="string">&#x27;ar-EG&#x27;</span>) <span class="comment">// [&#x27;الأحد&#x27;, &#x27;الاثنين&#x27;, &#x27;الثلاثاء&#x27;, &#x27;الأربعاء&#x27;, &#x27;الخميس&#x27;, &#x27;الجمعة&#x27;, &#x27;السبت&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<p>当然，如果你还是不喜欢运行时为你提供的格式，我们还有上文提到过的 <code>formatToParts()</code> 方法可以用。来看一个简单的例子吧：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Intl</span>.DateTimeFormat(<span class="string">&#x27;zh-CN&#x27;</span>, &#123;</span><br><span class="line">    year: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">    month: <span class="string">&#x27;short&#x27;</span>,</span><br><span class="line">    day: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">    weekday: <span class="string">&#x27;long&#x27;</span>,</span><br><span class="line">    hour: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">    minute: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">    second: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">&#125;).formatToParts(<span class="keyword">new</span> <span class="built_in">Date</span>())</span><br><span class="line"><span class="comment">// [</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;year&#x27;, value: &#x27;2021&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;literal&#x27;, value: &#x27;年&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;month&#x27;, value: &#x27;10&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;literal&#x27;, value: &#x27;月&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;day&#x27;, value: &#x27;13&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;literal&#x27;, value: &#x27;日&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;weekday&#x27;, value: &#x27;星期三&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;literal&#x27;, value: &#x27; &#x27; &#125;,</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;dayPeriod&#x27;, value: &#x27;上午&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;hour&#x27;, value: &#x27;1&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;literal&#x27;, value: &#x27;:&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;minute&#x27;, value: &#x27;00&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;literal&#x27;, value: &#x27;:&#x27; &#125;,</span></span><br><span class="line"><span class="comment">//     &#123; type: &#x27;second&#x27;, value: &#x27;00&#x27; &#125;</span></span><br><span class="line"><span class="comment">// ]</span></span><br></pre></td></tr></table></figure>
+
+<p>随后，你就可以自己解析这个数组来构造出你想要的时间格式了。最后，我们还可以使用 <code>Intl.RelativeTimeFormat</code> 来格式化相对日期。当然我们不会在这里详细讲解这个 API，你可以参考 <a href="https://link.juejin.cn/?target=https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat">MDN 文档</a>。直接来看一个简单例子吧：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getRelativeTime = <span class="function">(<span class="params">num, unit, locale</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Intl</span>.RelativeTimeFormat(locale, &#123; <span class="attr">numeric</span>: <span class="string">&#x27;auto&#x27;</span> &#125;).format(num, unit)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getRelativeTime(-<span class="number">3</span>, <span class="string">&#x27;day&#x27;</span>, <span class="string">&#x27;en-US&#x27;</span>) <span class="comment">// 3 days ago</span></span><br><span class="line">getRelativeTime(-<span class="number">1</span>, <span class="string">&#x27;day&#x27;</span>, <span class="string">&#x27;zh-CN&#x27;</span>) <span class="comment">// 昨天</span></span><br><span class="line">getRelativeTime(<span class="number">0</span>, <span class="string">&#x27;second&#x27;</span>, <span class="string">&#x27;zh-CN&#x27;</span>) <span class="comment">// 现在</span></span><br><span class="line">getRelativeTime(<span class="number">3</span>, <span class="string">&#x27;hour&#x27;</span>, <span class="string">&#x27;ja&#x27;</span>) <span class="comment">// 3 時間後</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>Intl.RelativeTimeFormat</code> 是一个相对较晚进入标准的对象，因此浏览器支持程度较差，可能需要使用 <a href="https://link.juejin.cn/?target=https://formatjs.io/docs/polyfills/intl-relativetimeformat">Polyfill</a>。不过目前（2021.10）主流浏览器的最新版本均已支持此 API。</p>
+</blockquote>
+<h3 id="未来"><a href="#未来" class="headerlink" title="未来"></a>未来</h3><p>我希望这篇文章时区转换的部分可以很快过时——这并非无稽之谈，目前（2021.10）TC39 的 <code>Temporal</code> <a href="https://link.juejin.cn/?target=https://github.com/tc39/proposal-temporal">提案</a>已经进入 Stage 3 了。<code>Temporal</code> <strong>提案定义了一个新的、时区友好的</strong> <code>Temporal</code> <strong>命名空间，并期望在不久后就能进入标准并最终应用于生产环境</strong>。<code>Temporal</code> 定义了完整的时区、时间段、日历规则的处理，且拥有简单明了的 API。那时候，JavaScript 的时区处理就不会再如此痛苦了。由于目前 <code>Temporal</code> 提案还未进入标准，API 暂未稳定，我们无法将其用于生产环境，但我们可以来看一个简单的例子感受一下这个 API 的强大。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> zonedDateTime = Temporal.ZonedDateTime.from(&#123;</span><br><span class="line">  timeZone: <span class="string">&#x27;America/Los_Angeles&#x27;</span>,</span><br><span class="line">  year: <span class="number">1995</span>,</span><br><span class="line">  month: <span class="number">12</span>,</span><br><span class="line">  day: <span class="number">7</span>,</span><br><span class="line">  hour: <span class="number">3</span>,</span><br><span class="line">  minute: <span class="number">24</span>,</span><br><span class="line">  second: <span class="number">30</span>,</span><br><span class="line">  millisecond: <span class="number">0</span>,</span><br><span class="line">  microsecond: <span class="number">3</span>,</span><br><span class="line">  nanosecond: <span class="number">500</span>,</span><br><span class="line">  calendar: <span class="string">&#x27;iso8601&#x27;</span></span><br><span class="line">&#125;) <span class="comment">// 1995-12-07T03:24:30.0000035-08:00[America/Los_Angeles]</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你希望立刻开始使用 <code>Temporal</code>，现在已有 Polyfill 可用。</p>
+<p>不过，时区问题不会消失，各地区的习惯也很难融合到一起。时间的国际化处理是<a href="https://link.juejin.cn/?target=https://yourcalendricalfallacyis.com/">极其复杂</a>的，前端中的时间国际化仍然值得我们认真关注。</p>
 <h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><ul>
 <li><p>将UTC / GMT时间转换为当地时间</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 控制台调试安装 Console Importer， $i(&#x27;moment&#x27;) 引入</span><br><span class="line"></span><br><span class="line"># UTC（GMT）时间 2022-01-14 11:17:00 转本地时间</span><br><span class="line">moment.utc(<span class="string">&quot;2022-01-14 11:17:00&quot;</span>).local().format(<span class="string">&#x27;YYYY-MMM-DD HH:mm:ss&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-
 </li>
 <li><p>更多时间和时区可以使用这个库进行操作</p>
 <p><a target="_blank" rel="noopener" href="http://momentjs.cn/docs/#/parsing/now/">http://momentjs.cn/docs/#/parsing/now/</a></p>
 <p><a target="_blank" rel="noopener" href="http://momentjs.cn/timezone/docs/">http://momentjs.cn/timezone/docs/</a></p>
+</li>
+<li><p>formatToParts格式化自己的日期格式</p>
+<p>值得注意的是formatToParts的兼容性似乎不佳，生产环境使用需慎重(<a target="_blank" rel="noopener" href="https://github.com/mdn/browser-compat-data/pull/3769">https://github.com/mdn/browser-compat-data/pull/3769</a>)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Intl</span>.DateTimeFormat(<span class="string">&#x27;en-us&#x27;</span>, &#123;</span><br><span class="line">  weekday: <span class="string">&#x27;long&#x27;</span>,</span><br><span class="line">  year: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">  month: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">  day: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">  hour: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">  minute: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">  second: <span class="string">&#x27;numeric&#x27;</span>,</span><br><span class="line">  hour12: <span class="literal">true</span>,</span><br><span class="line">  timeZone: <span class="string">&#x27;UTC&#x27;</span></span><br><span class="line">&#125;).formatToParts(<span class="keyword">new</span> <span class="built_in">Date</span>()).map(<span class="function">(<span class="params">&#123;type, value&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;dayPeriod&#x27;</span>: <span class="keyword">return</span> <span class="string">`&lt;b&gt;<span class="subst">$&#123;value&#125;</span>&lt;/b&gt;`</span></span><br><span class="line">    <span class="keyword">default</span> : <span class="keyword">return</span> value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;).reduce(<span class="function">(<span class="params">string, part</span>) =&gt;</span> string + part)</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ul>
 
@@ -422,7 +613,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 ionluo
+    		&copy; 2023 ionluo
     	</div>
       	<div class="footer-right">
 			<!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -522,6 +713,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">WEB开发</a>
               </li>
              
@@ -534,7 +729,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,10 +738,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Django</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -559,6 +750,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">IDE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -578,11 +773,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color3">转载</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Rendertron</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -598,10 +797,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">VR</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -610,11 +805,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color3">VR</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,15 +837,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">nvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -658,11 +861,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -670,11 +873,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
+                <a href="javascript:void(0)" class="js-tag color3">公考</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">公考</a>
+                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -698,7 +901,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Grunt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">lodash</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -706,11 +929,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
+                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -734,15 +957,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">日记</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -754,11 +977,35 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">草稿</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hide</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VirtualBox</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Centos7</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -795,34 +1042,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">canvas</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
               </li>
             
             <div class="clearfix"></div>

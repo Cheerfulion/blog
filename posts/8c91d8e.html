@@ -17,8 +17,17 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/112263-a9cc862c4b707fcd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1143/format/webp">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/112263-dde74daa8e61e6b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
+<meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/1_20210104174925009020.png">
+<meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/2_20210104175105442752.png">
+<meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/3_20210104175138641761.png">
+<meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/4_20210104175234839333.png">
+<meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/5_20210104175334982464.png">
+<meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/6_20210104175424892282.png">
+<meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/7_20210104175630794547.png">
+<meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/8_20210104175651960482.png">
+<meta property="og:image" content="http://blog.cdn.ionluo.cn/blog/image-20220909094135529.png">
 <meta property="article:published_time" content="2021-12-08T09:31:49.000Z">
-<meta property="article:modified_time" content="2022-06-10T09:03:44.734Z">
+<meta property="article:modified_time" content="2023-08-08T02:14:12.053Z">
 <meta property="article:author" content="ionluo">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -213,11 +222,35 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;Being called from &quot;</span> + <span class="built_in">arguments</span>.callee.caller.toString());</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://upload-images.jianshu.io/upload_images/112263-dde74daa8e61e6b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt="img"></p>
-<p>你可以从最后打印出来的结果看到，<code>hello</code>函数是被<code>sayHello</code>这个函数调用了。</p>
+<p>你可以从最后打印出来的结果看到，<code>hello</code>函数是被<code>sayHello</code>这个函数调用了。（对于不在window下的函数不管用，所以有点鸡肋）</p>
 <blockquote>
 <p>作者：SCQ000<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/a2f5965cf86e">https://www.jianshu.com/p/a2f5965cf86e</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 </blockquote>
 <h2 id="动画调试"><a href="#动画调试" class="headerlink" title="动画调试"></a>动画调试</h2><p><a target="_blank" rel="noopener" href="https://webdesign.tutsplus.com/articles/quick-tip-chrome-animation-dev-tools--cms-31505">https://webdesign.tutsplus.com/articles/quick-tip-chrome-animation-dev-tools--cms-31505</a></p>
+<h2 id="文件替换（overrides）"><a href="#文件替换（overrides）" class="headerlink" title="文件替换（overrides）"></a>文件替换（overrides）</h2><p>overrides可以将远程的页面下载到本地，我们可以对下载到本地的页面进行编辑修改， 在下一次请求该页面时可以用本地页面进行替换显示。 具体使用方法：</p>
+<p>1.选中Sources–&gt;Overrides–&gt;+Select folder for overrides,添加一个页面存储目录。<img src="http://blog.cdn.ionluo.cn/blog/1_20210104174925009020.png" alt="img"><img src="http://blog.cdn.ionluo.cn/blog/2_20210104175105442752.png" alt="img"></p>
+<p>2.允许获得访问权限。<img src="http://blog.cdn.ionluo.cn/blog/3_20210104175138641761.png" alt="img"></p>
+<p>3.勾选Enable Local Overrides。<img src="http://blog.cdn.ionluo.cn/blog/4_20210104175234839333.png" alt="img"></p>
+<p>4.刷新页面。<img src="http://blog.cdn.ionluo.cn/blog/5_20210104175334982464.png" alt="img"></p>
+<p>5.切换到Network面板，选中需要下载到本地的页面–&gt;鼠标右键–&gt;Save for overrides。<img src="http://blog.cdn.ionluo.cn/blog/6_20210104175424892282.png" alt="img"></p>
+<p>6.保存以后，在Sourced面板–&gt;Overrides选项卡下可以看到已经下载的页面， 把菜单栏的“首页”随便改一下，再刷新页面，可以发现菜单栏已经显示为修改的值。<img src="http://blog.cdn.ionluo.cn/blog/7_20210104175630794547.png" alt="img"><img src="http://blog.cdn.ionluo.cn/blog/8_20210104175651960482.png" alt="img"></p>
+<blockquote>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://itcoder.cn/9/13/">https://itcoder.cn/9/13/</a></p>
+</blockquote>
+<h2 id="调试问题记录"><a href="#调试问题记录" class="headerlink" title="调试问题记录"></a>调试问题记录</h2><p>下面纯粹是我遇到的问题，也没有找到具体原因，仅做记录</p>
+<ol>
+<li><p>vue2.x调试变量显示undefined，实际console.log出来不是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  data () &#123;</span><br><span class="line">    return &#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  created: &#123;</span><br><span class="line">      	const flag &#x3D; false</span><br><span class="line">        if (flag) &#123;</span><br><span class="line">          const x1 &#x3D; 1</span><br><span class="line">          console.log(x1)</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          const x1 &#x3D; 2</span><br><span class="line">          console.log(x1)</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><img src="http://blog.cdn.ionluo.cn/blog/image-20220909094135529.png" alt="image-20220909094135529"></p>
+<p>调试可以发现，x1是可以正常打印出2的，但是调试显示确是undefined，这时候只要把x1放到if外面就不会有这个问题，或者x1不重名</p>
+</blockquote>
+</li>
+<li><p>加载页面断点（Breakpoints）有时触发有时不触发</p>
+<p>该问题暂时无法稳定复现，目前在webpack的项目下有遇到过，不确定是否相关，新开一个tab标签页第一次刷新就一定正常（可以每次都触发，确认没有代码逻辑设计成条件触发，比如session记录状态啥的）。</p>
+</li>
+</ol>
 
       
       <!-- 首页不展示文章所有内容结束 -->
@@ -405,7 +438,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 ionluo
+    		&copy; 2023 ionluo
     	</div>
       	<div class="footer-right">
 			<!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -505,6 +538,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">WEB开发</a>
               </li>
              
@@ -517,7 +554,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -526,10 +563,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Django</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,6 +575,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">IDE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -561,11 +598,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color3">转载</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Rendertron</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,10 +622,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">VR</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -593,11 +630,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color3">VR</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,15 +662,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">nvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -641,11 +686,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -653,11 +698,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
+                <a href="javascript:void(0)" class="js-tag color3">公考</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">公考</a>
+                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,7 +726,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Grunt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">lodash</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -689,11 +754,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
+                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -717,15 +782,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">日记</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -737,11 +802,35 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">草稿</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hide</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VirtualBox</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Centos7</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -778,34 +867,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">canvas</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
               </li>
             
             <div class="clearfix"></div>

@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://www.ionluo.cn/blog">
   <title>【前端】页面增加水印 | ionluo的个人博客站点</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="IE8 ~ IE10：采用服务器动态生成 watermark 图片 + 元素在底层1&lt;style&gt;body &amp;#123;background-image: url();&amp;#125;&lt;&#x2F;style&gt;    IE11、Chrome 等：采用服务器动态生成 watermark 图片 + 元素在顶层（pointer-event）好处：至于顶层不容易受到页面的样式影响，但是有兼容问题">
+  <meta name="description" content="摘要页面水印目前主要有以下2种做法：  服务器生成水印图片置于页面顶&#x2F;底层 前端生成水印图片（canvas，svg）置于页面顶&#x2F;底层  对于需要考虑兼容，如IE10以下版本的浏览器，推荐使用服务器生成水印并放于页面底层的方式 对于安全性较高场景，需要防范水印被删除或者篡改。 对于图片水印来说，除了显式水印，还可以通过隐式水印来对图片进行鉴权。 123456789101112131415161718">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【前端】页面增加水印">
 <meta property="og:url" content="http://www.ionluo.cn/blog/posts/1a3424e8.html">
 <meta property="og:site_name" content="ionluo的个人博客站点">
-<meta property="og:description" content="IE8 ~ IE10：采用服务器动态生成 watermark 图片 + 元素在底层1&lt;style&gt;body &amp;#123;background-image: url();&amp;#125;&lt;&#x2F;style&gt;    IE11、Chrome 等：采用服务器动态生成 watermark 图片 + 元素在顶层（pointer-event）好处：至于顶层不容易受到页面的样式影响，但是有兼容问题">
+<meta property="og:description" content="摘要页面水印目前主要有以下2种做法：  服务器生成水印图片置于页面顶&#x2F;底层 前端生成水印图片（canvas，svg）置于页面顶&#x2F;底层  对于需要考虑兼容，如IE10以下版本的浏览器，推荐使用服务器生成水印并放于页面底层的方式 对于安全性较高场景，需要防范水印被删除或者篡改。 对于图片水印来说，除了显式水印，还可以通过隐式水印来对图片进行鉴权。 123456789101112131415161718">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-22T03:32:15.000Z">
-<meta property="article:modified_time" content="2022-06-10T09:03:44.756Z">
+<meta property="article:modified_time" content="2023-06-10T09:55:28.368Z">
 <meta property="article:author" content="ionluo">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -200,14 +200,43 @@
     <div class="article-entry" itemprop="articleBody">
       <!-- 首页不展示文章所有内容开始 -->
       
-        <h2 id="IE8-IE10：采用服务器动态生成-watermark-图片-元素在底层"><a href="#IE8-IE10：采用服务器动态生成-watermark-图片-元素在底层" class="headerlink" title="IE8 ~ IE10：采用服务器动态生成 watermark 图片 + 元素在底层"></a>IE8 ~ IE10：采用服务器动态生成 watermark 图片 + 元素在底层</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"><span class="selector-tag">body</span> &#123;<span class="attribute">background-image</span>: <span class="built_in">url</span>();&#125;</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>页面水印目前主要有以下2种做法：</p>
+<ol>
+<li>服务器生成水印图片置于页面顶/底层</li>
+<li>前端生成水印图片（canvas，svg）置于页面顶/底层</li>
+</ol>
+<p>对于需要考虑兼容，如IE10以下版本的浏览器，推荐使用服务器生成水印并放于页面底层的方式</p>
+<p>对于安全性较高场景，需要防范水印被删除或者篡改。</p>
+<p>对于图片水印来说，除了显式水印，还可以通过隐式水印来对图片进行鉴权。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="comment">/* 图片水印，置于底层(background) */</span></span></span><br><span class="line"><span class="css">    <span class="selector-tag">body</span> &#123;<span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&#x27;&#x27;</span>);&#125;</span></span><br><span class="line"><span class="css">    <span class="comment">/* 图片水印，置于顶层（pointer-events） */</span></span></span><br><span class="line"><span class="css">    <span class="selector-tag">div</span><span class="selector-id">#watermark</span> &#123;</span></span><br><span class="line">        position: fixed;</span><br><span class="line">        top: 0;</span><br><span class="line">        left: 0;</span><br><span class="line">        right: 0;</span><br><span class="line">        bottom: 0;</span><br><span class="line">        background: rgba(0,0,0,.6);</span><br><span class="line">        background-image: url(&#x27;&#x27;);</span><br><span class="line">        z-index: 999999;</span><br><span class="line">        pointer-events: none;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;watermark&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="IE11、Chrome-等：采用服务器动态生成-watermark-图片-元素在顶层（pointer-event）"><a href="#IE11、Chrome-等：采用服务器动态生成-watermark-图片-元素在顶层（pointer-event）" class="headerlink" title="IE11、Chrome 等：采用服务器动态生成 watermark 图片 + 元素在顶层（pointer-event）"></a>IE11、Chrome 等：采用服务器动态生成 watermark 图片 + 元素在顶层（pointer-event）</h2><p>好处：至于顶层不容易受到页面的样式影响，但是有兼容问题</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-tag">div</span><span class="selector-id">#watermark</span> &#123;</span></span><br><span class="line">        position: fixed;</span><br><span class="line">        top: 0;</span><br><span class="line">        left: 0;</span><br><span class="line">        right: 0;</span><br><span class="line">        bottom: 0;</span><br><span class="line">        background: rgba(0,0,0,.6);</span><br><span class="line">        background-image: url(&#x27;&#x27;);</span><br><span class="line">        z-index: 999999;</span><br><span class="line">        pointer-events: none;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;watermark&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="IE9-IE11-以及-Chrome-其实可以用-Canvas，但可能有兼容性风险"><a href="#IE9-IE11-以及-Chrome-其实可以用-Canvas，但可能有兼容性风险" class="headerlink" title="IE9 ~ IE11 以及 Chrome 其实可以用 Canvas，但可能有兼容性风险"></a>IE9 ~ IE11 以及 Chrome 其实可以用 Canvas，但可能有兼容性风险</h2>
+
+<h2 id="水印组件封装"><a href="#水印组件封装" class="headerlink" title="水印组件封装"></a>水印组件封装</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">  &lt;meta http-equiv=<span class="string">&quot;X-UA-Compatible&quot;</span> content=<span class="string">&quot;IE=edge&quot;</span>&gt;</span><br><span class="line">  &lt;meta name=<span class="string">&quot;viewport&quot;</span> content=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span><br><span class="line">  &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">  &lt;img src=<span class="string">&quot;&quot;</span> alt=<span class="string">&quot;&quot;</span> style=<span class="string">&quot;max-width: 100%&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  &lt;script&gt;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">function</span> <span class="title">__canvasWM</span>(<span class="params">&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">        container = <span class="built_in">document</span>.body,</span></span></span><br><span class="line"><span class="function"><span class="params">        textAlign = <span class="string">&#x27;center&#x27;</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        textBaseline = <span class="string">&#x27;middle&#x27;</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        fontSize,</span></span></span><br><span class="line"><span class="function"><span class="params">        fontFamily,</span></span></span><br><span class="line"><span class="function"><span class="params">        fontWeight,</span></span></span><br><span class="line"><span class="function"><span class="params">        font = <span class="string">&quot;normal 18px 微软雅黑&quot;</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        strokeStyle = <span class="string">&#x27;black&#x27;</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        content = <span class="string">&#x27;1111111111111111111111111111111111111111111111111111111111111&#x27;</span>, <span class="regexp">//</span> 水印内容，数组则多行显示，多行显示情况下，非第一行字体比第一行字体小<span class="number">4</span>号</span></span></span><br><span class="line"><span class="function"><span class="params">        rotate = <span class="string">&#x27;12&#x27;</span>, <span class="regexp">//</span> 倾斜度</span></span></span><br><span class="line"><span class="function"><span class="params">        color = <span class="string">&#x27;black&#x27;</span>, <span class="regexp">//</span> 字体颜色</span></span></span><br><span class="line"><span class="function"><span class="params">        opacity = <span class="number">0.5</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        xGap = <span class="number">0</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        yGap = <span class="number">0</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        zIndex = <span class="number">10000</span></span></span></span><br><span class="line"><span class="function"><span class="params">      &#125; = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> args = <span class="built_in">arguments</span>[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">const</span> canvas = <span class="built_in">document</span>.createElement(<span class="string">&#x27;canvas&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">&quot;2d&quot;</span>);</span><br><span class="line">        <span class="comment">// ctx.imageSmoothingEnabled = true</span></span><br><span class="line">        <span class="comment">// ctx.mozImageSmoothingEnabled = true</span></span><br><span class="line">        <span class="comment">// ctx.webkitImageSmoothingEnabled = true</span></span><br><span class="line">        <span class="comment">// ctx.msImageSmoothingEnabled = true</span></span><br><span class="line"></span><br><span class="line">        ctx.save()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> fonts = font.split(<span class="regexp">/\s+/</span>)</span><br><span class="line">        <span class="keyword">if</span> (fontWeight) fonts[<span class="number">0</span>] = fontWeight</span><br><span class="line">        <span class="keyword">if</span> (fontSize) fonts[<span class="number">1</span>] = fontSize + <span class="string">&#x27;px&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> (fontFamily) fonts[<span class="number">2</span>] = fontFamily</span><br><span class="line">        ctx.font = fonts.join(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> sita = <span class="built_in">Math</span>.PI / <span class="number">180</span> * rotate</span><br><span class="line">        <span class="keyword">let</span> w =  ctx.measureText(content).width</span><br><span class="line">        <span class="keyword">let</span> h =  <span class="built_in">Math</span>.max(w * <span class="built_in">Math</span>.tan(sita), <span class="built_in">parseFloat</span>(fonts[<span class="number">1</span>]))</span><br><span class="line">        w = w * <span class="built_in">Math</span>.cos(sita) + xGap</span><br><span class="line">        h = h * <span class="built_in">Math</span>.cos(sita) + yGap</span><br><span class="line">        canvas.width = w</span><br><span class="line">        canvas.height = h</span><br><span class="line">        ctx.translate(w/<span class="number">2</span>, h/<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        ctx.globalAlpha = opacity;</span><br><span class="line">        ctx.textAlign = textAlign;</span><br><span class="line">        ctx.textBaseline = textBaseline;</span><br><span class="line">        ctx.fillStyle = color;</span><br><span class="line"></span><br><span class="line">        ctx.rotate(sita);</span><br><span class="line">        ctx.fillText(content, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">        ctx.strokeStyle = strokeStyle;</span><br><span class="line">        ctx.strokeText(content, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">        ctx.restore()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> base64Url = canvas.toDataURL();</span><br><span class="line">        <span class="built_in">document</span>.querySelector(<span class="string">&#x27;img&#x27;</span>).src = base64Url</span><br><span class="line">        <span class="comment">// const __wm = document.querySelector(&#x27;.__wm&#x27;);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// const watermarkDiv = __wm || document.createElement(&quot;div&quot;);</span></span><br><span class="line">        <span class="comment">// const styleStr = `</span></span><br><span class="line">        <span class="comment">//   position:fixed;</span></span><br><span class="line">        <span class="comment">//   top:0;</span></span><br><span class="line">        <span class="comment">//   left:0;</span></span><br><span class="line">        <span class="comment">//   bottom:0;</span></span><br><span class="line">        <span class="comment">//   right:0;</span></span><br><span class="line">        <span class="comment">//   width:100%;</span></span><br><span class="line">        <span class="comment">//   height:100%;</span></span><br><span class="line">        <span class="comment">//   z-index:$&#123;zIndex&#125;;</span></span><br><span class="line">        <span class="comment">//   pointer-events:none;</span></span><br><span class="line">        <span class="comment">//   background-repeat:repeat;</span></span><br><span class="line">        <span class="comment">//   background-image:url(&#x27;$&#123;base64Url&#125;&#x27;)`;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// watermarkDiv.setAttribute(&#x27;style&#x27;, styleStr);</span></span><br><span class="line">        <span class="comment">// watermarkDiv.classList.add(&#x27;__wm&#x27;);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// if (!__wm) &#123;</span></span><br><span class="line">        <span class="comment">//   container.style.position = &#x27;relative&#x27;;</span></span><br><span class="line">        <span class="comment">//   container.insertBefore(watermarkDiv, container.firstChild);</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;</span></span><br><span class="line">        <span class="comment">// if (MutationObserver) &#123;</span></span><br><span class="line">        <span class="comment">//   let mo = new MutationObserver(function () &#123;</span></span><br><span class="line">        <span class="comment">//     const __wm = document.querySelector(&#x27;.__wm&#x27;);</span></span><br><span class="line">        <span class="comment">//     // 只在__wm元素变动才重新调用 __canvasWM</span></span><br><span class="line">        <span class="comment">//     if ((__wm &amp;&amp; __wm.getAttribute(&#x27;style&#x27;) !== styleStr) || !__wm) &#123;</span></span><br><span class="line">        <span class="comment">//       // 避免一直触发</span></span><br><span class="line">        <span class="comment">//       mo.disconnect();</span></span><br><span class="line">        <span class="comment">//       mo = null;</span></span><br><span class="line">        <span class="comment">//     __canvasWM(JSON.parse(JSON.stringify(args)));</span></span><br><span class="line">        <span class="comment">//     &#125;</span></span><br><span class="line">        <span class="comment">//   &#125;);</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//   mo.observe(container, &#123;</span></span><br><span class="line">        <span class="comment">//     attributes: true,</span></span><br><span class="line">        <span class="comment">//     subtree: true,</span></span><br><span class="line">        <span class="comment">//     childList: true</span></span><br><span class="line">        <span class="comment">//   &#125;)</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">module</span> != <span class="string">&#x27;undefined&#x27;</span> &amp;&amp; <span class="built_in">module</span>.exports) &#123;  <span class="comment">//CMD</span></span><br><span class="line">        <span class="built_in">module</span>.exports = __canvasWM;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> define == <span class="string">&#x27;function&#x27;</span> &amp;&amp; define.amd) &#123; <span class="comment">// AMD</span></span><br><span class="line">        define(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> __canvasWM;</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">window</span>.__canvasWM = __canvasWM;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)();</span><br><span class="line"></span><br><span class="line">    __canvasWM()</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="图片隐写术"><a href="#图片隐写术" class="headerlink" title="图片隐写术"></a><a target="_blank" rel="noopener" href="https://juejin.cn/post/6917934964202242061">图片隐写术</a></h2><p>对于图片资源来说，显性水印会破坏图片的完整性，有些情况下我们想要在保留图片原本样式，这时可以添加隐藏水印。</p>
+<p>简单实现思路是：图片的像素信息里存储着 RGB 的色值，对于RGB 分量值的小量变动，是肉眼无法分辨的，不会影响对图片的识别，我们可以对图片的RGB以一种特殊规则进行小量的改动。（LSB最低有效位）</p>
+<p>通过canvas.getImageData()可以获取到图片的像素数据，首先在canvas中绘制出水印图，获取到其像素数据，然后通过canvas获取到原图片的像素数据，选定R、G、B其中一个如G，遍历原图片像素，将对应水印像素有信息的像素的G都转成奇数，对应水印像素没有信息的像素都转成偶数，处理完后转成base64并替换到页面上，这时隐形水印就加好了，正常情况下看这个图片是没有水印的，但是经过对应规则（上边例子对应的解密规则是：遍历图片的像素数据中对应的G，奇数则将其rgba设置为0，255，0，偶数则设置为0，0，0）的解密处理后就可以看到水印了。</p>
+<p>这种方式下，当用户采用截图、保存图片后转换格式等方法获得图片后，图片的色值可能是会变化的，会影响水印效果 加水印代码实现：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;canvasText&quot;</span> <span class="attr">width</span>=<span class="string">&quot;256&quot;</span> <span class="attr">height</span>=<span class="string">&quot;256&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;canvas&quot;</span> <span class="attr">width</span>=<span class="string">&quot;256&quot;</span> <span class="attr">height</span>=<span class="string">&quot;256&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;canvas&#x27;</span>).getContext(<span class="string">&#x27;2d&#x27;</span>);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> ctxText = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;canvasText&#x27;</span>).getContext(<span class="string">&#x27;2d&#x27;</span>);</span></span><br><span class="line">            </span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> textData;</span></span><br><span class="line"><span class="javascript">            ctxText.font = <span class="string">&#x27;30px Microsoft Yahei&#x27;</span>;</span></span><br><span class="line"><span class="javascript">            ctxText.fillText(<span class="string">&#x27;水印&#x27;</span>, <span class="number">60</span>, <span class="number">130</span>);</span></span><br><span class="line">            textData = ctxText.getImageData(0, 0, ctxText.canvas.width, ctxText.canvas.height).data;</span><br><span class="line">            </span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> originalData;</span></span><br><span class="line"><span class="javascript">            img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line">                ctx.drawImage(img, 0, 0);</span><br><span class="line"><span class="javascript">                <span class="comment">// 获取指定区域的canvas像素信息</span></span></span><br><span class="line">                originalData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);</span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(originalData);</span></span><br><span class="line"><span class="javascript">                    mergeData(textData,<span class="string">&#x27;G&#x27;</span>)</span></span><br><span class="line"><span class="javascript">                    <span class="built_in">console</span>.log(<span class="built_in">document</span>.getElementById(<span class="string">&#x27;canvas&#x27;</span>).toDataURL())</span></span><br><span class="line">            &#125;;</span><br><span class="line"><span class="javascript">            img.src = <span class="string">&#x27;./aa.jpeg&#x27;</span>;</span></span><br><span class="line">            </span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> mergeData = <span class="function"><span class="keyword">function</span>(<span class="params">newData, color</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> oData = originalData.data;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> bit, offset;  </span></span><br><span class="line">             </span><br><span class="line"><span class="javascript">                <span class="keyword">switch</span>(color)&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">case</span> <span class="string">&#x27;R&#x27;</span>:</span></span><br><span class="line">                        bit = 0;</span><br><span class="line">                        offset = 3;</span><br><span class="line"><span class="javascript">                        <span class="keyword">break</span>;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">case</span> <span class="string">&#x27;G&#x27;</span>:</span></span><br><span class="line">                        bit = 1;</span><br><span class="line">                        offset = 2;</span><br><span class="line"><span class="javascript">                        <span class="keyword">break</span>;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">case</span> <span class="string">&#x27;B&#x27;</span>:</span></span><br><span class="line">                        bit = 2;</span><br><span class="line">                        offset = 1;</span><br><span class="line"><span class="javascript">                        <span class="keyword">break</span>;</span></span><br><span class="line">                &#125;</span><br><span class="line">             </span><br><span class="line"><span class="javascript">                <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; oData.length; i++)&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span>(i % <span class="number">4</span> == bit)&#123;</span></span><br><span class="line"><span class="javascript">                        <span class="comment">// 只处理目标通道</span></span></span><br><span class="line"><span class="javascript">                        <span class="keyword">if</span>(newData[i + offset] === <span class="number">0</span> &amp;&amp; (oData[i] % <span class="number">2</span> === <span class="number">1</span>))&#123;</span></span><br><span class="line"><span class="javascript">                            <span class="comment">// 没有水印信息的像素，将其对应通道的值设置为偶数</span></span></span><br><span class="line"><span class="javascript">                            <span class="keyword">if</span>(oData[i] === <span class="number">255</span>)&#123;</span></span><br><span class="line">                                oData[i]--;</span><br><span class="line"><span class="javascript">                            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">                                oData[i]++;</span><br><span class="line">                            &#125;</span><br><span class="line"><span class="javascript">                        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (newData[i + offset] !== <span class="number">0</span> &amp;&amp; (oData[i] % <span class="number">2</span> === <span class="number">0</span>))&#123;</span></span><br><span class="line"><span class="javascript">                            <span class="comment">// 有水印信息的像素，将其对应通道的值设置为奇数</span></span></span><br><span class="line"><span class="javascript">                            <span class="keyword">if</span>(oData[i] === <span class="number">255</span>)&#123;</span></span><br><span class="line">                                oData[i]--;</span><br><span class="line"><span class="javascript">                            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">                                oData[i]++;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                ctx.putImageData(originalData, 0, 0);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>显示水印代码实现：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;canvas&quot;</span> <span class="attr">width</span>=<span class="string">&quot;256&quot;</span> <span class="attr">height</span>=<span class="string">&quot;256&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;canvas&#x27;</span>).getContext(<span class="string">&#x27;2d&#x27;</span>);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> originalData;</span></span><br><span class="line"><span class="javascript">            img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line">                ctx.drawImage(img, 0, 0);</span><br><span class="line"><span class="javascript">                <span class="comment">// 获取指定区域的canvas像素信息</span></span></span><br><span class="line">                originalData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);</span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(originalData);</span></span><br><span class="line">                    processData(originalData)</span><br><span class="line">            &#125;;</span><br><span class="line"><span class="javascript">            img.src = <span class="string">&#x27;./a.jpg&#x27;</span>;</span></span><br><span class="line">            </span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> processData = <span class="function"><span class="keyword">function</span>(<span class="params">originalData</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> data = originalData.data;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.length; i++)&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">if</span>(i % <span class="number">4</span> == <span class="number">1</span>)&#123;</span></span><br><span class="line"><span class="javascript">                        <span class="keyword">if</span>(data[i] % <span class="number">2</span> === <span class="number">0</span>)&#123;</span></span><br><span class="line">                            data[i] = 0;</span><br><span class="line"><span class="javascript">                        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">                            data[i] = 255;</span><br><span class="line">                        &#125;</span><br><span class="line"><span class="javascript">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(i % <span class="number">4</span> === <span class="number">3</span>)&#123;</span></span><br><span class="line"><span class="javascript">                        <span class="comment">// alpha通道不做处理</span></span></span><br><span class="line"><span class="javascript">                        <span class="keyword">continue</span>;</span></span><br><span class="line"><span class="javascript">                    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">                        <span class="comment">// 关闭其他分量，不关闭也不影响答案，甚至更美观 o(^▽^)o</span></span></span><br><span class="line">                        data[i] = 0;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"><span class="javascript">                <span class="comment">// 将结果绘制到画布</span></span></span><br><span class="line">                ctx.putImageData(originalData, 0, 0);</span><br><span class="line">            &#125;</span><br><span class="line">                </span><br><span class="line">        <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>文件隐藏：<code>copy /b A.jpg + B.zip C.jpg</code></p>
+</blockquote>
+
       
       <!-- 首页不展示文章所有内容结束 -->
 
@@ -394,7 +423,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 ionluo
+    		&copy; 2023 ionluo
     	</div>
       	<div class="footer-right">
 			<!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -494,6 +523,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">WEB开发</a>
               </li>
              
@@ -506,7 +539,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">七牛云</a>
+                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -515,10 +548,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Django</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">黑科技</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -531,6 +560,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">IDE</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -550,11 +583,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color3">转载</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Rendertron</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,10 +607,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">VR</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">hexo</a>
               </li>
              
@@ -582,11 +615,19 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+                <a href="javascript:void(0)" class="js-tag color3">VR</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">eslint</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,15 +647,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">nvm</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">express</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -630,11 +671,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -642,11 +683,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端 js canvas</a>
+                <a href="javascript:void(0)" class="js-tag color3">公考</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">公考</a>
+                <a href="javascript:void(0)" class="js-tag color5">兼容问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -670,7 +711,27 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">jquery</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Grunt</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">lodash</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -678,11 +739,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
+                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">大前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">好文收藏</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -706,15 +767,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">日记</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">生活</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">树莓派</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -726,11 +787,35 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">草稿</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">软考</a>
+                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hide</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">VirtualBox</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Centos7</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -767,34 +852,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">canvas</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">转载</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">实战章无法显示问题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">angularjs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">JQuery</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">系统分析师</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Centos</a>
               </li>
             
             <div class="clearfix"></div>
